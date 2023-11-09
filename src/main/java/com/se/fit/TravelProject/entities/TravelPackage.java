@@ -19,7 +19,6 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -37,6 +36,8 @@ public abstract class TravelPackage implements Serializable {
 	private String packageName;
 	@Column(columnDefinition = "datetime2(7)")
 	private LocalDate departureDate;
+	@Column(columnDefinition = "datetime2(7)")
+	private LocalDate returnDate;
 	private double price;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String description;
@@ -58,13 +59,14 @@ public abstract class TravelPackage implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TravelPackage(int travelPackageId, String packageName, LocalDate departureDate, double price,
-			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
-			Destination destination) {
+	public TravelPackage(int travelPackageId, String packageName, LocalDate departureDate, LocalDate returnDate,
+			double price, String description, int availableSeats, Set<String> imagesList, EVehicle vehicle,
+			Departure departure, Destination destination) {
 		super();
 		this.travelPackageId = travelPackageId;
 		this.packageName = packageName;
 		this.departureDate = departureDate;
+		this.returnDate = returnDate;
 		this.price = price;
 		this.description = description;
 		this.availableSeats = availableSeats;
@@ -74,12 +76,13 @@ public abstract class TravelPackage implements Serializable {
 		this.destination = destination;
 	}
 
-	public TravelPackage(String packageName, LocalDate departureDate, double price, String description,
-			int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
+	public TravelPackage(String packageName, LocalDate departureDate, LocalDate returnDate, double price,
+			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
 			Destination destination) {
 		super();
 		this.packageName = packageName;
 		this.departureDate = departureDate;
+		this.returnDate = returnDate;
 		this.price = price;
 		this.description = description;
 		this.availableSeats = availableSeats;
@@ -111,6 +114,14 @@ public abstract class TravelPackage implements Serializable {
 
 	public void setDepartureDate(LocalDate departureDate) {
 		this.departureDate = departureDate;
+	}
+
+	public LocalDate getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(LocalDate returnDate) {
+		this.returnDate = returnDate;
 	}
 
 	public double getPrice() {
@@ -176,9 +187,9 @@ public abstract class TravelPackage implements Serializable {
 	@Override
 	public String toString() {
 		return "TravelPackage [travelPackageId=" + travelPackageId + ", packageName=" + packageName + ", departureDate="
-				+ departureDate + ", price=" + price + ", description=" + description + ", availableSeats="
-				+ availableSeats + ", imagesList=" + imagesList + ", vehicle=" + vehicle + ", departure=" + departure
-				+ ", destination=" + destination + "]";
+				+ departureDate + ", returnDate=" + returnDate + ", price=" + price + ", description=" + description
+				+ ", availableSeats=" + availableSeats + ", imagesList=" + imagesList + ", vehicle=" + vehicle
+				+ ", departure=" + departure + ", destination=" + destination + "]";
 	}
 
 }
