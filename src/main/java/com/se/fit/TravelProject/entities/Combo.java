@@ -18,8 +18,6 @@ public class Combo extends TravelPackage implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4783031539248453067L;
-	@Column(columnDefinition = "datetime2(7)")
-	private LocalDate returnDate;
 	private int checkinTime;
 	private int checkoutTime;
 	@Column(columnDefinition = "nvarchar(255)")
@@ -33,40 +31,29 @@ public class Combo extends TravelPackage implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Combo(int travelPackageId, String packageName, LocalDate departureDate, double price, String description,
+	public Combo(int travelPackageId, String packageName, LocalDate departureDate, LocalDate returnDate, double price,
+			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
+			Destination destination, int checkinTime, int checkoutTime, String vehicleInf, String comboInf,
+			EComboType comboType) {
+		super(travelPackageId, packageName, departureDate, returnDate, price, description, availableSeats, imagesList,
+				vehicle, departure, destination);
+		this.checkinTime = checkinTime;
+		this.checkoutTime = checkoutTime;
+		this.vehicleInf = vehicleInf;
+		this.comboInf = comboInf;
+		this.comboType = comboType;
+	}
+
+	public Combo(String packageName, LocalDate departureDate, LocalDate returnDate, double price, String description,
 			int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination,
-			LocalDate returnDate, int checkinTime, int checkoutTime, String vehicleInf, String comboInf,
-			EComboType comboType) {
-		super(travelPackageId, packageName, departureDate, price, description, availableSeats, imagesList, vehicle,
+			int checkinTime, int checkoutTime, String vehicleInf, String comboInf, EComboType comboType) {
+		super(packageName, departureDate, returnDate, price, description, availableSeats, imagesList, vehicle,
 				departure, destination);
-		this.returnDate = returnDate;
 		this.checkinTime = checkinTime;
 		this.checkoutTime = checkoutTime;
 		this.vehicleInf = vehicleInf;
 		this.comboInf = comboInf;
 		this.comboType = comboType;
-	}
-
-	public Combo(String packageName, LocalDate departureDate, double price, String description, int availableSeats,
-			Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination,
-			LocalDate returnDate, int checkinTime, int checkoutTime, String vehicleInf, String comboInf,
-			EComboType comboType) {
-		super(packageName, departureDate, price, description, availableSeats, imagesList, vehicle, departure,
-				destination);
-		this.returnDate = returnDate;
-		this.checkinTime = checkinTime;
-		this.checkoutTime = checkoutTime;
-		this.vehicleInf = vehicleInf;
-		this.comboInf = comboInf;
-		this.comboType = comboType;
-	}
-
-	public LocalDate getReturnDate() {
-		return returnDate;
-	}
-
-	public void setReturnDate(LocalDate returnDate) {
-		this.returnDate = returnDate;
 	}
 
 	public int getCheckinTime() {
@@ -115,8 +102,8 @@ public class Combo extends TravelPackage implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Combo [returnDate=" + returnDate + ", checkinTime=" + checkinTime + ", checkoutTime=" + checkoutTime
-				+ ", vehicleInf=" + vehicleInf + ", comboInf=" + comboInf + ", comboType=" + comboType + "]";
+		return "Combo [checkinTime=" + checkinTime + ", checkoutTime=" + checkoutTime + ", vehicleInf=" + vehicleInf
+				+ ", comboInf=" + comboInf + ", comboType=" + comboType + "]";
 	}
 
 }

@@ -36,12 +36,12 @@ public class Tour extends TravelPackage implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tour(int travelPackageId, String packageName, LocalDate departureDate, double price, String description,
-			int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination,
-			int numberDays, String touristAttraction, String cuisine, String hotel, String idealTime, String object,
-			EInternationalType internationalType) {
-		super(travelPackageId, packageName, departureDate, price, description, availableSeats, imagesList, vehicle,
-				departure, destination);
+	public Tour(int travelPackageId, String packageName, LocalDate departureDate, LocalDate returnDate, double price,
+			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
+			Destination destination, int numberDays, String touristAttraction, String cuisine, String hotel,
+			String idealTime, String object, EInternationalType internationalType) {
+		super(travelPackageId, packageName, departureDate, returnDate, price, description, availableSeats, imagesList,
+				vehicle, departure, destination);
 		this.numberDays = numberDays;
 		this.touristAttraction = touristAttraction;
 		this.cuisine = cuisine;
@@ -51,12 +51,12 @@ public class Tour extends TravelPackage implements Serializable {
 		this.internationalType = internationalType;
 	}
 
-	public Tour(String packageName, LocalDate departureDate, double price, String description, int availableSeats,
-			Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination, int numberDays,
-			String touristAttraction, String cuisine, String hotel, String idealTime, String object,
+	public Tour(String packageName, LocalDate departureDate, LocalDate returnDate, double price, String description,
+			int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination,
+			int numberDays, String touristAttraction, String cuisine, String hotel, String idealTime, String object,
 			EInternationalType internationalType) {
-		super(packageName, departureDate, price, description, availableSeats, imagesList, vehicle, departure,
-				destination);
+		super(packageName, departureDate, returnDate, price, description, availableSeats, imagesList, vehicle,
+				departure, destination);
 		this.numberDays = numberDays;
 		this.touristAttraction = touristAttraction;
 		this.cuisine = cuisine;
