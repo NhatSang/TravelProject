@@ -18,6 +18,7 @@ public class Departure implements Serializable {
 	private static final long serialVersionUID = 4769855374077338041L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "departure_id")
 	private int departureId;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String location;

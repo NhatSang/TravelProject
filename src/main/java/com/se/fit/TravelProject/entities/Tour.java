@@ -18,18 +18,20 @@ public class Tour extends TravelPackage implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4994622033259334777L;
+	@Column(name = "number_days")
 	private int numberDays;
-	@Column(columnDefinition = "nvarchar(255)")
+	@Column(columnDefinition = "nvarchar(255)",name = "tourist_attraction")
 	private String touristAttraction;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String cuisine;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String hotel;
-	@Column(columnDefinition = "nvarchar(255)")
+	@Column(columnDefinition = "nvarchar(255)",name = "ideal_time")
 	private String idealTime;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String object;
 	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "international_type")
 	private EInternationalType internationalType;
 
 	public Tour() {
