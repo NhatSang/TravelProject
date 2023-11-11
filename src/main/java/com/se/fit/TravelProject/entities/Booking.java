@@ -22,16 +22,16 @@ public class Booking implements Serializable {
 	private static final long serialVersionUID = -7775585632931296740L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "booking_id")
 	private int bookingId;
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 	@ManyToOne
-	@JoinColumn(name = "travelPackageId")
+	@JoinColumn(name = "travel_package_id")
 	private TravelPackage travelPackage;
-	@Column(columnDefinition = "datetime2(7)")
+	@Column(columnDefinition = "datetime2(7)",name="creation_date")
 	private LocalDate creationDate;
-
 	public Booking() {
 		// TODO Auto-generated constructor stub
 	}

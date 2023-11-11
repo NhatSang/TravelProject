@@ -18,13 +18,16 @@ public class Combo extends TravelPackage implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4783031539248453067L;
+	@Column(name = " checkin_time")
 	private int checkinTime;
+	@Column(name = " checkout_time")
 	private int checkoutTime;
-	@Column(columnDefinition = "nvarchar(255)")
+	@Column(columnDefinition = "nvarchar(255)",name="vehicle_inf")
 	private String vehicleInf;
-	@Column(columnDefinition = "nvarchar(255)")
+	@Column(columnDefinition = "nvarchar(255)",name="combo_inf")
 	private String comboInf;
 	@Enumerated(EnumType.ORDINAL)
+	@Column(name="combo_type")
 	private EComboType comboType;
 
 	public Combo() {

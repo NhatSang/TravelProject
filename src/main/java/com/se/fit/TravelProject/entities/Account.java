@@ -19,49 +19,49 @@ public class Account implements Serializable {
 	 */
 	private static final long serialVersionUID = 6758543535589076148L;
 	@Id
-	private String userName;
+	private String username;
 	@Column(nullable = false)
-	private String passWord;
+	private String password;
 	@Enumerated(EnumType.ORDINAL)
-	private ERole eRole;
+	private ERole role;
 	@ManyToOne
-	@JoinColumn(name = "User_Id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Account() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Account(String userName, String passWord, ERole eRole, User user) {
+	public Account(String username, String password, ERole role, User user) {
 		super();
-		this.userName = userName;
-		this.passWord = passWord;
-		this.eRole = eRole;
+		this.username = username;
+		this.password = password;
+		this.role = role;
 		this.user = user;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getPassWord() {
-		return passWord;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public ERole geteRole() {
-		return eRole;
+	public ERole getRole() {
+		return role;
 	}
 
-	public void seteRole(ERole eRole) {
-		this.eRole = eRole;
+	public void setRole(ERole role) {
+		this.role = role;
 	}
 
 	public User getUser() {
@@ -78,7 +78,7 @@ public class Account implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Account [userName=" + userName + ", passWord=" + passWord + ", eRole=" + eRole + ", user=" + user + "]";
+		return "Account [username=" + username + ", password=" + password + ", role=" + role + ", user=" + user + "]";
 	}
 
 }

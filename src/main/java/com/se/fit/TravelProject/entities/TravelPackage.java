@@ -19,10 +19,12 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "travelPackage_type", discriminatorType = DiscriminatorType.INTEGER)
+@Table(name = "travel_package")
 public abstract class TravelPackage implements Serializable {
 
 	/**
@@ -31,16 +33,18 @@ public abstract class TravelPackage implements Serializable {
 	private static final long serialVersionUID = -5600196550063011878L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "travel_package_id")
 	private int travelPackageId;
-	@Column(columnDefinition = "nvarchar(255)")
+	@Column(columnDefinition = "nvarchar(255)",name="package_name")
 	private String packageName;
-	@Column(columnDefinition = "datetime2(7)")
+	@Column(columnDefinition = "datetime2(7)",name="departure_date")
 	private LocalDate departureDate;
-	@Column(columnDefinition = "datetime2(7)")
+	@Column(columnDefinition = "datetime2(7)",name="return_date")
 	private LocalDate returnDate;
 	private double price;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String description;
+	@Column(name = "available_seats")
 	private int availableSeats;
 	@ElementCollection
 	@CollectionTable(name = "Images", joinColumns = @JoinColumn(name = "travelPackageId"))
@@ -49,10 +53,10 @@ public abstract class TravelPackage implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private EVehicle vehicle;
 	@ManyToOne
-	@JoinColumn(name = "departureId")
+	@JoinColumn(name = "departure_id")
 	private Departure departure;
 	@ManyToOne
-	@JoinColumn(name = "destinationId")
+	@JoinColumn(name = "destination_id")
 	private Destination destination;
 
 	public TravelPackage() {

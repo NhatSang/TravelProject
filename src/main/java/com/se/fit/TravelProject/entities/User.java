@@ -18,18 +18,20 @@ public class User implements Serializable{
 	private static final long serialVersionUID = -8280303498779999034L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="user_id")
 	private int userId;
-	@Column(nullable = false, columnDefinition = "nvarchar(50)")
+	@Column(nullable = false, columnDefinition = "nvarchar(50)",name = "full_name")
 	private String fullName;
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false, length = 50,name = "email")
 	private String email;
-	@Column(nullable = false, length = 10)
+	@Column(nullable = false, length = 10,name = "phone")
 	private String phone;
-	@Column(nullable = false, length = 200)
+	@Column(nullable = false, length = 200,name = "address")
 	private String address;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
+		
 	}
 
 	public User(int userId, String fullName, String email, String phone, String address) {

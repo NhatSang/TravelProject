@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 public class Destination {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "destination_id")
 	private int destinationId;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String location;
