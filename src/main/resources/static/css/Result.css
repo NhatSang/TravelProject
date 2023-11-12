@@ -11,14 +11,16 @@ p {
 
 /* link font */
 
-@font-face {
-    font-family: 'Gilroy';
-    src: url(../../library/font/Font\ Gilroy\ VH\ Full/!important);
-}
 
 body {
-    font-family: 'Gilroy';
     background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.containerx {
+    width: 1440px;
 }
 
 .section1 {
