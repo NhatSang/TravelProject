@@ -1,9 +1,14 @@
 /* header */
 .menu_header {
-    width: 1300px;
+    width: 1600px;
     height: 100px;
     display: flex;
     padding-top: 35px;
+}
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu_list {
