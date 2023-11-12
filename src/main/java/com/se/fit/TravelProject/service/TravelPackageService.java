@@ -1,5 +1,6 @@
 package com.se.fit.TravelProject.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.se.fit.TravelProject.entities.Combo;
+import com.se.fit.TravelProject.entities.EInternationalType;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.repository.ComboRepository;
 import com.se.fit.TravelProject.repository.TourRepository;
@@ -52,20 +54,40 @@ public class TravelPackageService {
 		}
 		return combo;
 	}
-	
+
 	public void saveTour(Tour tour) {
 		tourRepository.save(tour);
 	}
-	
+
 	public void saveCombo(Combo combo) {
 		comboRepository.save(combo);
 	}
-	
+
 	public void deleteTour(int id) {
 		tourRepository.deleteById(id);
 	}
-	
+
 	public void deleteCombo(int id) {
 		comboRepository.deleteById(id);
+	}
+
+	public List<Tour> getToursActive(LocalDate currentDate) {
+		return tourRepository.findToursActive(currentDate);
+	}
+
+	public List<Tour> getToursByDesADep(int departureId, int destinationId, LocalDate currentDate) {
+		return tourRepository.findByDesADep(destinationId, departureId, currentDate);
+	}
+
+	public List<Tour> getToursByDep(int departureId, LocalDate currentDate) {
+		return tourRepository.findByDepature(departureId, currentDate);
+	}
+
+	public List<Tour> getToursByDes(int destinationId, LocalDate currentDate) {
+		return tourRepository.findByDestination(destinationId, currentDate);
+	}
+	
+	public List<Tour> getToursByInternationalType(EInternationalType type, LocalDate currentDate){
+		return tourRepository.findToursByInternationalType(type,currentDate);
 	}
 }
