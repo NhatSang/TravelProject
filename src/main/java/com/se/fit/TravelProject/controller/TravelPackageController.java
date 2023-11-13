@@ -31,4 +31,5 @@ public class TravelPackageController {
 	public List<Combo> showCombos(){
 		return packageService.getAllCombos();
 	}
+	
 }
