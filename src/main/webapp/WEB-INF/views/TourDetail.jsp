@@ -25,11 +25,10 @@
 </head>
 <body>
 	<div class="menu_header">
-		<div class="logo col-sm-3">
-			<a href=""> <img src="/resources/img/Logo.png" alt="">
-			</a>
+		<div class="logo col-sm-2">
+			<img src="/resources/img/Logo.png" alt="logo">
 		</div>
-		<div class="menu col-sm-6 navbar">
+		<div class="menu col-sm-8 navbar">
 			<ul class="menu_list navbar-nav">
 				<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
 						chủ</a></li>
@@ -48,11 +47,24 @@
 						hệ</a></li>
 				<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
 						mãi</a></li>
+				<c:if
+					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
+					<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
+							lý</a></li>
+				</c:if>
 			</ul>
 		</div>
-		<div class="btnLogin_Cart col-sm-3">
-			<input type="button" value="Đăng nhập"> <a href=""> <img
-				src="/resources/library/icon/Cart.svg" alt="cart">
+		<div class="btnLogin_Cart col-sm-2">
+			<c:if test="${ empty sessionScope.USERID}">
+				<input type="button" value="Đăng nhập"
+					onclick="window.location.href='login';return false;">
+			</c:if>
+			<%-- <c:if test="${not empty sessionScope.USERID}">
+							<input type="button" value="Đăng xuất"
+								onclick="window.location.href='${pageContext.request.contextPath}/logout';return false;">
+						</c:if> --%>
+			<a href="#"> <img src="/resources/library/icon/Cart.svg"
+				alt="cart">
 			</a>
 		</div>
 	</div>

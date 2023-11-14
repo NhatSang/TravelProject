@@ -19,6 +19,9 @@ import com.se.fit.TravelProject.service.AccountService;
 import com.se.fit.TravelProject.service.TravelPackageService;
 import com.se.fit.TravelProject.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -35,14 +38,20 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
-			Model model) {
+	public String login(HttpSession session, @RequestParam("username") String username,
+			@RequestParam("password") String password, Model model) {
 		Account account = accountService.getAccountById(username);
 		if (account != null) {
 			if (account.getPassword().equals(password)) {
 				User user = userService.getUserById(account.getUser().getUserId());
+				int userId = user.getUserId();
+				String role = account.getRole().toString();
+				session.setAttribute("USERID", userId);
+				session.setAttribute("ROLEUSER", role);
 				model.addAttribute("ROLE", account.getRole().toString());
+				System.out.println(role);
 				model.addAttribute("USER", user);
+				System.out.println(userId);
 				List<Tour> listTour = packageService.getToursActive(LocalDate.now());
 				List<Combo> listCombo = packageService.getAllCombos();
 				model.addAttribute("tours", listTour);
@@ -56,5 +65,14 @@ public class UserController {
 			model.addAttribute("ERROR", "Username không tồn tại");
 			return "dangnhap";
 		}
+	}
+
+	@PostMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		return "dangnhap";
 	}
 }

@@ -16,33 +16,52 @@
 
 <body>
 	<div class="menu_header">
-		<div class="logo col-sm-3">
-			<a href=""> <img src="/resources/img/Logo.png" alt="">
-			</a>
+		<div class="logo col-sm-2">
+			<img src="/resources/img/Logo.png" alt="logo">
 		</div>
-		<div class="menu col-sm-6 navbar">
+		<div class="menu col-sm-8 navbar">
 			<ul class="menu_list navbar-nav">
 				<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
 						chủ</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Du
-						lịch</a></li>
+				<li class="menu_item nav-item dropdown"><a
+					class=" dropdown-toggle" href="#" role="button"
+					id="dropdownMenuLink" data-bs-toggle="dropdown"
+					aria-expanded="false"> Du lịch </a>
+					<ul style="position: absolute;" class="dropdown-menu"
+						aria-labelledby="dropdownMenuLink">
+						<li><a class="dropdown-item" href="#">Tour</a></li>
+						<li><a class="dropdown-item" href="#">Combo Tour</a></li>
+					</ul></li>
 				<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
 						tức</a></li>
 				<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
 						hệ</a></li>
 				<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
 						mãi</a></li>
+				<c:if
+					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
+					<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
+							lý</a></li>
+				</c:if>
 			</ul>
 		</div>
-		<div class="btnLogin_Cart col-sm-3">
-			<input type="button" value="Đăng nhập"> <a href=""> <img
-				src="/resources/library/icon/Cart.svg" alt="cart">
+		<div class="btnLogin_Cart col-sm-2">
+			<c:if test="${ empty sessionScope.USERID}">
+				<input type="button" value="Đăng nhập"
+					onclick="window.location.href='login';return false;">
+			</c:if>
+			<%-- <c:if test="${not empty sessionScope.USERID}">
+							<input type="button" value="Đăng xuất"
+								onclick="window.location.href='${pageContext.request.contextPath}/logout';return false;">
+						</c:if> --%>
+			<a href="#"> <img src="/resources/library/icon/Cart.svg"
+				alt="cart">
 			</a>
 		</div>
 	</div>
 	<div class="link_bar">
 		<a href="">Du lịch</a>
-<!-- 		 <a href="">Du lịch trong nước >></a> <a
+		<!-- 		 <a href="">Du lịch trong nước >></a> <a
 			href="">Du lịch Vũng Tàu</a> -->
 	</div>
 	<div class="containerx">
@@ -79,14 +98,18 @@
 			</div>
 			<div class="img_content">
 				<div class="img_chinh">
-					<img src="/resources/img/${combo.imagesList.toArray()[0]}" alt="img" style="height: 525px">
+					<img src="/resources/img/${combo.imagesList.toArray()[0]}"
+						alt="img" style="height: 525px">
 				</div>
 				<div class="img_phu">
 					<div class="img_phu-top">
-						<img src="/resources/img/${combo.imagesList.toArray()[1]}" alt="img"> <img
+						<img src="/resources/img/${combo.imagesList.toArray()[1]}"
+							alt="img"> <img
 							src="/resources/img/${combo.imagesList.toArray()[2]}" alt="img">
 					</div>
-					<img class="img_bottom" src="/resources/img/${combo.imagesList.toArray()[3]}" alt="img" style="width: 490px;height: 238px">
+					<img class="img_bottom"
+						src="/resources/img/${combo.imagesList.toArray()[3]}" alt="img"
+						style="width: 490px; height: 238px">
 				</div>
 			</div>
 			<div class="map_content">
@@ -196,8 +219,9 @@
 							z
 							<div class="code_trip">
 								<p>Mã chuyến bay</p>
-								<img class="circle_left" src="/resources/library/icon/Ellipse 11.svg"
-									alt=""> <img class="circle_right"
+								<img class="circle_left"
+									src="/resources/library/icon/Ellipse 11.svg" alt=""> <img
+									class="circle_right"
 									src="/resources/library/icon/Ellipse 11.svg" alt="">
 								<p class="trip_code">XNXX999</p>
 							</div>
@@ -212,9 +236,7 @@
 						<div class="img_service">
 							<img src="/resources/img/service.png" alt="">
 						</div>
-						<p class="txt_service">
-						${combo.comboInf}
-						</p>
+						<p class="txt_service">${combo.comboInf}</p>
 					</div>
 				</div>
 				<div class="combo_include">
@@ -296,8 +318,8 @@
 				<div class="items_card">
 					<div class="card_item col">
 						<div class="card_img">
-							<a href="" class="card_link"> <img src="/resources/img/card1.png"
-								alt="">
+							<a href="" class="card_link"> <img
+								src="/resources/img/card1.png" alt="">
 							</a> <a href="" class="card_favourite"> <img
 								src="/resources/library/icon/favourite.svg" alt="">
 							</a>
@@ -362,8 +384,8 @@
 				<div class="items_card">
 					<div class="card_item col">
 						<div class="card_img">
-							<a href="" class="card_link"> <img src="/resources/img/card2.png"
-								alt="">
+							<a href="" class="card_link"> <img
+								src="/resources/img/card2.png" alt="">
 							</a> <a href="" class="card_favourite"> <img
 								src="/resources/library/icon/favourite.svg" alt="">
 							</a>
@@ -428,8 +450,8 @@
 				<div class="items_card">
 					<div class="card_item col">
 						<div class="card_img">
-							<a href="" class="card_link"> <img src="/resources/img/card3.png"
-								alt="">
+							<a href="" class="card_link"> <img
+								src="/resources/img/card3.png" alt="">
 							</a> <a href="" class="card_favourite"> <img
 								src="/resources/library/icon/favourite.svg" alt="">
 							</a>
@@ -494,8 +516,8 @@
 				<div class="items_card">
 					<div class="card_item col">
 						<div class="card_img">
-							<a href="" class="card_link"> <img src="/resources/img/card3.png"
-								alt="">
+							<a href="" class="card_link"> <img
+								src="/resources/img/card3.png" alt="">
 							</a> <a href="" class="card_favourite"> <img
 								src="/resources/library/icon/favourite.svg" alt="">
 							</a>
@@ -560,8 +582,8 @@
 				<div class="items_card">
 					<div class="card_item col">
 						<div class="card_img">
-							<a href="" class="card_link"> <img src="/resources/img/card2.png"
-								alt="">
+							<a href="" class="card_link"> <img
+								src="/resources/img/card2.png" alt="">
 							</a> <a href="" class="card_favourite"> <img
 								src="/resources/library/icon/favourite.svg" alt="">
 							</a>
@@ -626,8 +648,8 @@
 				<div class="items_card">
 					<div class="card_item col">
 						<div class="card_img">
-							<a href="" class="card_link"> <img src="/resources/img/card1.png"
-								alt="">
+							<a href="" class="card_link"> <img
+								src="/resources/img/card1.png" alt="">
 							</a> <a href="" class="card_favourite"> <img
 								src="/resources/library/icon/favourite.svg" alt="">
 							</a>
@@ -728,7 +750,8 @@
 				<div class="detail_app">
 					<div class="app_android">
 						<p>Android</p>
-						<a href=""> <img src="/resources/library/icon/android.svg" alt="">
+						<a href=""> <img src="/resources/library/icon/android.svg"
+							alt="">
 						</a>
 					</div>
 					<div class="app_ios">
@@ -765,8 +788,8 @@
 					<h4>Chứng nhận</h4>
 				</div>
 				<div class="detail_link">
-					<a href=""> <img class="chungnhan1" src="/resources/img/chungnhan1.png"
-						alt="">
+					<a href=""> <img class="chungnhan1"
+						src="/resources/img/chungnhan1.png" alt="">
 					</a> <a href=""> <img src="/resources/img/chungnhan2.png" alt="">
 					</a>
 				</div>
@@ -803,9 +826,11 @@
 					<h4>Mạng xã hội</h4>
 				</div>
 				<div class="mxh">
-					<a href=""> <img src="/resources/library/icon/facebook.svg" alt="">
+					<a href=""> <img src="/resources/library/icon/facebook.svg"
+						alt="">
 					</a> <a href=""> <img src="/resources/library/icon/ins.svg" alt="">
-					</a> <a href=""> <img src="/resources/library/icon/youtube.svg" alt="">
+					</a> <a href=""> <img src="/resources/library/icon/youtube.svg"
+						alt="">
 					</a> <a href=""> <img src="/resources/library/icon/mxh.svg" alt="">
 					</a>
 				</div>
