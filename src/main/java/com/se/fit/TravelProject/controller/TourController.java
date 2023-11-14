@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,12 +37,11 @@ public class TourController {
 		this.destinationService = destinationService;
 	}
 
-	@GetMapping("/showTours")
-	public String showTours(@RequestParam("departure") String departure, @RequestParam("departure") String destination,
-			Model model) {
-		List<Tour> list = packageService.getAllTours();
-		model.addAttribute("LISTTOURS", list);
-		return "";
+	@GetMapping("/showTour")
+	public String showTour(@RequestParam("tourId") int tourId, Model model) {
+		Tour tour = packageService.getTourById(tourId);
+		model.addAttribute("TOUR", tour);
+		return "TourDetail";
 	}
 
 	@GetMapping("/resultSearchTour")
@@ -92,5 +92,18 @@ public class TourController {
 		model.addAttribute("LISTDEP", departures);
 		model.addAttribute("LISTDES", destinations);
 		return "ResultSearchTour";
+	}
+	
+	@GetMapping("/booking")
+	public String bookingTour(@RequestParam("tourId") int tourId, Model model ) {
+		Tour tour = packageService.getTourById(tourId);
+		model.addAttribute("TRAVELPACKAGE", tour);
+		return "Booking";
+	}
+	
+	@PostMapping("/save")
+	public String booking(@RequestParam("tourId") int tourId, Model model) {
+		Tour tour = packageService.getTourById(tourId);
+		return "";
 	}
 }

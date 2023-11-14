@@ -23,14 +23,11 @@ public class AccountService {
 		return accountRepository.findAll();
 	}
 	
-	public Account getAccountById(int id) {
-		Optional<Account> rs = accountRepository.findById(id);
+	public Account getAccountById(String username) {
+		Optional<Account> rs = accountRepository.findById(username);
 		Account account = null;
 		if(rs.isPresent()) {
 			account = rs.get();
-		}
-		else {
-			throw new RuntimeException("Not find");
 		}
 		return account;
 	}
@@ -39,7 +36,7 @@ public class AccountService {
 		accountRepository.save(account);
 	}
 	
-	public void deleteAccount(int id) {
-		accountRepository.deleteById(id);
+	public void deleteAccount(String username) {
+		accountRepository.deleteById(username);
 	}
 }
