@@ -7,15 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Tour;
+import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
 import com.se.fit.TravelProject.service.TravelPackageService;
 
 @Controller
-@RequestMapping("")
 public class HomeController {
 	private DepartureService departureService;
 	private DestinationService destinationService;
@@ -35,7 +36,7 @@ public class HomeController {
 
 
 
-	@GetMapping("")
+	@GetMapping("/")
 	public String getTour(Model model) {
 		List<Tour> listTour = travelPackageService.getAllTours();
 		List<Combo> listCombo = travelPackageService.getAllCombos();
@@ -45,5 +46,10 @@ public class HomeController {
 		return "Home";
 	}
 	
+	@GetMapping("/login")
+	public String showLogin(Model model) {
+		model.addAttribute("ERROR", "");
+		return "dangnhap";
+	}
 	
 }
