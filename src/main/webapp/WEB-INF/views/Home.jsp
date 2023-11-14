@@ -67,8 +67,10 @@
 						</ul>
 					</div>
 					<div class="btnLogin_Cart col-sm-3">
-						<input type="button" value="Đăng nhập"> <a href=""> <img
-							src="/resources/library/icon/Cart.svg" alt="cart">
+						<input type="button" value="Đăng nhập"
+							onclick="window.location.href='login';return false;"> <a
+							href="#"> <img src="/resources/library/icon/Cart.svg"
+							alt="cart">
 						</a>
 					</div>
 				</div>
@@ -1053,9 +1055,7 @@
 										<div class="card_img">
 											<a href="" class="card_link"> <c:if
 													test="${not empty tours.imagesList}">
-													<img
-														src="/resources/img/PhuQuoc1.png"
-														alt="img"
+													<img src="/resources/img/PhuQuoc1.png" alt="img"
 														style="width: 340px; height: 184px; border-radius: 10px">
 												</c:if>
 											</a> <a href="" class="card_favourite"> <img
