@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>User Form</title>
 <link type="text/css" rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/styleUserForm.css" />
+	href="/resources/css/styleUserForm.css" />
 <body>
 </head>
 
