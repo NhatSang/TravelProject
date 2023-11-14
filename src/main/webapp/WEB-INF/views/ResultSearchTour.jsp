@@ -142,11 +142,11 @@
 							<div class="item-card">
 								<div class="card">
 									<div class="card-img">
-										<a href="#"> <c:if
+										<a href="#"> <%-- <c:if
 												test="${not empty temp and not empty temp.imagesList and not empty temp.imagesList[0]}">
 												<img class="card-avt"
 													src="/resources/img/${temp.imagesList[0]}" alt="img">
-											</c:if>
+											</c:if> --%>
 										</a> <a href="#"> <img class="card-icon"
 											src="../../library/icon/favourite.svg" alt="">
 										</a>
