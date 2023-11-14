@@ -30,19 +30,6 @@ public class UserController {
 	}
 	
 	
-//	@GetMapping("/showUserss")
-//	public String showUserss(Model theModel){
-//		List<User> theUser = userService.getAllUsers();
-//		theModel.addAttribute("user", theUser);
-//		return "UserForm";
-//	
-//	}
-	
-	
-	//---------------------------------------------------------------
-	
-	
-	
 	@PostMapping("/saveUser")
 	public String saveUser(@ModelAttribute("user") User user){
 		System.out.println(user);
@@ -77,7 +64,6 @@ public class UserController {
 		theModel.addAttribute("user", user);
 		System.out.println(user);
 		return "UserForm";
-	
 	}
 	
 	
