@@ -49,11 +49,11 @@
 		<div class="content">
 			<div class="ticket">
 				<img src="/resources/library/icon/ticket-01.svg" alt="">
-				<p class="code_ticket">NDSGN869-020-121123XE-VLXX</p>
+				<p class="code_ticket">${combo.availableSeats}</p>
 			</div>
 			<div class="header_content">
 				<div class="header_content-left">
-					<p class="title_content">${detailCombo.packageName}</p>
+					<p class="title_content">${combo.packageName}</p>
 					<div class="favourite_content">
 						<a href=""> <img src="/resources/library/icon/favourite_2.svg"
 							alt="">
@@ -63,7 +63,7 @@
 				</div>
 				<div class="header_content-right">
 					<div class="price_content">
-						<p class="price">${detailCombo.price}VND</p>
+						<p class="price">${combo.price}VND</p>
 						<p>/ khách</p>
 					</div>
 					<div class="btn_content">
@@ -79,14 +79,14 @@
 			</div>
 			<div class="img_content">
 				<div class="img_chinh">
-					<img src="/resources/img/vungtau4.png" alt="">
+					<img src="/resources/img/${combo.imagesList.toArray()[0]}" alt="img" style="height: 525px">
 				</div>
 				<div class="img_phu">
 					<div class="img_phu-top">
-						<img src="/resources/img/Vungtau (1).png" alt=""> <img
-							src="/resources/img/Vungtau (3).png" alt="">
+						<img src="/resources/img/${combo.imagesList.toArray()[1]}" alt="img"> <img
+							src="/resources/img/${combo.imagesList.toArray()[2]}" alt="img">
 					</div>
-					<img class="img_bottom" src="/resources/img/Vungtau (2).png" alt="">
+					<img class="img_bottom" src="/resources/img/${combo.imagesList.toArray()[3]}" alt="img" style="width: 490px;height: 238px">
 				</div>
 			</div>
 			<div class="map_content">
@@ -97,13 +97,13 @@
 					<div class="content_time">
 						<div class="time_checkin">
 							<p>Giờ nhận phòng :</p>
-							<p class="text-bold">${detailCombo.checkinTime}:00</p>
+							<p class="text-bold">${combo.checkinTime}:00</p>
 							<%-- <p>ngày</p>
 							<p class="text-bold">${detailCombo.departureDate}</p> --%>
 						</div>
 						<div class="time_checkout">
 							<p>Giờ trả phòng :</p>
-							<p class="text-bold">${detailCombo.checkoutTime}:00</p>
+							<p class="text-bold">${combo.checkoutTime}:00</p>
 							<%-- <p>ngày</p>
 							<p class="text-bold">${detailCombo.returnDate}</p> --%>
 						</div>
@@ -125,7 +125,7 @@
 					<div class="detail_airline">
 						<h4>VietNam Airlines</h4>
 						<img src="/resources/img/airline.png" alt="">
-						<p>${detailCombo.vehicleInf}</p>
+						<p>${combo.vehicleInf}</p>
 					</div>
 					<div class="detail_figlht">
 						<div class="form_detail">
@@ -134,15 +134,15 @@
 								<div class="form_left">
 									<div class="day_start">
 										<p>Ngày đi:</p>
-										<p class="text-bold">${detailCombo.departureDate}</p>
+										<p class="text-bold">${combo.departureDate}</p>
 									</div>
 									<div class="destination_start-end">
 										<div class="destination_start">
-											<p>${detailCombo.departure.location}</p>
+											<p>${combo.departure.location}</p>
 											<p>(XXX)</p>
 										</div>
 										<div class="destination_end">
-											<p>${detailCombo.destination.location}</p>
+											<p>${combo.destination.location}</p>
 											<p>(XXX)</p>
 										</div>
 									</div>
@@ -166,15 +166,15 @@
 								<div class="form_right">
 									<div class="day_end">
 										<p>Ngày về:</p>
-										<p class="text-bold">${detailCombo.returnDate}</p>
+										<p class="text-bold">${combo.returnDate}</p>
 									</div>
 									<div class="destination_start-end">
 										<div class="destination_end">
-											<p>${detailCombo.destination.location}</p>
+											<p>${combo.destination.location}</p>
 											<p>(XXX)</p>
 										</div>
 										<div class="destination_start">
-											<p>${detailCombo.departure.location}</p>
+											<p>${combo.departure.location}</p>
 											<p>(XXX)</p>
 										</div>
 									</div>
@@ -212,21 +212,9 @@
 						<div class="img_service">
 							<img src="/resources/img/service.png" alt="">
 						</div>
-						<p class="txt_service">Khách sạn Fivitel Đà Nẵng tọa lạc tại
-							388 Đ. Trần Hưng Đạo, An Hải Tây, Sơn Trà, Đà Nẵng, bên cạnh cây
-							cầu Trần Thị Lý xinh đẹp - được thiết kế với 25 tầng gồm 157
-							phòng sang trọng theo tiêu chuẩn 4 sao cùng lối thiết kế đẳng cấp
-							vừa mang nét truyền thống Á Đông vừa mang dáng dấp cổ điển của
-							kiến trúc Châu Âu. Tất cả các phòng có hướng nhìn trực diện ra
-							sông với những cây cầu nổi tiếng và toàn cảnh thành phố. Phòng
-							được trải thảm với tông màu nhẹ nhàng, giường ngủ bằng gỗ nguyên
-							khối cùng trang trí hoa văn tinh tế sẽ mang đến cho quý khách một
-							giấc ngủ ngon và những giấc mơ thật đẹp. Với lợi thế nằm tựa mình
-							bên dòng sông Hàn thơ mộng nên tất cả các phòng của khách sạn đều
-							có tầm nhìn thoáng hướng ra các địa điểm vui chơi giải trí –
-							trung tâm thương mại – rừng Sơn Trà,…nổi tiếng của TP Đà Nẵng.
-							Cũng từ khách sạn, du khách dễ dàng di chuyển đến các danh lam
-							thắng cảnh khác của TP Huế, Hội An, Thánh địa Mỹ Sơn,…</p>
+						<p class="txt_service">
+						${combo.comboInf}
+						</p>
 					</div>
 				</div>
 				<div class="combo_include">

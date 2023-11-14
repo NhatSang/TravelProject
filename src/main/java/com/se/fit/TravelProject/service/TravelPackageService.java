@@ -90,4 +90,23 @@ public class TravelPackageService {
 	public List<Tour> getToursByInternationalType(EInternationalType type, LocalDate currentDate){
 		return tourRepository.findToursByInternationalType(type,currentDate);
 	}
+	
+	public List<Combo> getCombos(LocalDate currDate){
+		return comboRepository.findComboActive(currDate);
+	}
+	public List<Combo> getCombosByDep(int departureId, LocalDate currDate) {
+		return comboRepository.findByDepature(departureId, currDate);
+	}
+	public List<Combo> getCombosByDes(int destinationId, LocalDate currDate) {
+		return comboRepository.findByDestination(destinationId, currDate);
+	}
+	public List<Combo> getCombosByDesADep(int departureId, int destinationId, LocalDate currDate) {
+		return comboRepository.findByDesADep(destinationId, departureId, currDate);
+	}
+	
+	
+	
+	
+	
+	
 }
