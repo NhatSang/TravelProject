@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.se.fit.TravelProject.entities.Combo;
+import com.se.fit.TravelProject.entities.EComboType;
 import com.se.fit.TravelProject.entities.EInternationalType;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.repository.ComboRepository;
@@ -124,4 +125,7 @@ public class TravelPackageService {
 		return comboRepository.findByDesADep(destinationId, departureId, currDate);
 	}
 
+	public List<Combo> getComboByComboType(EComboType type,LocalDate currentDate){
+		return comboRepository.findComboByComboType(type, currentDate);
+	}
 }
