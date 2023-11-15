@@ -81,7 +81,7 @@
 							<input type="button" value="Đăng xuất"
 								onclick="window.location.href='logout';return false;">
 						</c:if> --%>
-						<a href="#"> <img src="/resources/library/icon/Cart.svg"
+						<a href="" onclick="window.location.href='Cart/showCart';return false;"> <img src="/resources/library/icon/Cart.svg"
 							alt="cart">
 						</a>
 					</div>
