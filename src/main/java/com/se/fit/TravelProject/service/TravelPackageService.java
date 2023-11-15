@@ -75,6 +75,14 @@ public class TravelPackageService {
 		return tourRepository.findToursActive(currentDate);
 	}
 
+	//
+	public List<Tour> getToursActiveHome(LocalDate currentDate) {
+		List<Tour> tourHome =  tourRepository.findToursActive(currentDate);
+		if(tourHome.size()>6)
+			return  tourRepository.findToursActive(currentDate).subList(0, 6);
+		return  tourRepository.findToursActive(currentDate);
+	}
+
 	public List<Tour> getToursByDesADep(int departureId, int destinationId, LocalDate currentDate) {
 		return tourRepository.findByDesADep(destinationId, departureId, currentDate);
 	}
@@ -86,27 +94,34 @@ public class TravelPackageService {
 	public List<Tour> getToursByDes(int destinationId, LocalDate currentDate) {
 		return tourRepository.findByDestination(destinationId, currentDate);
 	}
-	
-	public List<Tour> getToursByInternationalType(EInternationalType type, LocalDate currentDate){
-		return tourRepository.findToursByInternationalType(type,currentDate);
+
+	public List<Tour> getToursByInternationalType(EInternationalType type, LocalDate currentDate) {
+		return tourRepository.findToursByInternationalType(type, currentDate);
 	}
-	
-	public List<Combo> getCombos(LocalDate currDate){
+
+	public List<Combo> getCombos(LocalDate currDate) {
 		return comboRepository.findComboActive(currDate);
 	}
+
+	//
+	public List<Combo> getCombosHome(LocalDate currDate){
+		List<Combo> cbHome = comboRepository.findComboActive(currDate);
+		if(cbHome.size()>4) {
+			return comboRepository.findComboActive(currDate).subList(0, 4);
+		}
+		return comboRepository.findComboActive(currDate);
+	}
+
 	public List<Combo> getCombosByDep(int departureId, LocalDate currDate) {
 		return comboRepository.findByDepature(departureId, currDate);
 	}
+
 	public List<Combo> getCombosByDes(int destinationId, LocalDate currDate) {
 		return comboRepository.findByDestination(destinationId, currDate);
 	}
+
 	public List<Combo> getCombosByDesADep(int departureId, int destinationId, LocalDate currDate) {
 		return comboRepository.findByDesADep(destinationId, departureId, currDate);
 	}
-	
-	
-	
-	
-	
-	
+
 }
