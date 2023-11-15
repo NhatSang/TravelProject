@@ -94,8 +94,8 @@ public class UserController {
 				System.out.println(role);
 				model.addAttribute("USER", user);
 				System.out.println(userId);
-				List<Tour> listTour = packageService.getToursActive(LocalDate.now());
-				List<Combo> listCombo = packageService.getAllCombos();
+				List<Tour> listTour = packageService.getToursActiveHome(LocalDate.now());
+				List<Combo> listCombo = packageService.getCombosHome(LocalDate.now());
 				model.addAttribute("tours", listTour);
 				model.addAttribute("combos", listCombo);
 				return "Home";
