@@ -1,5 +1,7 @@
 package com.se.fit.TravelProject.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -61,4 +63,20 @@ public class Destination {
 		return "Destination [destinationId=" + destinationId + ", location=" + location + ", type=" + type + "]";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Destination that = (Destination) o;
+
+		return Objects.equals(destinationId, that.destinationId);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(destinationId);
+	}
 }

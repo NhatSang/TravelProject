@@ -1,8 +1,6 @@
 package com.se.fit.TravelProject.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -20,13 +18,13 @@ public class Tour extends TravelPackage implements Serializable {
 	private static final long serialVersionUID = 4994622033259334777L;
 	@Column(name = "number_days")
 	private int numberDays;
-	@Column(columnDefinition = "nvarchar(255)",name = "tourist_attraction")
+	@Column(columnDefinition = "nvarchar(255)", name = "tourist_attraction")
 	private String touristAttraction;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String cuisine;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String hotel;
-	@Column(columnDefinition = "nvarchar(255)",name = "ideal_time")
+	@Column(columnDefinition = "nvarchar(255)", name = "ideal_time")
 	private String idealTime;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String object;
@@ -38,35 +36,6 @@ public class Tour extends TravelPackage implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tour(int travelPackageId, String packageName, LocalDate departureDate, LocalDate returnDate, double price,
-			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
-			Destination destination, int numberDays, String touristAttraction, String cuisine, String hotel,
-			String idealTime, String object, EInternationalType internationalType) {
-		super(travelPackageId, packageName, departureDate, returnDate, price, description, availableSeats, imagesList,
-				vehicle, departure, destination);
-		this.numberDays = numberDays;
-		this.touristAttraction = touristAttraction;
-		this.cuisine = cuisine;
-		this.hotel = hotel;
-		this.idealTime = idealTime;
-		this.object = object;
-		this.internationalType = internationalType;
-	}
-
-	public Tour(String packageName, LocalDate departureDate, LocalDate returnDate, double price, String description,
-			int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination,
-			int numberDays, String touristAttraction, String cuisine, String hotel, String idealTime, String object,
-			EInternationalType internationalType) {
-		super(packageName, departureDate, returnDate, price, description, availableSeats, imagesList, vehicle,
-				departure, destination);
-		this.numberDays = numberDays;
-		this.touristAttraction = touristAttraction;
-		this.cuisine = cuisine;
-		this.hotel = hotel;
-		this.idealTime = idealTime;
-		this.object = object;
-		this.internationalType = internationalType;
-	}
 
 	public int getNumberDays() {
 		return numberDays;
