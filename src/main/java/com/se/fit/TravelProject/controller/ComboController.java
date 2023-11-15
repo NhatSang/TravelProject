@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Departure;
 import com.se.fit.TravelProject.entities.Destination;
+import com.se.fit.TravelProject.entities.EComboType;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
@@ -67,6 +69,22 @@ public class ComboController {
 		System.out.println(listCombos);
 		return "ResultSearchCombo";
 	}
+	@GetMapping("/searchByComboType")
+	public String searchByComboType(@RequestParam("type") String type,Model model) {
+		List<Combo> list = null;
+		List<Departure> departures = departureService.getAllDepartures();
+		List<Destination> destinations = destinationService.getAllDestinations();
+		if("CH".equals(type)) {
+			list = travelPackageService.getComboByComboType(EComboType.CH, LocalDate.now());
+		}else if ("AH".equals(type)){
+			list = travelPackageService.getComboByComboType(EComboType.AH, LocalDate.now());
+		}
+		model.addAttribute("listCombos", list);
+		model.addAttribute("listDestinations", destinations);
+		model.addAttribute("listDepartures", departures);
+		model.addAttribute("sum", list.size());
+		return "ResultSearchCombo";
+	}
 	
 	@GetMapping("/showComboDetail")
 	public String showComboDetail(@RequestParam("comboId") int comboId, Model model) {
@@ -82,10 +100,54 @@ public class ComboController {
 		return "Booking";
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("/saveBooking")
 	public String booking(@RequestParam("comboId") int comboId, Model model) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		return "";
 	}
+	
+	@GetMapping("/showListCombos")
+	public String showListCombos(Model model) {
+		List<Combo> listCb = travelPackageService.getAllCombos();
+		model.addAttribute("combos", listCb);
+		return "ListCombos";
+	}
+	
+	@PostMapping("/saveCombo")
+	public String saveCombo(@ModelAttribute("combo") Combo combo) {
+		travelPackageService.saveCombo(combo);
+		return "redirect:/Combo/showListCombos";
+	}
+	
+	@GetMapping("/addCombo")
+	public String showFormAdd(Model model) {
+		Combo combo = new Combo();
+		List<Departure> departures = departureService.getAllDepartures();
+		List<Destination> destinations = destinationService.getAllDestinations();
+		model.addAttribute("combo", combo);
+		model.addAttribute("departures", departures);
+		model.addAttribute("destinations", destinations);
+		return "ComboForm";
+	}
+	
+	@GetMapping("/updateCombo")
+	public String showFormUpdate(@RequestParam("comboId") int comboId,Model model) {
+		Combo combo = travelPackageService.getComboById(comboId);
+		List<Departure> departures = departureService.getAllDepartures();
+		List<Destination> destinations = destinationService.getAllDestinations();
+		model.addAttribute("combo", combo);
+		model.addAttribute("departures", departures);
+		model.addAttribute("destinations", destinations);
+		return "ComboForm";
+	}
+	
+	@GetMapping("/deleteCombo")
+	public String  deleteCombo(@RequestParam("comboId") int comboId) {
+		travelPackageService.deleteCombo(comboId);
+		return "redirect:/Combo/showListCombos";
+	}
+	
+	
+	
 	
 }

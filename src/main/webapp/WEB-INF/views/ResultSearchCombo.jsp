@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,26 +82,24 @@
 
 					<div class="section_filter" style="padding-left: 25px;">
 						<div class="row-filter-2">
-							<!-- <label>Loại tour</label><br> -->
-							<%-- <div class="btn-group" role="group">
-								<c:url var="Domestic" value="searchByInternationalType">
-									<c:param name="type" value="Domestic" />
+							<label>Loại tour</label><br>
+							<div class="btn-group" role="group">
+								<c:url var="CH" value="searchByComboType">
+									<c:param name="type" value="CH" />
 								</c:url>
-								<c:url var="Foreign" value="searchByInternationalType">
-									<c:param name="type" value="Foreign" />
+								<c:url var="AH" value="searchByComboType">
+									<c:param name="type" value="AH" />
 								</c:url>
 								<div>
 									<button class="btn col" id=""
-										onclick="window.location.href='${Domestic}'; return false;">Trong
-										nước</button>
+										onclick="window.location.href='${CH}'; return false;">Car-Hotel</button>
 								</div>
 
 								<div>
 									<button class="btn col" id=""
-										onclick="window.location.href='${Foreign}';return false;">Nước
-										ngoài</button>
+										onclick="window.location.href='${AH}';return false;">Airline-Hotel</button>
 								</div>
-							</div> --%>
+							</div>
 						</div>
 						<form
 							action="${pageContext.request.contextPath}/Combo/searchDesAndDep"
@@ -193,7 +191,8 @@
 										</div>
 										<div class="price-combo">
 											<p>
-												Giá: <span> <fmt:formatNumber value="${combo.price}" /> </span><span> VND</span> /Người
+												Giá: <span> <fmt:formatNumber value="${combo.price}" />
+												</span><span> VND</span> /Người
 											</p>
 										</div>
 										<div class="card-footer-combo">

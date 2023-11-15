@@ -16,13 +16,13 @@
 <body>
 
 	<div class="body_manager">
-		<div class="container" style="height: 1050px">
-		<h2 class="title">CẬP NHẬT TOUR</h2>
+		<div class="container" style="height: 870px">
+			<h2 class="title">CẬP NHẬT COMBO</h2>
 			<table>
-				<form:form action="saveTour" method="POST" modelAttribute="TOUR">
+				<form:form action="saveCombo" method="POST" modelAttribute="combo">
 					<form:hidden path="travelPackageId" />
 					<tr>
-						<td class="row_1">Tour:</td>
+						<td class="row_1">Tên Combo:</td>
 						<td><form:input path="packageName" required="true"
 								class="row_2" /></td>
 					</tr>
@@ -69,25 +69,25 @@
 					<tr>
 						<td class="row_1">Số chỗ:</td>
 						<td><form:input path="availableSeats" required="true"
-								class="row_2" /></td>
+								class="row_2" type="number" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Hình ảnh:</td>
-						<td><input class="row_2" type="file" name="imagesList" id="imagesList"
-							accept="image/*" multiple /></td>
+						<td><input class="row_2" type="file" name="imagesList"
+							id="imagesList" accept="image/*" multiple /></td>
 					</tr>
-					<tr>
+					<%-- 					<tr>
 						<td class="row_1">Phương tiện:</td>
 						<td><form:select path="vehicle" class="row_2">
 								<form:options items="${EVehicle.values()}" />
 							</form:select></td>
-					</tr>
+					</tr> --%>
 					<tr>
 						<td class="row_1">Nơi khỏi hành:</td>
 						<td><form:select path="departure" id="departureLocation"
 								required="true" class="row_2">
 								<form:option value="" label="-- Chọn nơi khởi hành --" />
-								<form:options items="${LISTDEP}" itemLabel="location" />
+								<form:options items="${departures}" itemLabel="location" />
 							</form:select></td>
 					</tr>
 					<tr>
@@ -95,44 +95,32 @@
 						<td><form:select path="destination" id="destinationLocation"
 								required="true" class="row_2">
 								<form:option value="" label="-- chọn điểm đến --" />
-								<form:options items="${LISTDES}" itemLabel="location" />
+								<form:options items="${destinations}" itemLabel="location" />
 							</form:select></td>
 					</tr>
 					<tr>
-						<td class="row_1">Số ngày:</td>
-						<td><form:input path="numberDays" required="true"
-								class="row_2" /></td>
+						<td class="row_1">Giờ checkin:</td>
+						<td><form:input path="checkinTime" required="true"
+								class="row_2" type="number" min="0" max="23" step="1" /></td>
 					</tr>
 					<tr>
-						<td class="row_1">Điểm tham quan:</td>
-						<td><form:input path="touristAttraction" required="true"
-								class="row_2" /></td>
+						<td class="row_1">Giờ checkout:</td>
+						<td><form:input path="checkoutTime" required="true"
+								class="row_2" type="number" min="0" max="23" step="1" /></td>
 					</tr>
 					<tr>
-						<td class="row_1">Ẩm thực:</td>
-						<td><form:input path="cuisine" required="true" class="row_2" /></td>
+						<td class="row_1">Thông tin Combo:</td>
+						<td><form:input path="comboInf" required="true" class="row_2" /></td>
 					</tr>
 					<tr>
-						<td class="row_1">Khách sạn:</td>
-						<td><form:input path="hotel" required="true" class="row_2" /></td>
-					</tr>
-					<tr>
-						<td class="row_1">Thời gian lý tưởng:</td>
-						<td><form:input path="idealTime" required="true"
-								class="row_2" /></td>
-					</tr>
-					<tr>
-						<td class="row_1">Đối tượng:</td>
-						<td><form:input path="object" required="true" class="row_2" /></td>
-					</tr>
-					<tr>
-						<td class="row_1">Loai tour:</td>
-						<td><form:select path="internationalType" class="row_2">
-								<form:options items="${EInternationalType.values()}" />
+						<td class="row_1">Loai Combo:</td>
+						<td><form:select path="comboType" class="row_2">
+								<form:options items="${EComboType.values()}" />
 							</form:select></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="Lưu" class="save" style="width: 200px;margin-left: 50px" /></td>
+						<td colspan="2"><input type="submit" value="Lưu" class="save"
+							style="width: 200px; margin-left: 50px" /></td>
 					</tr>
 				</form:form>
 			</table>

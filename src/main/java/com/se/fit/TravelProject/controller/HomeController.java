@@ -1,6 +1,7 @@
 package com.se.fit.TravelProject.controller;
 
 import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,8 +39,8 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String getTour(Model model) {
-		List<Tour> listTour = travelPackageService.getAllTours();
-		List<Combo> listCombo = travelPackageService.getAllCombos();
+		List<Tour> listTour = travelPackageService.getToursActiveHome(LocalDate.now());
+		List<Combo> listCombo = travelPackageService.getCombosHome(LocalDate.now());
 		model.addAttribute("tours", listTour);
 		model.addAttribute("combos", listCombo);
 		System.out.println(listTour.get(1).getImagesList().iterator().toString());
