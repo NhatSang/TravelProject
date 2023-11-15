@@ -1,6 +1,7 @@
 package com.se.fit.TravelProject.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
 import com.se.fit.TravelProject.service.TravelPackageService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/Combo")
@@ -147,7 +150,23 @@ public class ComboController {
 		return "redirect:/Combo/showListCombos";
 	}
 	
-	
+	@GetMapping("/addComboToCart")
+	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session) {
+	    Combo combo = travelPackageService.getComboById(comboId);
+	    System.out.println(combo);
+	    if (combo != null) {
+	        List<Combo> userCart = (List<Combo>) session.getAttribute("userCart");
+	        if (userCart == null) {
+	            userCart = new ArrayList<>();
+	            session.setAttribute("userCart", userCart);
+	        }
+	        userCart.add(combo);
+	        session.setAttribute("userCart", userCart);
+	        return "GioHang";
+	    } else {
+	        return "GioHang";
+	    }
+	}
 	
 	
 }

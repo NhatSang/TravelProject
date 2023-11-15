@@ -1,6 +1,7 @@
 package com.se.fit.TravelProject.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Departure;
 import com.se.fit.TravelProject.entities.Destination;
 import com.se.fit.TravelProject.entities.EInternationalType;
@@ -19,6 +21,8 @@ import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
 import com.se.fit.TravelProject.service.TravelPackageService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/Tour")
@@ -141,4 +145,22 @@ public class TourController {
 		model.addAttribute("LISTDES", destinations);
 		return "TourForm";
 	}
+	
+	@GetMapping("/addTourToCart")
+	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session) {
+	    Tour tour = packageService.getTourById(tourId);
+	    if (tour != null) {
+	        List<Tour> userCart = (List<Tour>) session.getAttribute("userCart");
+	        if (userCart == null) {
+	            userCart = new ArrayList<>();
+	            session.setAttribute("userCart", userCart);
+	        }
+	        userCart.add(tour);
+	        session.setAttribute("userCart", userCart);
+	        return "GioHang";
+	    } else {
+	        return "GioHang";
+	    }
+	}
+	
 }

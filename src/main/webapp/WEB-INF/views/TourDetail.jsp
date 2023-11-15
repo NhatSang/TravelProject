@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,15 +83,20 @@
 				<div class="header_content-left">
 					<p class="title_content">${TOUR.packageName}</p>
 					<div class="favourite_content">
-						<a href=""> <img src="/resources/library/icon/favourite_2.svg"
-							alt="">
+						<c:url var="cartLink" value="/Tour/addTourToCart">
+							<c:param name="tourId" value="${TOUR.travelPackageId}"></c:param>
+						</c:url>
+						<a href="${cartLink}">
+							<img src="/resources/library/icon/favourite_2.svg" alt="">
 						</a>
-						<p>Thêm vào yêu thích</p>
+						<p>Thêm vào giỏ hàng</p>
 					</div>
 				</div>
 				<div class="header_content-right">
 					<div class="price_content">
-						<p class="price">${TOUR.price}VND</p>
+						<p class="price">
+						<fmt:formatNumber>${TOUR.price}</fmt:formatNumber>
+						VND</p>
 						<p>/ khách</p>
 					</div>
 					<div class="btn_content">

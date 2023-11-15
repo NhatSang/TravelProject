@@ -24,6 +24,7 @@ import com.se.fit.TravelProject.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
 
 
 
@@ -90,6 +91,7 @@ public class UserController {
 				String role = account.getRole().toString();
 				session.setAttribute("USERID", userId);
 				session.setAttribute("ROLEUSER", role);
+				session.setAttribute("User",user);
 				model.addAttribute("ROLE", account.getRole().toString());
 				System.out.println(role);
 				model.addAttribute("USER", user);
