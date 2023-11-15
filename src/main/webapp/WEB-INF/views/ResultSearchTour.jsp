@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -195,7 +196,9 @@
 										</div>
 										<div
 											style="color: red; font-size: x-large; font-weight: bold;">
-											<span>${temp.price}</span><span> vnđ</span>
+											<span>
+											<fmt:formatNumber value="${temp.price}" />
+											</span><span> VND</span>
 										</div>
 									</div>
 									<div class="card-btn row row-cols-2">

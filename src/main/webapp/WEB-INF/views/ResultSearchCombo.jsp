@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -192,7 +193,7 @@
 										</div>
 										<div class="price-combo">
 											<p>
-												Giá: <span> ${combo.price} </span><span> vnđ</span> /Người
+												Giá: <span> <fmt:formatNumber value="${combo.price}" /> </span><span> VND</span> /Người
 											</p>
 										</div>
 										<div class="card-footer-combo">
