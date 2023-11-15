@@ -24,5 +24,6 @@ public interface ComboRepository extends JpaRepository<Combo, Integer>{
 
 	@Query("SELECT c From Combo c WHERE c.departureDate >:currentDate AND c.availableSeats > 0")
 	public List<Combo> findComboActive(@Param("currentDate") LocalDate currentDate);
+	
 
 }
