@@ -1,6 +1,7 @@
 package com.se.fit.TravelProject.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,7 +56,22 @@ public class Departure implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Departure [departureId=" + departureId + ", location=" + location + "]";
+		return "Departure{" + "departureId=" + departureId+ ", location='" + location + '\'' + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Departure departure = (Departure) o;
+		return departureId == departure.departureId && Objects.equals(location, departure.location);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(departureId, location);
 	}
 
 }

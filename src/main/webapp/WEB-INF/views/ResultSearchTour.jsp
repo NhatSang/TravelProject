@@ -59,7 +59,7 @@
 			<div class="btnLogin_Cart col-sm-2">
 				<c:if test="${ empty sessionScope.USERID}">
 					<input type="button" value="Đăng nhập"
-						onclick="window.location.href='login';return false;">
+						onclick="window.location.href='http://localhost:8080/login';return false;">
 				</c:if>
 				<%-- <c:if test="${not empty sessionScope.USERID}">
 							<input type="button" value="Đăng xuất"
@@ -170,9 +170,11 @@
 							<div class="item-card">
 								<div class="card">
 									<div class="card-img">
-										<a href="#"> <img class="card-avt"
-											src="/resources/img/${temp.imagesList.iterator().next()}"
-											alt="img">
+										<c:if test="${not empty temp.imagesList}">
+											<a href="#"> <img class="card-avt"
+												src="/resources/img/${temp.imagesList.iterator().next()}"
+												alt="img">
+										</c:if>
 										</a> <a href="#"> <img class="card-icon"
 											src="/resources/library/icon/favourite.svg" alt="">
 										</a>

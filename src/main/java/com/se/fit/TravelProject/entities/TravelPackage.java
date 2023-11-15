@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -35,11 +38,11 @@ public abstract class TravelPackage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "travel_package_id")
 	private int travelPackageId;
-	@Column(columnDefinition = "nvarchar(255)",name="package_name")
+	@Column(columnDefinition = "nvarchar(255)", name = "package_name")
 	private String packageName;
-	@Column(columnDefinition = "datetime2(7)",name="departure_date")
+	@Column(columnDefinition = "datetime2(7)", name = "departure_date")
 	private LocalDate departureDate;
-	@Column(columnDefinition = "datetime2(7)",name="return_date")
+	@Column(columnDefinition = "datetime2(7)", name = "return_date")
 	private LocalDate returnDate;
 	private double price;
 	@Column(columnDefinition = "nvarchar(255)")
@@ -54,46 +57,15 @@ public abstract class TravelPackage implements Serializable {
 	private EVehicle vehicle;
 	@ManyToOne
 	@JoinColumn(name = "departure_id")
+	@JsonProperty("departure")
 	private Departure departure;
 	@ManyToOne
 	@JoinColumn(name = "destination_id")
+	@JsonProperty("destination")
 	private Destination destination;
 
 	public TravelPackage() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public TravelPackage(int travelPackageId, String packageName, LocalDate departureDate, LocalDate returnDate,
-			double price, String description, int availableSeats, Set<String> imagesList, EVehicle vehicle,
-			Departure departure, Destination destination) {
-		super();
-		this.travelPackageId = travelPackageId;
-		this.packageName = packageName;
-		this.departureDate = departureDate;
-		this.returnDate = returnDate;
-		this.price = price;
-		this.description = description;
-		this.availableSeats = availableSeats;
-		this.imagesList = imagesList;
-		this.vehicle = vehicle;
-		this.departure = departure;
-		this.destination = destination;
-	}
-
-	public TravelPackage(String packageName, LocalDate departureDate, LocalDate returnDate, double price,
-			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
-			Destination destination) {
-		super();
-		this.packageName = packageName;
-		this.departureDate = departureDate;
-		this.returnDate = returnDate;
-		this.price = price;
-		this.description = description;
-		this.availableSeats = availableSeats;
-		this.imagesList = imagesList;
-		this.vehicle = vehicle;
-		this.departure = departure;
-		this.destination = destination;
 	}
 
 	public int getTravelPackageId() {

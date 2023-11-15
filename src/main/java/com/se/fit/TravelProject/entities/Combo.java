@@ -1,8 +1,6 @@
 package com.se.fit.TravelProject.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -22,42 +20,18 @@ public class Combo extends TravelPackage implements Serializable {
 	private int checkinTime;
 	@Column(name = " checkout_time")
 	private int checkoutTime;
-	@Column(columnDefinition = "nvarchar(255)",name="vehicle_inf")
+	@Column(columnDefinition = "nvarchar(255)", name = "vehicle_inf")
 	private String vehicleInf;
-	@Column(columnDefinition = "nvarchar(255)",name="combo_inf")
+	@Column(columnDefinition = "nvarchar(255)", name = "combo_inf")
 	private String comboInf;
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name="combo_type")
+	@Column(name = "combo_type")
 	private EComboType comboType;
 
 	public Combo() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Combo(int travelPackageId, String packageName, LocalDate departureDate, LocalDate returnDate, double price,
-			String description, int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure,
-			Destination destination, int checkinTime, int checkoutTime, String vehicleInf, String comboInf,
-			EComboType comboType) {
-		super(travelPackageId, packageName, departureDate, returnDate, price, description, availableSeats, imagesList,
-				vehicle, departure, destination);
-		this.checkinTime = checkinTime;
-		this.checkoutTime = checkoutTime;
-		this.vehicleInf = vehicleInf;
-		this.comboInf = comboInf;
-		this.comboType = comboType;
-	}
-
-	public Combo(String packageName, LocalDate departureDate, LocalDate returnDate, double price, String description,
-			int availableSeats, Set<String> imagesList, EVehicle vehicle, Departure departure, Destination destination,
-			int checkinTime, int checkoutTime, String vehicleInf, String comboInf, EComboType comboType) {
-		super(packageName, departureDate, returnDate, price, description, availableSeats, imagesList, vehicle,
-				departure, destination);
-		this.checkinTime = checkinTime;
-		this.checkoutTime = checkoutTime;
-		this.vehicleInf = vehicleInf;
-		this.comboInf = comboInf;
-		this.comboType = comboType;
-	}
 
 	public int getCheckinTime() {
 		return checkinTime;

@@ -101,9 +101,44 @@ public class TourController {
 		return "Booking";
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("/saveBooking")
 	public String booking(@RequestParam("tourId") int tourId, Model model) {
 		Tour tour = packageService.getTourById(tourId);
 		return "";
+	}
+	
+	@GetMapping("/showListTours")
+	public String showListTours(Model model) {
+		List<Tour> list = packageService.getAllTours();
+		model.addAttribute("LISTTOURS", list);
+		return "ListTours";
+	}
+	
+	@PostMapping("/saveTour")
+	public String saveTour(@ModelAttribute("TOUR") Tour tour) {
+		packageService.saveTour(tour);
+		return "redirect:/Tour/showListTours";
+	}
+	
+	@GetMapping("/addTour")
+	public String showFormAdd(Model model) {
+		Tour tour = new Tour();
+		List<Departure> departures = departureService.getAllDepartures();
+		List<Destination> destinations = destinationService.getAllDestinations();
+		model.addAttribute("TOUR", tour);
+		model.addAttribute("LISTDEP", departures);
+		model.addAttribute("LISTDES", destinations);
+		return "TourForm";
+	}
+	
+	@GetMapping("/updateTour")
+	public String showFormUpdate(@RequestParam("tourId") int tourId,Model model) {
+		Tour tour = packageService.getTourById(tourId);
+		List<Departure> departures = departureService.getAllDepartures();
+		List<Destination> destinations = destinationService.getAllDestinations();
+		model.addAttribute("TOUR", tour);
+		model.addAttribute("LISTDEP", departures);
+		model.addAttribute("LISTDES", destinations);
+		return "TourForm";
 	}
 }
