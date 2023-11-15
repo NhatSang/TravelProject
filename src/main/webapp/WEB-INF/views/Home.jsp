@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,6 +129,7 @@
 				<div class="uuDaiSatGio">
 					<h1 class="title_uudai">Ưu đãi Tour</h1>
 					<div class="listCard row row-cols-3">
+						
 						<c:forEach var="tours" items="${tours}">
 							<form:form>
 								<div class="items_card">
@@ -187,7 +189,9 @@
 											<p class="txt_sale">-8%</p>
 										</div>
 										<div class="newprice">
-											<p>${tours.price}</p>
+											<p>
+											 <fmt:formatNumber value="${tours.price}" />
+											</p>
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p>VND</p>
 										</div>
@@ -242,7 +246,9 @@
 										<div class="detail_price">
 											<p>Giá:</p>
 											<p style="padding: 0 5px 0px 5px;"></p>
-											<p class="price">${combo.price}VND</p>
+											<p class="price">
+											 <fmt:formatNumber value="${combo.price}" />
+											VND</p>
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p>/Người</p>
 										</div>
