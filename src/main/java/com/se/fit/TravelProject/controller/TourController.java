@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.se.fit.TravelProject.entities.Booking;
 import com.se.fit.TravelProject.entities.CartItem;
 import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Departure;
 import com.se.fit.TravelProject.entities.Destination;
 import com.se.fit.TravelProject.entities.EInternationalType;
 import com.se.fit.TravelProject.entities.Tour;
+import com.se.fit.TravelProject.entities.TravelPackage;
+import com.se.fit.TravelProject.entities.User;
+import com.se.fit.TravelProject.service.BookingService;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
 import com.se.fit.TravelProject.service.TravelPackageService;
+import com.se.fit.TravelProject.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -32,14 +37,18 @@ public class TourController {
 	private TravelPackageService packageService;
 	private DepartureService departureService;
 	private DestinationService destinationService;
+	private BookingService bookingService;
+	private UserService userService;
 
 	@Autowired
 	public TourController(TravelPackageService packageService, DepartureService departureService,
-			DestinationService destinationService) {
+			DestinationService destinationService, BookingService bookingService, UserService userService) {
 		super();
 		this.packageService = packageService;
 		this.departureService = departureService;
 		this.destinationService = destinationService;
+		this.bookingService = bookingService;
+		this.userService = userService;
 	}
 
 	@GetMapping("/showTour")
@@ -98,33 +107,39 @@ public class TourController {
 		model.addAttribute("LISTDES", destinations);
 		return "ResultSearchTour";
 	}
-	
+
 	@GetMapping("/booking")
-	public String bookingTour(@RequestParam("tourId") int tourId, Model model ) {
+	public String bookingTour(@RequestParam("tourId") int tourId, Model model) {
 		Tour tour = packageService.getTourById(tourId);
 		model.addAttribute("TRAVELPACKAGE", tour);
 		return "Booking";
 	}
-	
-	@PostMapping("/saveBooking")
-	public String booking(@RequestParam("tourId") int tourId, Model model) {
-		Tour tour = packageService.getTourById(tourId);
-		return "";
+
+	@GetMapping("/saveBooking")
+	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model) {
+		User user = userService.getUserById(userId);
+		Tour tour = packageService.getTourById(id);
+		tour.setAvailableSeats(tour.getAvailableSeats() - 1);
+        packageService.saveTour(tour);
+		Booking booking = new Booking(user, tour, LocalDate.now());
+		bookingService.saveBooking(booking); 
+		model.addAttribute("message", "Bạn đã dặt thành công");
+		return "redirect:/";
 	}
-	
+
 	@GetMapping("/showListTours")
 	public String showListTours(Model model) {
 		List<Tour> list = packageService.getAllTours();
 		model.addAttribute("LISTTOURS", list);
 		return "ListTours";
 	}
-	
+
 	@PostMapping("/saveTour")
 	public String saveTour(@ModelAttribute("TOUR") Tour tour) {
 		packageService.saveTour(tour);
 		return "redirect:/Tour/showListTours";
 	}
-	
+
 	@GetMapping("/addTour")
 	public String showFormAdd(Model model) {
 		Tour tour = new Tour();
@@ -135,9 +150,9 @@ public class TourController {
 		model.addAttribute("LISTDES", destinations);
 		return "TourForm";
 	}
-	
+
 	@GetMapping("/updateTour")
-	public String showFormUpdate(@RequestParam("tourId") int tourId,Model model) {
+	public String showFormUpdate(@RequestParam("tourId") int tourId, Model model) {
 		Tour tour = packageService.getTourById(tourId);
 		List<Departure> departures = departureService.getAllDepartures();
 		List<Destination> destinations = destinationService.getAllDestinations();
@@ -146,7 +161,7 @@ public class TourController {
 		model.addAttribute("LISTDES", destinations);
 		return "TourForm";
 	}
-	
+
 	@GetMapping("/addTourToCart")
 	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session, Model model) {
 		Tour tour = packageService.getTourById(tourId);
@@ -193,5 +208,5 @@ public class TourController {
 		}
 		return "GioHang";
 	}
-	
+
 }

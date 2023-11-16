@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.se.fit.TravelProject.entities.Booking;
 import com.se.fit.TravelProject.entities.CartItem;
 import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Departure;
 import com.se.fit.TravelProject.entities.Destination;
 import com.se.fit.TravelProject.entities.EComboType;
 import com.se.fit.TravelProject.entities.Tour;
+import com.se.fit.TravelProject.entities.TravelPackage;
+import com.se.fit.TravelProject.entities.User;
+import com.se.fit.TravelProject.service.BookingService;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
 import com.se.fit.TravelProject.service.TravelPackageService;
+import com.se.fit.TravelProject.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,14 +36,18 @@ public class ComboController {
 	private TravelPackageService travelPackageService;
 	private DepartureService departureService;
 	private DestinationService destinationService;
+	private BookingService bookingService;
+	private UserService userService;
 
 	@Autowired
 	public ComboController(TravelPackageService travelPackageService, DepartureService departureService,
-			DestinationService destinationService) {
+			DestinationService destinationService, BookingService bookingService, UserService userService) {
 		super();
 		this.travelPackageService = travelPackageService;
 		this.departureService = departureService;
 		this.destinationService = destinationService;
+		this.bookingService = bookingService;
+		this.userService = userService;
 	}
 
 	@GetMapping("/comBoTours")
@@ -105,12 +114,18 @@ public class ComboController {
 		model.addAttribute("TRAVELPACKAGE", combo);
 		return "Booking";
 	}
-
-	@PostMapping("/saveBooking")
-	public String booking(@RequestParam("comboId") int comboId, Model model) {
-		Combo combo = travelPackageService.getComboById(comboId);
-		return "";
+	@GetMapping("/saveBooking")
+	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model) {
+		User user = userService.getUserById(userId);
+		Combo combo = travelPackageService.getComboById(id);
+		combo.setAvailableSeats(combo.getAvailableSeats() - 1);
+		travelPackageService.saveCombo(combo);
+		Booking booking = new Booking(user, combo, LocalDate.now());
+		bookingService.saveBooking(booking);
+		model.addAttribute("mess", "Bạn đã dặt thành công");
+		return "redirect:/";
 	}
+
 
 	@GetMapping("/showListCombos")
 	public String showListCombos(Model model) {

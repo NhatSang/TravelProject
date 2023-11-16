@@ -51,6 +51,7 @@ public class Booking implements Serializable {
 		this.creationDate = creationDate;
 	}
 
+
 	public int getBookingId() {
 		return bookingId;
 	}

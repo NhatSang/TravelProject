@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +27,11 @@
 			</a>
 		</div>
 		<div class="content">
-			<form action="">
+			<form action="" method="post">
+				<c:url var="bookLink" value="saveBooking">
+					<c:param name="id" value="${TRAVELPACKAGE.travelPackageId}"></c:param>
+					<c:param name="userId" value="${sessionScope.USERID}"></c:param>
+				</c:url>
 				<div class="cart-list">
 					<div class="cart-item">
 						<div class="code">
@@ -33,7 +39,8 @@
 								class="code-id">${TRAVELPACKAGE.travelPackageId}</span>
 						</div>
 						<h3 class="name">${TRAVELPACKAGE.packageName}</h3>
-						<span class="price">${TRAVELPACKAGE.price}</span>
+						<span class="price"><fmt:formatNumber>${TRAVELPACKAGE.price}</fmt:formatNumber>
+							VND</span>
 						<p>
 							Khởi hành: <span class="date">${TRAVELPACKAGE.departureDate}</span>
 						</p>
@@ -46,7 +53,8 @@
 					</div>
 				</div>
 				<div class="form">
-				<input type="hidden" name="TourId" value="${TRAVELPACKAGE.travelPackageId}">
+					<input type="hidden" name="TourId"
+						value="${TRAVELPACKAGE.travelPackageId}">
 					<div class="attention">
 						<h2>Lưu ý</h2>
 						<textarea name="attention" id="attention"></textarea>
@@ -63,10 +71,12 @@
 					</div>
 
 					<h2>
-						Tổng: <span class="total">${TRAVELPACKAGE.price} vnđ</span>
+						Tổng: <span class="total"><fmt:formatNumber>${TRAVELPACKAGE.price}</fmt:formatNumber>
+							VND</span>
 					</h2>
 
-					<button type="submit" class="submit-button" onclick="booking()">Đặt ngay</button>
+					
+						<a style="text-decoration: none;width: 100%" href="${bookLink}" class="submit-button">Đặt ngay</a>
 				</div>
 			</form>
 		</div>
