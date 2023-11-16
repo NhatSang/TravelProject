@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.se.fit.TravelProject.entities.CartItem;
 import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Departure;
 import com.se.fit.TravelProject.entities.Destination;
@@ -147,20 +148,50 @@ public class TourController {
 	}
 	
 	@GetMapping("/addTourToCart")
-	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session) {
-	    Tour tour = packageService.getTourById(tourId);
-	    if (tour != null) {
-	        List<Tour> userCart = (List<Tour>) session.getAttribute("userCart");
-	        if (userCart == null) {
-	            userCart = new ArrayList<>();
-	            session.setAttribute("userCart", userCart);
-	        }
-	        userCart.add(tour);
-	        session.setAttribute("userCart", userCart);
-	        return "GioHang";
-	    } else {
-	        return "GioHang";
-	    }
+	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session, Model model) {
+		Tour tour = packageService.getTourById(tourId);
+		if (tour != null) {
+			// Kiểm tra xem combo có chỗ trống và số lượng không vượt quá chỗ trống
+			if (tour.getAvailableSeats() > 0) {
+				List<CartItem> userCart = (List<CartItem>) session.getAttribute("userCart");
+				if (userCart == null) {
+					userCart = new ArrayList<>();
+					session.setAttribute("userCart", userCart);
+				}
+
+				boolean comboExists = false;
+				for (CartItem item : userCart) {
+					if (item.getID() == tourId) {
+						// Nếu combo đã tồn tại trong giỏ, kiểm tra số lượng không vượt quá chỗ trống
+						if (item.getQuantity() < tour.getAvailableSeats()) {
+							item.increaseQuantity();
+						} else {
+							// Xử lý trường hợp vượt quá chỗ trống, có thể hiển thị thông báo hoặc thực hiện
+							// hành động khác
+							model.addAttribute("message", "Số lượng đã vượt quá chỗ trống.");
+							return "GioHang";
+						}
+						comboExists = true;
+						break;
+					}
+				}
+
+				// Nếu combo chưa tồn tại trong giỏ, kiểm tra số lượng không vượt quá chỗ trống
+				if (!comboExists) {
+					CartItem cartItem = new CartItem(tour, 1);
+					userCart.add(cartItem);
+				}
+
+				session.setAttribute("userCart", userCart);
+			} else {
+				model.addAttribute("message", "Combo không còn chỗ trống.");
+				return "GioHang";
+			}
+		} else {
+			model.addAttribute("message", "Combo không tồn tại.");
+			return "GioHang";
+		}
+		return "GioHang";
 	}
 	
 }

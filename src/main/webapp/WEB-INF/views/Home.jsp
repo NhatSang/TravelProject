@@ -131,7 +131,7 @@
 					<div class="listCard row row-cols-3">
 						
 						<c:forEach var="tours" items="${tours}">
-							<form:form>
+							<form:form >
 								<div class="items_card">
 									<div class="card_item col">
 										<div class="card_img">
