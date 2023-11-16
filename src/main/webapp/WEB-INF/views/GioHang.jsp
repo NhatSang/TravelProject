@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page
+	import="org.springframework.web.servlet.support.RequestContextUtils"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +17,59 @@
 <!-- link css -->
 <link rel="stylesheet" href="/resources/css/resetGH.css" />
 <link rel="stylesheet" href="/resources/css/styleGH.css" />
+<link rel="stylesheet"
+	href="/resources/library/bootstrap/css/bootstrap.min.css">
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
 	rel="stylesheet" />
+<!-- LINK JS -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+        var message = "${message}";
+
+        if (message && message.trim() !== "") {
+            alert(message);
+        }
+        
+        
+        function decreaseQuantity(itemId) {
+            $.get('decreaseQuantity?itemId=' + itemId, function() {
+                // Cập nhật giao diện người dùng nếu cần
+                console.log("xoa");
+                location.reload();
+            });
+        }
+        
+        function calculateTotal() {
+            var total = 0;
+
+            // Lặp qua từng sản phẩm trong giỏ hàng
+            $(".cart-item").each(function () {
+                // Sử dụng Number để chuyển đổi chuỗi thành số mà không mất thông tin về phần thập phân
+                var priceText = $(this).find(".price").text();
+                var quantityText = $(this).find(".remain").text();
+
+                // Loại bỏ tất cả kí tự không phải là số hoặc dấu chấm
+                var cleanedPriceText = priceText.replace(/\./g, '').replace(',', '.');
+                var price = Number(cleanedPriceText);
+                var quantity = parseInt(quantityText);
+
+                // Kiểm tra xem giá và số lượng có là số hợp lệ hay không
+                if (!isNaN(price) && !isNaN(quantity)) {
+                    total += price * quantity;
+                }
+            });
+
+            // Hiển thị tổng tiền vào thẻ span
+            $("#total").text(new Intl.NumberFormat('vi-VN').format(total));
+        }
+
+        // Gọi hàm tính tổng tiền khi trang tải hoặc có sự thay đổi trong giỏ hàng
+        $(document).ready(function() {
+            calculateTotal();
+        });
+    </script>
 
 </head>
 <body>
@@ -34,29 +85,34 @@
 				<div class="cart-list">
 					<c:forEach var="cart" items="${sessionScope.userCart}">
 						<div class="cart-item">
-							<input type="checkbox" class="check-button" />
+							<!-- <input type="checkbox" class="check-button" /> -->
 							<div class="code">
 								<img src="/resource/library/icon/ticket-01.svg" alt="" /> <span
-									class="code-id">${cart.availableSeats}</span>
+									class="code-id">Mã ${cart.cartItem.travelPackageId}</span>
 							</div>
-							<h3 class="name">Siêu Sale 🔥 | ${cart.packageName}</h3>
-							<span class="price"> ${cart.packageName} VND</span>
+							<h3 class="name">Siêu Sale 🔥 | ${cart.cartItem.packageName}</h3>
+							<span class="price"> <fmt:formatNumber>${cart.cartItem.price}</fmt:formatNumber>
+							</span>
 							<p>
-								Khởi hành: <span class="date"> ${cart.departureDate} </span>
+								Khởi hành: <span class="date">
+									${cart.cartItem.departureDate} </span>
 							</p>
 							<p>
 								Nơi khởi hành: <span class="from">
-									${cart.departure.location } </span>
+									${cart.cartItem.departure.location } </span>
 							</p>
 							<p>
-								Số chổ còn nhận: <span class="remain">
-									${cart.availableSeats} </span>
+								Số chổ còn nhận: <span class="">
+									${cart.cartItem.availableSeats} </span>
 							</p>
-							<p>
-								Giá: <span class="service"> <fmt:formatNumber>${cart.price}</fmt:formatNumber>VND
-								</span>
-							</p>
-							 <button type="button" class="delete-button" onclick="window.location.href = '/deleteCartItem?itemId='${cart.travelPackageId}">Xóa</button>
+							<div style="display: flex; justify-content: space-between;">
+								<p>
+									Số lượng: <span class="remain"> ${cart.quantity} </span>
+								</p>
+								<button type="button" class="delete-button btn btn-danger"
+									onclick="decreaseQuantity(${cart.cartItem.travelPackageId})">Xóa</button>
+
+							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -107,7 +163,7 @@
 					</div>
 
 					<h2>
-						Tổng: <span class="total">2,299,000 vnđ</span>
+						Tổng: <span id="total" class="total"></span>
 					</h2>
 
 					<button type="submit" class="submit-button">Thanh toán</button>

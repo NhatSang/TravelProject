@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.se.fit.TravelProject.entities.CartItem;
 import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Departure;
 import com.se.fit.TravelProject.entities.Destination;
@@ -30,6 +31,7 @@ public class ComboController {
 	private TravelPackageService travelPackageService;
 	private DepartureService departureService;
 	private DestinationService destinationService;
+
 	@Autowired
 	public ComboController(TravelPackageService travelPackageService, DepartureService departureService,
 			DestinationService destinationService) {
@@ -50,7 +52,7 @@ public class ComboController {
 		model.addAttribute("sum", listCombos.size());
 		return "ResultSearchCombo";
 	}
-	
+
 	@GetMapping("/searchDesAndDep")
 	public String searchDesAndDep(@RequestParam("departureId") int departureId,
 			@RequestParam("destinationId") int destinationId, Model model) {
@@ -72,14 +74,15 @@ public class ComboController {
 		System.out.println(listCombos);
 		return "ResultSearchCombo";
 	}
+
 	@GetMapping("/searchByComboType")
-	public String searchByComboType(@RequestParam("type") String type,Model model) {
+	public String searchByComboType(@RequestParam("type") String type, Model model) {
 		List<Combo> list = null;
 		List<Departure> departures = departureService.getAllDepartures();
 		List<Destination> destinations = destinationService.getAllDestinations();
-		if("CH".equals(type)) {
+		if ("CH".equals(type)) {
 			list = travelPackageService.getComboByComboType(EComboType.CH, LocalDate.now());
-		}else if ("AH".equals(type)){
+		} else if ("AH".equals(type)) {
 			list = travelPackageService.getComboByComboType(EComboType.AH, LocalDate.now());
 		}
 		model.addAttribute("listCombos", list);
@@ -88,40 +91,40 @@ public class ComboController {
 		model.addAttribute("sum", list.size());
 		return "ResultSearchCombo";
 	}
-	
+
 	@GetMapping("/showComboDetail")
 	public String showComboDetail(@RequestParam("comboId") int comboId, Model model) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		model.addAttribute("combo", combo);
 		return "ComboDetail";
 	}
-	
+
 	@GetMapping("/booking")
-	public String bookingCombo(@RequestParam("comboId")int comboId, Model model) {
+	public String bookingCombo(@RequestParam("comboId") int comboId, Model model) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		model.addAttribute("TRAVELPACKAGE", combo);
 		return "Booking";
 	}
-	
+
 	@PostMapping("/saveBooking")
 	public String booking(@RequestParam("comboId") int comboId, Model model) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		return "";
 	}
-	
+
 	@GetMapping("/showListCombos")
 	public String showListCombos(Model model) {
 		List<Combo> listCb = travelPackageService.getAllCombos();
 		model.addAttribute("combos", listCb);
 		return "ListCombos";
 	}
-	
+
 	@PostMapping("/saveCombo")
 	public String saveCombo(@ModelAttribute("combo") Combo combo) {
 		travelPackageService.saveCombo(combo);
 		return "redirect:/Combo/showListCombos";
 	}
-	
+
 	@GetMapping("/addCombo")
 	public String showFormAdd(Model model) {
 		Combo combo = new Combo();
@@ -132,9 +135,9 @@ public class ComboController {
 		model.addAttribute("destinations", destinations);
 		return "ComboForm";
 	}
-	
+
 	@GetMapping("/updateCombo")
-	public String showFormUpdate(@RequestParam("comboId") int comboId,Model model) {
+	public String showFormUpdate(@RequestParam("comboId") int comboId, Model model) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		List<Departure> departures = departureService.getAllDepartures();
 		List<Destination> destinations = destinationService.getAllDestinations();
@@ -143,30 +146,58 @@ public class ComboController {
 		model.addAttribute("destinations", destinations);
 		return "ComboForm";
 	}
-	
+
 	@GetMapping("/deleteCombo")
-	public String  deleteCombo(@RequestParam("comboId") int comboId) {
+	public String deleteCombo(@RequestParam("comboId") int comboId) {
 		travelPackageService.deleteCombo(comboId);
 		return "redirect:/Combo/showListCombos";
 	}
-	
+
 	@GetMapping("/addComboToCart")
-	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session) {
-	    Combo combo = travelPackageService.getComboById(comboId);
-	    System.out.println(combo);
-	    if (combo != null) {
-	        List<Combo> userCart = (List<Combo>) session.getAttribute("userCart");
-	        if (userCart == null) {
-	            userCart = new ArrayList<>();
-	            session.setAttribute("userCart", userCart);
-	        }
-	        userCart.add(combo);
-	        session.setAttribute("userCart", userCart);
-	        return "GioHang";
-	    } else {
-	        return "GioHang";
-	    }
+	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session, Model model) {
+		Combo combo = travelPackageService.getComboById(comboId);
+		if (combo != null) {
+			// Kiểm tra xem combo có chỗ trống và số lượng không vượt quá chỗ trống
+			if (combo.getAvailableSeats() > 0) {
+				List<CartItem> userCart = (List<CartItem>) session.getAttribute("userCart");
+				if (userCart == null) {
+					userCart = new ArrayList<>();
+					session.setAttribute("userCart", userCart);
+				}
+
+				boolean comboExists = false;
+				for (CartItem item : userCart) {
+					if (item.getID() == comboId) {
+						// Nếu combo đã tồn tại trong giỏ, kiểm tra số lượng không vượt quá chỗ trống
+						if (item.getQuantity() < combo.getAvailableSeats()) {
+							item.increaseQuantity();
+						} else {
+							// Xử lý trường hợp vượt quá chỗ trống, có thể hiển thị thông báo hoặc thực hiện
+							// hành động khác
+							model.addAttribute("message", "Số lượng đã vượt quá chỗ trống.");
+							return "GioHang";
+						}
+						comboExists = true;
+						break;
+					}
+				}
+
+				// Nếu combo chưa tồn tại trong giỏ, kiểm tra số lượng không vượt quá chỗ trống
+				if (!comboExists) {
+					CartItem cartItem = new CartItem(combo, 1);
+					userCart.add(cartItem);
+				}
+
+				session.setAttribute("userCart", userCart);
+			} else {
+				model.addAttribute("message", "Combo không còn chỗ trống.");
+				return "GioHang";
+			}
+		} else {
+			model.addAttribute("message", "Combo không tồn tại.");
+			return "GioHang";
+		}
+		return "GioHang";
 	}
-	
-	
+
 }
