@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page
+	import="org.springframework.web.servlet.support.RequestContextUtils"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,6 +37,13 @@
 <script
 	src="/resources/library/swiper/cdn.jsdelivr.net_npm_swiper@10.2.0_swiper-bundle.min.js"></script>
 
+<script>
+	var message = "${message}";
+
+	if (message && message.trim() !== "") {
+		alert(message);
+	}
+</script>
 
 </head>
 
@@ -81,8 +90,9 @@
 							<input type="button" value="Đăng xuất"
 								onclick="window.location.href='logout';return false;">
 						</c:if> --%>
-						<a href="" onclick="window.location.href='Cart/showCart';return false;"> <img src="/resources/library/icon/Cart.svg"
-							alt="cart">
+						<a href=""
+							onclick="window.location.href='Cart/showCart';return false;">
+							<img src="/resources/library/icon/Cart.svg" alt="cart">
 						</a>
 					</div>
 				</div>
@@ -129,9 +139,9 @@
 				<div class="uuDaiSatGio">
 					<h1 class="title_uudai">Ưu đãi Tour</h1>
 					<div class="listCard row row-cols-3">
-						
+
 						<c:forEach var="tours" items="${tours}">
-							<form:form >
+							<form:form>
 								<div class="items_card">
 									<div class="card_item col">
 										<div class="card_img">
@@ -190,7 +200,7 @@
 										</div>
 										<div class="newprice">
 											<p>
-											 <fmt:formatNumber value="${tours.price}" />
+												<fmt:formatNumber value="${tours.price}" />
 											</p>
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p>VND</p>
@@ -247,8 +257,9 @@
 											<p>Giá:</p>
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p class="price">
-											 <fmt:formatNumber value="${combo.price}" />
-											VND</p>
+												<fmt:formatNumber value="${combo.price}" />
+												VND
+											</p>
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p>/Người</p>
 										</div>
