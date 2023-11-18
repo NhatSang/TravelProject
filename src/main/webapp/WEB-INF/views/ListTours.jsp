@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +13,15 @@
 <body>
 	<div>
 		<input type="button" value="Quản lý Người Dùng"
-			onclick="window.location.href='.....'; return false;"
+			onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
 			class="button_manager" /> <input type="button" value="Quản lý Tour"
-			onclick="window.location.href='Tour/showListTours'; return false;"
-			class="button_manager" style="background-color: #3B0EEE;color: #fff" /> <input type="button"
-			value="Quản lý Combo Tour"
-			onclick="window.location.href='.....'; return false;"
+			onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
+			class="button_manager" style="background-color: #3B0EEE; color: #fff" />
+		<input type="button" value="Quản lý Combo Tour"
+			onclick="window.location.href='http://localhost:8080/Combo/showListCombos'; return false;"
+			class="button_manager" /> <input type="button"
+			value="Quản lý Booking"
+			onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
 			class="button_manager" /> <br> <br>
 	</div>
 	<div class="body_manager">
@@ -31,7 +34,6 @@
 		<div class="table">
 
 			<table>
-
 				<tr>
 					<th class="row_head_1">Mã tour</th>
 					<th class="row_head_2">Tên tour</th>

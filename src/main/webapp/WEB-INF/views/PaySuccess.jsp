@@ -25,7 +25,7 @@
 							<p>Chúng tôi đã gửi thông tin chi tiết về email:</p>
 						</div>
 						<div class="div-10">
-							<p>${user.email}</p>
+							<p>${acc.email}</p>
 						</div>
 					</div>
 					<div class="div-11"></div>
@@ -43,9 +43,9 @@
 				<div class="div-20">
 					<div class="div-21">${user.userId}</div>
 					<div class="div-22">
-						<div class="div-23">${user.fullName}</div>
-						<div class="div-24">${user.email}</div>
-						<div class="div-25">${user.phone}</div>
+						<div class="div-23">${acc.fullName}</div>
+						<div class="div-24">${acc.email}</div>
+						<div class="div-25">${acc.phone}</div>
 					</div>
 					<!-- <div class="div-26">2.900.000đ</div> -->
 				</div>

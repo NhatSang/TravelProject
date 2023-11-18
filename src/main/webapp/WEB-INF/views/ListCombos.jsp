@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +13,19 @@
 <body>
 	<div>
 		<input type="button" value="Quản lý Người Dùng"
-			onclick="window.location.href='.....'; return false;"
+			onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
 			class="button_manager" /> <input type="button" value="Quản lý Tour"
-			onclick="window.location.href=''; return false;"
-			class="button_manager" />
-		<input type="button" value="Quản lý Combo Tour"
-			onclick="window.location.href='.....'; return false;"
-			class="button_manager"  style="background-color: #3B0EEE; color: #fff"/> <br> <br>
+			onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
+			class="button_manager" /> <input type="button"
+			value="Quản lý Combo Tour"
+			onclick="window.location.href='http://localhost:8080/Combo/showListCombos'; return false;"
+			class="button_manager" style="background-color: #3B0EEE; color: #fff" />
+			<input type="button"
+			value="Quản lý Booking"
+			onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
+			class="button_manager"/>
+		<br> <br>
+		
 	</div>
 	<div class="body_manager">
 		<h1 class="title">QUẢN LÝ COMBO TOUR</h1>
@@ -61,11 +67,9 @@
 						<td class="row_head">${temp.returnDate}</td>
 						<td class="row_head"><fmt:formatNumber>${temp.price}</fmt:formatNumber></td>
 						<td class="row_head">${temp.availableSeats}</td>
-						<td class="row_head" style="display: flex"><a href="${updateLink}"
-							class="manager_button">Cập nhật</a>
-							
-							<a href="${deleteLink}"
-							class="manager_button_delete">Xoá</a>
+						<td class="row_head"><a
+							href="${updateLink}" class="manager_button">Cập nhật</a> <a
+							href="${deleteLink}" class="manager_button_delete">Xoá</a></td>
 					</tr>
 				</c:forEach>
 			</table>

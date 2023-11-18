@@ -19,7 +19,7 @@ body {
 
 .containerx {
 	width: 1440px;
-	height: 5000px;
+	height: 5450px;
 	display: flex;
 	justify-content: center;
 	background-color: #f8f8f8;
@@ -995,13 +995,13 @@ swiper-slide img {
 
 .card_btnAddCart {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
 }
 
-.card_btnAddCart input {
+.card_btnAddCart {
 	margin-right: -30px;
 	padding-left: 24px;
-	width: 300px;
+	width: 340px;
 	height: 35px;
 	background: #3B0EEE;
 	border: 7px;
@@ -1011,6 +1011,7 @@ swiper-slide img {
 	font-size: 15px;
 	line-height: 21px;
 	color: #FFFFFF;
+	align-items: center;
 }
 
 .card_btnAddCart img {
@@ -1018,8 +1019,7 @@ swiper-slide img {
 	height: 24px;
 	border-radius: 10px 0 0 10px;
 	position: relative;
-	right: 210px;
-	top: 5px;
+	/* 	right: 150px; */
 	border-right: none;
 }
 
@@ -1113,7 +1113,8 @@ swiper-slide img {
 	padding-top: 15px;
 }
 
-.btn1 input {
+.btn1 {
+	display: flex;
 	padding-left: 24px;
 	width: 210px;
 	height: 46px;
@@ -1122,21 +1123,21 @@ swiper-slide img {
 	color: #fff;
 	font-size: 15px;
 	font-weight: bold;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .btn1 img {
 	width: 24px;
 	height: 24px;
 	border-radius: 10px 0 0 10px;
-	position: relative;
-	right: 195px;
-	top: -2px;
 	border-right: none;
 }
 
-.btn2 input {
+.btn2 {
+	display: flex;
 	padding-left: 24px;
-	width: 210px;
+	width: 150px;
 	height: 46px;
 	border-radius: 10px;
 	background-color: #fff;
@@ -1145,15 +1146,14 @@ swiper-slide img {
 	font-weight: bold;
 	border: #CBCBCB 1px solid;
 	margin-left: 20px;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .btn2 img {
 	width: 24px;
 	height: 24px;
 	border-radius: 10px 0 0 10px;
-	position: relative;
-	right: 165px;
-	top: -2px;
 	border-right: none;
 }
 

@@ -31,27 +31,29 @@
 		</div>
 		<div class="menu col-sm-8 navbar">
 			<ul class="menu_list navbar-nav">
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
-						chủ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/">Trang chủ</a></li>
 				<li class="menu_item nav-item dropdown"><a
 					class=" dropdown-toggle" href="#" role="button"
 					id="dropdownMenuLink" data-bs-toggle="dropdown"
 					aria-expanded="false"> Du lịch </a>
 					<ul style="position: absolute;" class="dropdown-menu"
 						aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="#">Tour</a></li>
-						<li><a class="dropdown-item" href="#">Combo Tour</a></li>
+						<li><a class="dropdown-item"
+							href="http://localhost:8080/Tour/resultSearchTour">Tour</a></li>
+						<li><a class="dropdown-item"
+							href="http://localhost:8080/Combo/comBoTours">Combo Tour</a></li>
 					</ul></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
-						tức</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
-						hệ</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
-						mãi</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/TinTuc">Tin tức</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/LienHe">Liên hệ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/KhuyenMai">Khuyến mãi</a></li>
 				<c:if
-					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
-					<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
-							lý</a></li>
+					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'A'}">
+					<li class="menu_item nav-item"><a class="nav-link"
+						href="http://localhost:8080/user/showUsers">Quản lý</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -64,9 +66,9 @@
 							<input type="button" value="Đăng xuất"
 								onclick="window.location.href='${pageContext.request.contextPath}/logout';return false;">
 						</c:if> --%>
-			<a href="#"> <img src="/resources/library/icon/Cart.svg"
-				alt="cart">
-			</a>
+			<a href="http://localhost:8080/Cart/showCart">
+							<img src="/resources/library/icon/Cart.svg" alt="cart">
+						</a>
 		</div>
 	</div>
 	<div class="containerx">

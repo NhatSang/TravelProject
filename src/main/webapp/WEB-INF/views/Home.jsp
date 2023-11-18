@@ -57,27 +57,29 @@
 					</div>
 					<div class="menu col-sm-8 navbar">
 						<ul class="menu_list navbar-nav">
-							<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
-									chủ</a></li>
+							<li class="menu_item nav-item"><a class="nav-link"
+								href="http://localhost:8080/">Trang chủ</a></li>
 							<li class="menu_item nav-item dropdown"><a
 								class=" dropdown-toggle" href="#" role="button"
 								id="dropdownMenuLink" data-bs-toggle="dropdown"
 								aria-expanded="false"> Du lịch </a>
 								<ul style="position: absolute;" class="dropdown-menu"
 									aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="#">Tour</a></li>
-									<li><a class="dropdown-item" href="#">Combo Tour</a></li>
+									<li><a class="dropdown-item"
+										href="http://localhost:8080/Tour/resultSearchTour">Tour</a></li>
+									<li><a class="dropdown-item"
+										href="http://localhost:8080/Combo/comBoTours">Combo Tour</a></li>
 								</ul></li>
-							<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
-									tức</a></li>
-							<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
-									hệ</a></li>
-							<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
-									mãi</a></li>
+							<li class="menu_item nav-item"><a class="nav-link"
+								href="http://localhost:8080/TinTuc">Tin tức</a></li>
+							<li class="menu_item nav-item"><a class="nav-link"
+								href="http://localhost:8080/LienHe">Liên hệ</a></li>
+							<li class="menu_item nav-item"><a class="nav-link"
+								href="http://localhost:8080/KhuyenMai">Khuyến mãi</a></li>
 							<c:if
-								test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
-								<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
-										lý</a></li>
+								test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'A'}">
+								<li class="menu_item nav-item"><a class="nav-link"
+									href="http://localhost:8080/user/showUsers">Quản lý</a></li>
 							</c:if>
 						</ul>
 					</div>
@@ -90,9 +92,8 @@
 							<input type="button" value="Đăng xuất"
 								onclick="window.location.href='logout';return false;">
 						</c:if> --%>
-						<a href=""
-							onclick="window.location.href='Cart/showCart';return false;">
-							<img src="/resources/library/icon/Cart.svg" alt="cart">
+						<a href="http://localhost:8080/Cart/showCart"> <img
+							src="/resources/library/icon/Cart.svg" alt="cart">
 						</a>
 					</div>
 				</div>
@@ -145,7 +146,9 @@
 								<div class="items_card">
 									<div class="card_item col">
 										<div class="card_img">
-											<a href="" class="card_link"> <c:if
+											<a
+												href="http://localhost:8080/Tour/showTour?tourId=${tours.travelPackageId}"
+												class="card_link"> <c:if
 													test="${not empty tours.imagesList}">
 													<img src="/resources/img/${tours.imagesList.toArray()[1]}"
 														alt="img"
@@ -205,10 +208,13 @@
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p>VND</p>
 										</div>
-										<div class="card_btnAddCart">
-											<input type="submit" value="Thêm vào giỏ hàng"> <img
-												src="/resources/library/icon/add.svg" alt="">
-										</div>
+										<a style="text-decoration: none;width: 300px"
+											href="http://localhost:8080/Tour/addTourToCart?tourId=${tours.travelPackageId}">
+											<div class="card_btnAddCart">
+												<span>Thêm vào giỏ hàng</span> <img
+													src="/resources/library/icon/add.svg" alt="">
+											</div>
+										</a>
 									</div>
 								</div>
 							</form:form>
@@ -216,7 +222,7 @@
 					</div>
 				</div>
 				<div class="uuDaiDacBiet">
-					<h1 class="title_uuDaiDacBiet">Ưu đãi đặc biệt</h1>
+					<h1 class="title_uuDaiDacBiet">Ưu đãi Combo</h1>
 					<c:forEach var="combo" items="${combos}">
 						<form:form>
 							<div class="cardSpecial">
@@ -230,7 +236,12 @@
 								<div class="cardSpecial_detail">
 									<div class="detail_header">
 										<div class="header_left">
-											<p>Vé máy bay + Khách sạn</p>
+											<c:if test="${combo.comboType eq 'CH'}">
+												<p>Vé xe + khách sạn</p>
+											</c:if>
+											<c:if test="${combo.comboType eq 'AH'}">
+												<p>Vé máy bay + khách sạn</p>
+											</c:if>
 										</div>
 										<div class="header_right">
 											<img src="/resources/library/icon/rate.svg" alt="">
@@ -247,7 +258,7 @@
 											</div>
 										</div>
 										<div class="detail_content-destination card_destination">
-											<p>${combo.description}</p>
+											<p>${combo.packageName}</p>
 										</div>
 										<div class="detail_content-start card_start">
 											<p>Vé máy bay khứ hồi Vietravel Airlines + Phòng Tiêu
@@ -264,14 +275,19 @@
 											<p>/Người</p>
 										</div>
 										<div class="detail_btn">
-											<div class="btn1">
-												<input type="button" value="Thêm vào giỏ hàng"> <img
-													src="/resources/library/icon/add.svg" alt="">
-											</div>
-											<div class="btn2">
-												<input type="button" value="Ngày khác"> <img
-													src="/resources/library/icon/calendar-date.svg" alt="">
-											</div>
+											<a style="text-decoration: none;"
+												href="http://localhost:8080/Combo/addComboToCart?comboId=${combo.travelPackageId}">
+												<div class="btn1">
+													<span>Thêm vào giỏ hàng</span> <img
+														src="/resources/library/icon/add.svg" alt="img">
+												</div>
+											</a> <a style="text-decoration: none;"
+												href="http://localhost:8080/Combo/showComboDetail?comboId=${combo.travelPackageId}">
+												<div class="btn2">
+													<span>Chi tiết</span> <img
+														src="/resources/library/icon/detail.svg" alt="">
+												</div>
+											</a>
 										</div>
 									</div>
 								</div>

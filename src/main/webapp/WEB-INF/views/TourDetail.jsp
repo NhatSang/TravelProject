@@ -11,13 +11,15 @@
 <title>Travel.co</title>
 <link rel="stylesheet" href="/resources/css/ComboDetail.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet"
+	href="/resources/css/Header_Footer.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+
 <script src="/resources/library/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script
 	src="/resources/library/swiper/cdn.jsdelivr.net_npm_swiper@10.2.0_swiper-element-bundle.min.js"></script>
@@ -29,29 +31,32 @@
 		<div class="logo col-sm-2">
 			<img src="/resources/img/Logo.png" alt="logo">
 		</div>
-		<div class="menu col-sm-8 navbar">
+		<div class="menu col-sm-8 navbar"
+			style="display: flex; align-items: center; justify-content: center;">
 			<ul class="menu_list navbar-nav">
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
-						chủ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/">Trang chủ</a></li>
 				<li class="menu_item nav-item dropdown"><a
 					class=" dropdown-toggle" href="#" role="button"
 					id="dropdownMenuLink" data-bs-toggle="dropdown"
 					aria-expanded="false"> Du lịch </a>
 					<ul style="position: absolute;" class="dropdown-menu"
 						aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="#">Tour</a></li>
-						<li><a class="dropdown-item" href="#">Combo Tour</a></li>
+						<li><a class="dropdown-item"
+							href="http://localhost:8080/Tour/resultSearchTour">Tour</a></li>
+						<li><a class="dropdown-item"
+							href="http://localhost:8080/Combo/comBoTours">Combo Tour</a></li>
 					</ul></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
-						tức</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
-						hệ</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
-						mãi</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/TinTuc">Tin tức</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/LienHe">Liên hệ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/KhuyenMai">Khuyến mãi</a></li>
 				<c:if
-					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
-					<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
-							lý</a></li>
+					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'A'}">
+					<li class="menu_item nav-item"><a class="nav-link"
+						href="http://localhost:8080/user/showUsers">Quản lý</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -64,9 +69,9 @@
 							<input type="button" value="Đăng xuất"
 								onclick="window.location.href='${pageContext.request.contextPath}/logout';return false;">
 						</c:if> --%>
-			<a href="#"> <img src="/resources/library/icon/Cart.svg"
-				alt="cart">
-			</a>
+			<a href="http://localhost:8080/Cart/showCart">
+							<img src="/resources/library/icon/Cart.svg" alt="cart">
+						</a>
 		</div>
 	</div>
 

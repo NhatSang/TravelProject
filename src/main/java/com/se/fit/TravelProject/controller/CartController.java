@@ -1,11 +1,8 @@
 package com.se.fit.TravelProject.controller;
 
-
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,11 +36,11 @@ public class CartController {
 	private AccountService accountService;
 	private UserService userService;
 	private BookingService bookingService;
-	
-	
+
 	@Autowired
 	public CartController(TravelPackageService travelPackageService, DepartureService departureService,
-			DestinationService destinationService  ,AccountService accountService,UserService userService,BookingService bookingService) {
+			DestinationService destinationService, AccountService accountService, UserService userService,
+			BookingService bookingService) {
 		super();
 		this.travelPackageService = travelPackageService;
 		this.departureService = departureService;
@@ -52,69 +49,84 @@ public class CartController {
 		this.userService = userService;
 		this.bookingService = bookingService;
 	}
-	
+
 	@GetMapping("/showCart")
 	public String showCart() {
 		return "GioHang";
 	}
+
 	@GetMapping("/decreaseQuantity")
 	public String decreaseQuantity(@RequestParam("itemId") int itemId, HttpSession session) {
-	    List<CartItem> userCart = (List<CartItem>) session.getAttribute("userCart");
-	    
-	    if (userCart != null) {
-	        Iterator<CartItem> iterator = userCart.iterator();
-	        while (iterator.hasNext()) {
-	            CartItem item = iterator.next();
-	            if (item.getID() == itemId) {
-	                item.decreaseQuantity();
-	                
-	                // Nếu số lượng giảm về 0, xóa phần tử khỏi danh sách
-	                if (item.getQuantity() == 0) {
-	                    iterator.remove();
-	                }
-	                
-	                break;
-	            }
-	        }  
-	        session.setAttribute("userCart", userCart);
-	    }
-	    return "GioHang";
+		List<CartItem> userCart = (List<CartItem>) session.getAttribute("userCart");
+
+		if (userCart != null) {
+			Iterator<CartItem> iterator = userCart.iterator();
+			while (iterator.hasNext()) {
+				CartItem item = iterator.next();
+				if (item.getID() == itemId) {
+					item.decreaseQuantity();
+
+					// Nếu số lượng giảm về 0, xóa phần tử khỏi danh sách
+					if (item.getQuantity() == 0) {
+						iterator.remove();
+					}
+
+					break;
+				}
+			}
+			session.setAttribute("userCart", userCart);
+		}
+		return "GioHang";
 	}
-	@PostMapping("/bookAll")
-	public String bookAll(@RequestParam("userId") int userId, Model model, HttpSession session) {
-	    // Retrieve the user by userId
-	    User user = userService.getUserById(userId);
 
-	    // Get the list of cart items from the session (userCart)
-	    List<CartItem> cartItems = (List<CartItem>) session.getAttribute("userCart");
+	@GetMapping("/bookAll")
+	public String bookAll(Model model, HttpSession session) {
+		int userId = (int) session.getAttribute("USERID");
 
-	    // Iterate through each item in the cart
-	    for (CartItem cartItem : cartItems) {
-	        int id = cartItem.getID();
+		User user = userService.getUserById(userId);
 
-	        if (cartItem.isComboTour()) {
-	            Combo combo = travelPackageService.getComboById(id);
+		// Get the list of cart items from the session (userCart)
+		List<CartItem> cartItems = (List<CartItem>) session.getAttribute("userCart");
+		System.out.println(cartItems);
 
-	            combo.setAvailableSeats(combo.getAvailableSeats() - 1);
-	            travelPackageService.saveCombo(combo);
+		// Iterate through each item in the cart
+		for (CartItem cartItem : cartItems) {
+			int id = cartItem.getID();
 
-	            Booking booking = new Booking(user, combo, LocalDate.now());
-	            bookingService.saveBooking(booking);
-	        } else {
+			if (cartItem.isComboTour()) {
+				Combo combo = travelPackageService.getComboById(id);
 
-	        	Tour tour = travelPackageService.getTourById(id);
-	        	tour.setAvailableSeats(tour.getAvailableSeats() - 1);
-	        	travelPackageService.saveTour(tour);
-	        	
-	        	Booking booking = new Booking(user, tour, LocalDate.now());
-	        	bookingService.saveBooking(booking);
-	        }
-	    }
-	    session.removeAttribute("userCart");
-	    
-	    session.setAttribute("bill", cartItems);
+				if (combo.getAvailableSeats() > 0) {
+					combo.setAvailableSeats(combo.getAvailableSeats() - 1);
+					travelPackageService.saveCombo(combo);
+					Booking booking = new Booking(user, combo, LocalDate.now());
+					bookingService.saveBooking(booking);
+				} else {
+					model.addAttribute("messger", "Xin lỗi Tour này hết chỗ");
+				   return "redirect:/Cart/showCart";
+				}
+			} else {
 
-	    model.addAttribute("mess", "Bạn đã đặt thành công tất cả các tour trong giỏ hàng");
-	    return "PaySucess";
+				Tour tour = travelPackageService.getTourById(id);
+
+				if (tour.getAvailableSeats() > 0) {
+					tour.setAvailableSeats(tour.getAvailableSeats() - 1);
+					travelPackageService.saveTour(tour);
+					Booking booking = new Booking(user, tour, LocalDate.now());
+					bookingService.saveBooking(booking);
+				} else {
+					model.addAttribute("messger", "Xin lỗi Combo này hết chỗ");
+					return "redirect:/Cart/showCart";
+				}
+			}
+		}
+		session.removeAttribute("userCart");
+
+		session.setAttribute("bill", cartItems);
+
+		session.setAttribute("acc", user);
+
+		model.addAttribute("mess", "Bạn đã đặt thành công tất cả các tour trong giỏ hàng");
+		return "PaySuccess";
 	}
 }
