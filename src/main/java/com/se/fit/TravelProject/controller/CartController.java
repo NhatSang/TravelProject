@@ -22,6 +22,7 @@ import com.se.fit.TravelProject.service.AccountService;
 import com.se.fit.TravelProject.service.BookingService;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
+import com.se.fit.TravelProject.service.SendMailService;
 import com.se.fit.TravelProject.service.TravelPackageService;
 import com.se.fit.TravelProject.service.UserService;
 
@@ -36,11 +37,12 @@ public class CartController {
 	private AccountService accountService;
 	private UserService userService;
 	private BookingService bookingService;
+	private SendMailService mailService;
 
 	@Autowired
 	public CartController(TravelPackageService travelPackageService, DepartureService departureService,
 			DestinationService destinationService, AccountService accountService, UserService userService,
-			BookingService bookingService) {
+			BookingService bookingService, SendMailService mailService) {
 		super();
 		this.travelPackageService = travelPackageService;
 		this.departureService = departureService;
@@ -48,12 +50,14 @@ public class CartController {
 		this.accountService = accountService;
 		this.userService = userService;
 		this.bookingService = bookingService;
+		this.mailService = mailService;
 	}
 
 	@GetMapping("/showCart")
 	public String showCart() {
 		return "GioHang";
 	}
+
 
 	@GetMapping("/decreaseQuantity")
 	public String decreaseQuantity(@RequestParam("itemId") int itemId, HttpSession session) {
@@ -103,7 +107,7 @@ public class CartController {
 					bookingService.saveBooking(booking);
 				} else {
 					model.addAttribute("messger", "Xin lỗi Tour này hết chỗ");
-				   return "redirect:/Cart/showCart";
+					return "redirect:/Cart/showCart";
 				}
 			} else {
 
@@ -125,6 +129,8 @@ public class CartController {
 		session.setAttribute("bill", cartItems);
 
 		session.setAttribute("acc", user);
+		String emailUser = user.getEmail();
+		mailService.sendBookingConfirmationEmail(emailUser);
 
 		model.addAttribute("mess", "Bạn đã đặt thành công tất cả các tour trong giỏ hàng");
 		return "PaySuccess";

@@ -25,6 +25,7 @@ import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.service.BookingService;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
+import com.se.fit.TravelProject.service.SendMailService;
 import com.se.fit.TravelProject.service.TravelPackageService;
 import com.se.fit.TravelProject.service.UserService;
 
@@ -38,16 +39,18 @@ public class ComboController {
 	private DestinationService destinationService;
 	private BookingService bookingService;
 	private UserService userService;
+	private SendMailService mailService;
 
 	@Autowired
 	public ComboController(TravelPackageService travelPackageService, DepartureService departureService,
-			DestinationService destinationService, BookingService bookingService, UserService userService) {
+			DestinationService destinationService, BookingService bookingService, UserService userService,SendMailService mailService) {
 		super();
 		this.travelPackageService = travelPackageService;
 		this.departureService = departureService;
 		this.destinationService = destinationService;
 		this.bookingService = bookingService;
 		this.userService = userService;
+		this.mailService = mailService;
 	}
 
 	@GetMapping("/comBoTours")
@@ -123,6 +126,8 @@ public class ComboController {
 		Booking booking = new Booking(user, combo, LocalDate.now());
 		bookingService.saveBooking(booking);
 		session.setAttribute("acc", user);
+		String emailUser = user.getEmail();
+		mailService.sendBookingConfirmationEmail(emailUser);
 		return "PaySuccess";
 	}
 
