@@ -18,7 +18,7 @@ body {
 
 /* menu */
 .menu_header {
-	width: 1300px;
+	width: 1377px;
 	height: 100px;
 	display: flex;
 	padding-top: 35px;
@@ -188,7 +188,8 @@ body {
 	width: 40%;
 }
 
-.btn_DatNgay input {
+.btn_DatNgay  {
+	display:flex;
 	padding-left: 30px;
 	width: 200px;
 	height: 50px;
@@ -198,12 +199,14 @@ body {
 	font-weight: bold;
 	border: none;
 	border-radius: 10px;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 30px;
 }
 
 .btn_DatNgay img {
-	position: relative;
-	top: -38px;
-	left: 40px;
+	width: 24px;
+	height: 24px;
 }
 
 .btn_Call input {

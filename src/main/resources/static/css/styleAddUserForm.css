@@ -26,7 +26,7 @@ body {
 }
 .container{
 	width: 510px;
-	height: 420px;
+	height: 530px;
 	justify-content: center;
 	align-items: center;
 	background-color: #eeeeee;
@@ -93,3 +93,5 @@ body {
 	margin-top: -60px;
 	
 }
+
+

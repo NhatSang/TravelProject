@@ -166,7 +166,8 @@
 						Tổng: <span id="total" class="total"></span>
 					</h2>
 
-					<button type="submit" class="submit-button">Thanh toán</button>
+					<button onclick="window.location.href ='http://localhost:8080/Cart/bookAll';return false;"
+					 type="submit" class="submit-button">Thanh toán</button>
 				</div>
 			</div>
 		</form:form>

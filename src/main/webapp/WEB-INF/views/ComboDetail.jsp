@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Combo Chi tiết</title>
 <link rel="stylesheet" href="/resources/css/ComboDetail.css">
+<link type="text/css" rel="stylesheet"
+	href="/resources/css/Header_Footer.css">
 <link rel="stylesheet"
 	href="/resources/library/bootstrap/css/bootstrap.min.css">
-
+<script src="/resources/library/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/resources/library/swiper/cdn.jsdelivr.net_npm_swiper@10.2.0_swiper-element-bundle.min.js"></script>
+<script
+	src="/resources/library/swiper/cdn.jsdelivr.net_npm_swiper@10.2.0_swiper-bundle.min.js"></script>
 </head>
 
 <body>
@@ -20,27 +26,30 @@
 		<div class="logo col-sm-2">
 			<img src="/resources/img/Logo.png" alt="logo">
 		</div>
-		<div class="menu col-sm-8 navbar">
+		<div class="menu col-sm-8 navbar"
+			style="display: flex; align-items: center; justify-content: center;">
 			<ul class="menu_list navbar-nav">
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
-						chủ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/">Trang chủ</a></li>
 				<li class="menu_item nav-item dropdown"><a
 					class=" dropdown-toggle" href="#" role="button"
 					id="dropdownMenuLink" data-bs-toggle="dropdown"
 					aria-expanded="false"> Du lịch </a>
 					<ul style="position: absolute;" class="dropdown-menu"
 						aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="#">Tour</a></li>
-						<li><a class="dropdown-item" href="#">Combo Tour</a></li>
+						<li><a class="dropdown-item"
+							href="http://localhost:8080/Tour/resultSearchTour">Tour</a></li>
+						<li><a class="dropdown-item"
+							href="http://localhost:8080/Combo/comBoTours">Combo Tour</a></li>
 					</ul></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
-						tức</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
-						hệ</a></li>
-				<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
-						mãi</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/TinTuc">Tin tức</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/LienHe">Liên hệ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link"
+					href="http://localhost:8080/KhuyenMai">Khuyến mãi</a></li>
 				<c:if
-					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
+					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'A'}">
 					<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
 							lý</a></li>
 				</c:if>
@@ -49,7 +58,7 @@
 		<div class="btnLogin_Cart col-sm-2">
 			<c:if test="${ empty sessionScope.USERID}">
 				<input type="button" value="Đăng nhập"
-					onclick="window.location.href='login';return false;">
+					onclick="window.location.href='http://localhost:8080/login';return false;">
 			</c:if>
 			<%-- <c:if test="${not empty sessionScope.USERID}">
 							<input type="button" value="Đăng xuất"
@@ -78,8 +87,8 @@
 						<c:url var="cartLink" value="/Combo/addComboToCart">
 							<c:param name="comboId" value="${combo.travelPackageId}"></c:param>
 						</c:url>
-						<a href="${cartLink}">
-							<img src="/resources/library/icon/favourite_2.svg" alt="">
+						<a href="${cartLink}"> <img
+							src="/resources/library/icon/favourite_2.svg" alt="">
 						</a>
 						<p>Thêm vào giỏ hàng</p>
 					</div>
@@ -87,15 +96,21 @@
 				<div class="header_content-right">
 					<div class="price_content">
 						<p class="price">
-						<fmt:formatNumber>${combo.price}</fmt:formatNumber>
-						VND</p>
+							<fmt:formatNumber>${combo.price}</fmt:formatNumber>
+							VND
+						</p>
 						<p>/ khách</p>
 					</div>
 					<div class="btn_content">
-						<div class="btn_DatNgay">
-							<input type="button" value="Đặt ngay"> <img
-								src="/resources/library/icon/shopping-cart-add1.svg" alt="">
-						</div>
+						<c:url var="bookingLink" value="/Combo/booking">
+							<c:param name="comboId" value="${combo.travelPackageId}"></c:param>
+						</c:url>
+						<a href="${bookingLink}" style="text-decoration: none;">
+							<div class="btn_DatNgay">
+								<span>Đặt Ngay</span> <img
+									src="/resources/library/icon/shopping-cart-add1.svg" alt="">
+							</div>
+						</a>
 						<div class="btn_Call">
 							<input type="button" value="Liên hệ tư vấn">
 						</div>

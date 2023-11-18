@@ -1,6 +1,7 @@
 package com.se.fit.TravelProject.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.oracle.wls.shaded.org.apache.regexp.recompile;
 import com.se.fit.TravelProject.entities.Account;
 import com.se.fit.TravelProject.entities.Combo;
+import com.se.fit.TravelProject.entities.ERole;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.service.AccountService;
@@ -44,10 +46,28 @@ public class UserController {
 	}
 	
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("user") User user){
-		System.out.println(user);
+	public String saveUser(@ModelAttribute("user") User user, @RequestParam("username") String username, @RequestParam("password") String password){
+		Account account = new Account(username, password, ERole.C, user);
 		userService.saveUser(user);
+		accountService.saveAccount(account);
 		return "redirect:/user/showUsers";
+	}
+	
+	@GetMapping("/searchUser")
+	public String searchUser(@RequestParam("userId") int userId, Model model) {
+		try {
+			User user = userService.getUserById(userId);
+			List<User> user2 = new ArrayList<User>();
+			user2.add(user);
+			model.addAttribute("user", user2);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+
+		
+		return "UserForm";
+
 	}
 	
 

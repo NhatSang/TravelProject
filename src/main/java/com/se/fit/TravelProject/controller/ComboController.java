@@ -115,16 +115,15 @@ public class ComboController {
 		return "Booking";
 	}
 	@GetMapping("/saveBooking")
-	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model) {
+	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model,HttpSession session) {
 		User user = userService.getUserById(userId);
 		Combo combo = travelPackageService.getComboById(id);
 		combo.setAvailableSeats(combo.getAvailableSeats() - 1);
 		travelPackageService.saveCombo(combo);
 		Booking booking = new Booking(user, combo, LocalDate.now());
 		bookingService.saveBooking(booking);
-		model.addAttribute("mess", "Bạn đã dặt thành công");
-		model.addAttribute("user", user);
-		return "PaySucess";
+		session.setAttribute("acc", user);
+		return "PaySuccess";
 	}
 
 
@@ -191,7 +190,7 @@ public class ComboController {
 							// Xử lý trường hợp vượt quá chỗ trống, có thể hiển thị thông báo hoặc thực hiện
 							// hành động khác
 							model.addAttribute("message", "Số lượng đã vượt quá chỗ trống.");
-							return "GioHang";
+							return "redirect:/Cart/showCart";
 						}
 						comboExists = true;
 						break;
@@ -207,13 +206,13 @@ public class ComboController {
 				session.setAttribute("userCart", userCart);
 			} else {
 				model.addAttribute("message", "Combo không còn chỗ trống.");
-				return "GioHang";
+				return "redirect:/Cart/showCart";
 			}
 		} else {
 			model.addAttribute("message", "Combo không tồn tại.");
-			return "GioHang";
+			return "redirect:/Cart/showCart";
 		}
-		return "GioHang";
+		return "redirect:/Cart/showCart";
 	}
 
 }
