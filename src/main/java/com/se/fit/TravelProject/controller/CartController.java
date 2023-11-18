@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.entities.Booking;
 import com.se.fit.TravelProject.entities.CartItem;
+import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.entities.TravelPackage;
 import com.se.fit.TravelProject.service.AccountService;
@@ -79,31 +80,41 @@ public class CartController {
 	    }
 	    return "GioHang";
 	}
-//	@PostMapping("/bookAllCombo")
-//	public String bookAllTours(@RequestParam("userId") int userId, Model model,HttpSession session) {
-//	    User user = userService.getUserById(userId);
-//	    
-//	    // Lấy danh sách các tour từ giỏ hàng (session userCart)
-//	    List<CartItem> cartItems = (List<CartItem>) session.getAttribute("userCart");
-//
-//	    // Đặt từng tour trong giỏ hàng
-//	    for (CartItem cartItem : cartItems) {
-//	        int tourId = cartItem.getID();
-//	        Object tour = travelPackageService.getComboById(tourId);
-//
-//	        // Giảm số chỗ còn nhận
-//	        ((TravelPackage) tour).setAvailableSeats(((TravelPackage) tour).getAvailableSeats() - 1);
-//	        travelPackageService.saveCombo(tour);
-//
-//	        // Tạo và lưu thông tin đặt vé
-//	        Booking booking = new Booking(user, tour, LocalDate.now());
-//	        bookingService.saveBooking(booking);
-//	    }
-//
-//	    // Xóa giỏ hàng sau khi đã đặt thành công
-//	    session.removeAttribute("userCart");
-//
-//	    model.addAttribute("mess", "Bạn đã đặt thành công tất cả các tour trong giỏ hàng");
-//	    return "redirect:/";
-//	}
+	@PostMapping("/bookAll")
+	public String bookAll(@RequestParam("userId") int userId, Model model, HttpSession session) {
+	    // Retrieve the user by userId
+	    User user = userService.getUserById(userId);
+
+	    // Get the list of cart items from the session (userCart)
+	    List<CartItem> cartItems = (List<CartItem>) session.getAttribute("userCart");
+
+	    // Iterate through each item in the cart
+	    for (CartItem cartItem : cartItems) {
+	        int id = cartItem.getID();
+
+	        if (cartItem.isComboTour()) {
+	            Combo combo = travelPackageService.getComboById(id);
+
+	            combo.setAvailableSeats(combo.getAvailableSeats() - 1);
+	            travelPackageService.saveCombo(combo);
+
+	            Booking booking = new Booking(user, combo, LocalDate.now());
+	            bookingService.saveBooking(booking);
+	        } else {
+
+	        	Tour tour = travelPackageService.getTourById(id);
+	        	tour.setAvailableSeats(tour.getAvailableSeats() - 1);
+	        	travelPackageService.saveTour(tour);
+	        	
+	        	Booking booking = new Booking(user, tour, LocalDate.now());
+	        	bookingService.saveBooking(booking);
+	        }
+	    }
+	    session.removeAttribute("userCart");
+	    
+	    session.setAttribute("bill", cartItems);
+
+	    model.addAttribute("mess", "Bạn đã đặt thành công tất cả các tour trong giỏ hàng");
+	    return "PaySucess";
+	}
 }

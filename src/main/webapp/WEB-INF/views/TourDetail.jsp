@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,8 +86,8 @@
 						<c:url var="cartLink" value="/Tour/addTourToCart">
 							<c:param name="tourId" value="${TOUR.travelPackageId}"></c:param>
 						</c:url>
-						<a href="${cartLink}">
-							<img src="/resources/library/icon/favourite_2.svg" alt="">
+						<a href="${cartLink}"> <img
+							src="/resources/library/icon/favourite_2.svg" alt="">
 						</a>
 						<p>Thêm vào giỏ hàng</p>
 					</div>
@@ -95,8 +95,9 @@
 				<div class="header_content-right">
 					<div class="price_content">
 						<p class="price">
-						<fmt:formatNumber>${TOUR.price}</fmt:formatNumber>
-						VND</p>
+							<fmt:formatNumber>${TOUR.price}</fmt:formatNumber>
+							VND
+						</p>
 						<p>/ khách</p>
 					</div>
 					<div class="btn_content">
@@ -152,28 +153,34 @@
 					<div class="row-inf" style="margin-bottom: 20px;">
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour1.svg" alt="img">
 							</div>
 							<p>Thời gian</p>
 							<span>${TOUR.numberDays} ngày</span>
 						</div>
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour2.svg" alt="img">
 							</div>
 							<p>Phương tiện</p>
 							<span>${TOUR.vehicle}</span>
 						</div>
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour3.svg" alt="img">
 							</div>
 							<p>Địa điểm tham quan</p>
-							<span>${TOUR.touristAttraction}</span>
+							<span
+								style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+								${TOUR.touristAttraction} </span>
 						</div>
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour4.svg" alt="img">
 							</div>
 							<p>Ẩm thực</p>
 							<span>${TOUR.cuisine}</span>
@@ -182,28 +189,32 @@
 					<div class="row-inf" style="margin-bottom: 20px;">
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour5.svg" alt="img">
 							</div>
 							<p>Khách sạn</p>
 							<span>${TOUR.hotel}</span>
 						</div>
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour6.svg" alt="img">
 							</div>
 							<p>Thời gian lý tưởng</p>
 							<span>${TOUR.idealTime}</span>
 						</div>
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour7.svg" alt="img">
 							</div>
 							<p>Đối tượng</p>
 							<span>${TOUR.object}</span>
 						</div>
 						<div class="col-inf">
 							<div class="icon">
-								<img src="" alt="img">
+								<img style="width: 40px; height: 40px"
+									src="/resources/library/icon/icontour8.svg" alt="img">
 							</div>
 							<p>Ưu đãi</p>
 							<span>Đã bao gồm trong giá tour</span>

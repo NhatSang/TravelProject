@@ -124,7 +124,8 @@ public class TourController {
 		Booking booking = new Booking(user, tour, LocalDate.now());
 		bookingService.saveBooking(booking); 
 		model.addAttribute("message", "Bạn đã dặt thành công");
-		return "redirect:/";
+		model.addAttribute("user", user);
+		return "PaySuccess";
 	}
 
 	@GetMapping("/showListTours")

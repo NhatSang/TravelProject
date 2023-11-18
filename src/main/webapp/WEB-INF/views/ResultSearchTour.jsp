@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,51 +25,51 @@
 </head>
 
 <body>
-	<div class="containerx">
-		<div class="menu_header">
-			<div class="logo col-sm-2">
-				<img src="/resources/img/Logo.png" alt="logo">
-			</div>
-			<div class="menu col-sm-8 navbar">
-				<ul class="menu_list navbar-nav">
-					<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
-							chủ</a></li>
-					<li class="menu_item nav-item dropdown"><a
-						class=" dropdown-toggle" href="#" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown"
-						aria-expanded="false"> Du lịch </a>
-						<ul style="position: absolute;" class="dropdown-menu"
-							aria-labelledby="dropdownMenuLink">
-							<li><a class="dropdown-item" href="#">Tour</a></li>
-							<li><a class="dropdown-item" href="#">Combo Tour</a></li>
-						</ul></li>
-					<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
-							tức</a></li>
-					<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
-							hệ</a></li>
-					<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
-							mãi</a></li>
-					<c:if
-						test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
-						<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
-								lý</a></li>
-					</c:if>
-				</ul>
-			</div>
-			<div class="btnLogin_Cart col-sm-2">
-				<c:if test="${ empty sessionScope.USERID}">
-					<input type="button" value="Đăng nhập"
-						onclick="window.location.href='http://localhost:8080/login';return false;">
+	<div class="menu_header">
+		<div class="logo col-sm-2">
+			<img src="/resources/img/Logo.png" alt="logo">
+		</div>
+		<div class="menu col-sm-8 navbar">
+			<ul class="menu_list navbar-nav">
+				<li class="menu_item nav-item"><a class="nav-link" href="#">Trang
+						chủ</a></li>
+				<li class="menu_item nav-item dropdown"><a
+					class=" dropdown-toggle" href="#" role="button"
+					id="dropdownMenuLink" data-bs-toggle="dropdown"
+					aria-expanded="false"> Du lịch </a>
+					<ul style="position: absolute;" class="dropdown-menu"
+						aria-labelledby="dropdownMenuLink">
+						<li><a class="dropdown-item" href="#">Tour</a></li>
+						<li><a class="dropdown-item" href="#">Combo Tour</a></li>
+					</ul></li>
+				<li class="menu_item nav-item"><a class="nav-link" href="#">Tin
+						tức</a></li>
+				<li class="menu_item nav-item"><a class="nav-link" href="#">Liên
+						hệ</a></li>
+				<li class="menu_item nav-item"><a class="nav-link" href="#">Khuyến
+						mãi</a></li>
+				<c:if
+					test="${not empty sessionScope.USERID and sessionScope.ROLEUSER eq 'C'}">
+					<li class="menu_item nav-item"><a class="nav-link" href="#">Quản
+							lý</a></li>
 				</c:if>
-				<%-- <c:if test="${not empty sessionScope.USERID}">
+			</ul>
+		</div>
+		<div class="btnLogin_Cart col-sm-2">
+			<c:if test="${ empty sessionScope.USERID}">
+				<input type="button" value="Đăng nhập"
+					onclick="window.location.href='http://localhost:8080/login';return false;">
+			</c:if>
+			<%-- <c:if test="${not empty sessionScope.USERID}">
 							<input type="button" value="Đăng xuất"
 								onclick="window.location.href='${pageContext.request.contextPath}/logout';return false;">
 						</c:if> --%>
-				<a href="#"> <img src="/resources/library/icon/Cart.svg"
-					alt="cart">
-				</a>
-			</div>
+			<a href="#"> <img src="/resources/library/icon/Cart.svg"
+				alt="cart">
+			</a>
 		</div>
+	</div>
+	<div class="containerx">
 
 		<div class="row" style="margin-top: 30px; margin-bottom: 20px;">
 			<ul class="wrapper">
@@ -198,8 +198,7 @@
 										</div>
 										<div
 											style="color: red; font-size: x-large; font-weight: bold;">
-											<span>
-											<fmt:formatNumber value="${temp.price}" />
+											<span> <fmt:formatNumber value="${temp.price}" />
 											</span><span> VND</span>
 										</div>
 									</div>

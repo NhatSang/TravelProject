@@ -123,7 +123,8 @@ public class ComboController {
 		Booking booking = new Booking(user, combo, LocalDate.now());
 		bookingService.saveBooking(booking);
 		model.addAttribute("mess", "Bạn đã dặt thành công");
-		return "redirect:/";
+		model.addAttribute("user", user);
+		return "PaySucess";
 	}
 
 
