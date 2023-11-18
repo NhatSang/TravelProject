@@ -25,6 +25,7 @@ import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.service.BookingService;
 import com.se.fit.TravelProject.service.DepartureService;
 import com.se.fit.TravelProject.service.DestinationService;
+import com.se.fit.TravelProject.service.SendMailService;
 import com.se.fit.TravelProject.service.TravelPackageService;
 import com.se.fit.TravelProject.service.UserService;
 
@@ -39,16 +40,18 @@ public class TourController {
 	private DestinationService destinationService;
 	private BookingService bookingService;
 	private UserService userService;
+	private SendMailService mailService;
 
 	@Autowired
 	public TourController(TravelPackageService packageService, DepartureService departureService,
-			DestinationService destinationService, BookingService bookingService, UserService userService) {
+			DestinationService destinationService, BookingService bookingService, UserService userService, SendMailService mailService) {
 		super();
 		this.packageService = packageService;
 		this.departureService = departureService;
 		this.destinationService = destinationService;
 		this.bookingService = bookingService;
 		this.userService = userService;
+		this.mailService = mailService;
 	}
 
 	@GetMapping("/showTour")
@@ -124,6 +127,8 @@ public class TourController {
 		Booking booking = new Booking(user, tour, LocalDate.now());
 		bookingService.saveBooking(booking); 
 		session.setAttribute("acc", user);
+		String emailUser = user.getEmail();
+		mailService.sendBookingConfirmationEmail(emailUser);
 		return "PaySuccess";
 	}
 
