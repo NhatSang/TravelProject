@@ -23,6 +23,8 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -39,15 +41,20 @@ public abstract class TravelPackage implements Serializable {
 	@Column(name = "travel_package_id")
 	private int travelPackageId;
 	@Column(columnDefinition = "nvarchar(255)", name = "package_name")
+	@Pattern(regexp = "^[a-zA-z0-9].+$",message = "Tên không được để trống")
 	private String packageName;
 	@Column(columnDefinition = "datetime2(7)", name = "departure_date")
+	@NotNull(message = "Ngày đi không được để trống")
 	private LocalDate departureDate;
 	@Column(columnDefinition = "datetime2(7)", name = "return_date")
+	@NotNull(message = "Ngày về không được để trống")
 	private LocalDate returnDate;
+	@NotNull(message = "Giá không được để trống")
 	private double price;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String description;
 	@Column(name = "available_seats")
+	@NotNull(message = "Số chỗ không được để trống")
 	private int availableSeats;
 	@ElementCollection
 	@CollectionTable(name = "Images", joinColumns = @JoinColumn(name = "travelPackageId"))
@@ -58,10 +65,12 @@ public abstract class TravelPackage implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "departure_id")
 	@JsonProperty("departure")
+	@NotNull(message = "Nơi khởi hành không được để trống")
 	private Departure departure;
 	@ManyToOne
 	@JoinColumn(name = "destination_id")
 	@JsonProperty("destination")
+	@NotNull(message = "Điểm đến không được để trống")
 	private Destination destination;
 
 	public TravelPackage() {
