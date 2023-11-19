@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Account")
@@ -19,8 +21,11 @@ public class Account implements Serializable {
 	 */
 	private static final long serialVersionUID = 6758543535589076148L;
 	@Id
+	@Pattern(regexp = "^\\S+$" ,message = "Username không được để trống")
 	private String username;
 	@Column(nullable = false)
+	@NotNull(message = "Password không được để trống")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,16}$",message = "Mật khẩu phải có chữ hoa, chữ thường, số và độ dài 8 - 16 ký tự")
 	private String password;
 	@Enumerated(EnumType.ORDINAL)
 	private ERole role;
@@ -30,6 +35,7 @@ public class Account implements Serializable {
 
 	public Account() {
 		// TODO Auto-generated constructor stub
+		this.role = ERole.C;
 	}
 
 	public Account(String username, String password, ERole role, User user) {

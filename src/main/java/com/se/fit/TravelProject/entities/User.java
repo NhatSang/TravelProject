@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Userr")
@@ -21,10 +23,15 @@ public class User implements Serializable{
 	@Column(name="user_id")
 	private int userId;
 	@Column(nullable = false, columnDefinition = "nvarchar(50)",name = "full_name")
+	@Pattern(regexp = "^[a-zA-z0-9].+$" ,message = "Tên không được để trống")
 	private String fullName;
 	@Column(nullable = false, length = 50,name = "email")
+	@NotNull(message = "Email không được để trống")
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",message = "Email không đúng")
 	private String email;
 	@Column(nullable = false, length = 10,name = "phone")
+	@NotNull(message = "Số điện thoại không được để trống")
+	@Pattern(regexp = "^[0-9]{10}$",message = "Số điện thoại gồm 10 số")
 	private String phone;
 	@Column(nullable = false, length = 200,name = "address")
 	private String address;

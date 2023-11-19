@@ -7,6 +7,8 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @DiscriminatorValue("1")
@@ -17,6 +19,7 @@ public class Tour extends TravelPackage implements Serializable {
 	 */
 	private static final long serialVersionUID = 4994622033259334777L;
 	@Column(name = "number_days")
+	@NotNull(message = "Số ngày không được để trống")
 	private int numberDays;
 	@Column(columnDefinition = "nvarchar(255)", name = "tourist_attraction")
 	private String touristAttraction;
@@ -30,6 +33,7 @@ public class Tour extends TravelPackage implements Serializable {
 	private String object;
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "international_type")
+	@NotNull(message = "Loại tour không được để trống")
 	private EInternationalType internationalType;
 
 	public Tour() {

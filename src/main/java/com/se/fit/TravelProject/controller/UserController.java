@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.se.fit.TravelProject.entities.Combo;
 import com.se.fit.TravelProject.entities.ERole;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.entities.User;
+import com.se.fit.TravelProject.entities.UserAccount;
 import com.se.fit.TravelProject.service.AccountService;
 import com.se.fit.TravelProject.service.SendMailService;
 import com.se.fit.TravelProject.service.TravelPackageService;
@@ -27,9 +29,8 @@ import com.se.fit.TravelProject.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import jakarta.websocket.Session;
-
-
 
 @Controller
 @RequestMapping("/user")
@@ -40,22 +41,34 @@ public class UserController {
 	private SendMailService sendMailService;
 
 	@Autowired
-	public UserController(UserService userService, AccountService accountService, TravelPackageService packageService, SendMailService sendMailService) {
+	public UserController(UserService userService, AccountService accountService, TravelPackageService packageService,
+			SendMailService sendMailService) {
 		super();
 		this.userService = userService;
 		this.accountService = accountService;
 		this.packageService = packageService;
 		this.sendMailService = sendMailService;
 	}
-	
+
 	@PostMapping("/saveUser")
-	public String saveUser(@ModelAttribute("user") User user, @RequestParam("username") String username, @RequestParam("password") String password){
-		Account account = new Account(username, password, ERole.C, user);
-		userService.saveUser(user);
-		accountService.saveAccount(account);
+	public String saveUser(@Valid @ModelAttribute("userAccount") UserAccount userAccount, BindingResult result,Model model) {
+		if (result.hasErrors()) {
+			return "AddUserForm";
+		}
+		try {
+			User user = userAccount.getUser();
+			Account account = userAccount.getAccount();
+			account.setUser(user);
+			userService.saveUser(user,account);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ERROR", "Tài khoản đã tồn tại");
+			return "AddUserForm";
+		}
+		
 		return "redirect:/user/showUsers";
 	}
-	
+
 	@GetMapping("/searchUser")
 	public String searchUser(@RequestParam("userId") int userId, Model model) {
 		try {
@@ -66,41 +79,43 @@ public class UserController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
 
-		
 		return "UserForm";
 
 	}
-	
 
 	@GetMapping("/deleteUsers")
-	public String  deleteUsers(@RequestParam("userId") int id) {
+	public String deleteUsers(@RequestParam("userId") int id) {
 		userService.deleteUser(id);
 		return "redirect:/user/showUsers";
 	}
-	
+
 	@GetMapping("/addUsers")
-	public String  addUsers(Model theModel) {
-		User user = new User();
-		theModel.addAttribute("user", user);
+	public String addUsers(Model theModel) {
+		UserAccount userAccount = new UserAccount();
+		theModel.addAttribute("userAccount", userAccount);
 		return "AddUserForm";
-	
+
 	}
+
 	@GetMapping("/updateUsers")
 	public String showFormForUpdateAdmin(@RequestParam("userId") int id, Model theModel) {
 		User user = userService.getUserById(id);
 		System.out.println(user);
 		theModel.addAttribute("user", user);
+		theModel.addAttribute("ERROR", "Tài khoản đã tồn tại");
 		return "AddUserForm";
 	}
-	@PostMapping("/saveUserNotAdmin")
-	public String saveUserNotAdmin(@ModelAttribute("user") User user, @RequestParam("username") String username, @RequestParam("password") String password){
-		Account account = new Account(username, password, ERole.C, user);
-		userService.saveUser(user);
-		accountService.saveAccount(account);
-		return "redirect:/";
-	}
+
+//	@PostMapping("/saveUserNotAdmin")
+//	public String saveUserNotAdmin(@ModelAttribute("user") User user, @RequestParam("username") String username,
+//			@RequestParam("password") String password) {
+//		Account account = new Account(username, password, ERole.C, user);
+//		userService.saveUser(user);
+//		accountService.saveAccount(account);
+//		return "redirect:/";
+//	}
+
 	@GetMapping("/updateUsersNotAdmin")
 	public String showFormForUpdateUser(@RequestParam("userId") int id, Model theModel) {
 		User user = userService.getUserById(id);
@@ -108,15 +123,15 @@ public class UserController {
 		theModel.addAttribute("user", user);
 		return "UpdateUserNotAdmin";
 	}
-	
+
 	@GetMapping("/showUsers")
-	public String showUsers(Model theModel){
-		List<User> user = userService.getAllUsers();	
+	public String showUsers(Model theModel) {
+		List<User> user = userService.getAllUsers();
 		theModel.addAttribute("user", user);
 		System.out.println(user);
 		return "UserForm";
 	}
-	
+
 	@PostMapping("/login")
 	public String login(HttpSession session, @RequestParam("username") String username,
 			@RequestParam("password") String password, Model model) {
@@ -128,7 +143,7 @@ public class UserController {
 				String role = account.getRole().toString();
 				session.setAttribute("USERID", userId);
 				session.setAttribute("ROLEUSER", role);
-				session.setAttribute("User",user);
+				session.setAttribute("User", user);
 				model.addAttribute("ROLE", account.getRole().toString());
 				System.out.println(role);
 				model.addAttribute("USER", user);
@@ -148,35 +163,35 @@ public class UserController {
 		}
 	}
 
-		@GetMapping("/logout")
-		public String logout(HttpServletRequest request) {
-			HttpSession session = request.getSession(false);
-			if (session != null) {
-				session.removeAttribute("USERID");
-				session.removeAttribute("ROLEUSER");
-				session.removeAttribute("User");
-				session.invalidate();
-			}
-			return "dangnhap";
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.removeAttribute("USERID");
+			session.removeAttribute("ROLEUSER");
+			session.removeAttribute("User");
+			session.invalidate();
 		}
-		
-		@PostMapping("/register")
-		public String register(@ModelAttribute("user") User user, @RequestParam("username") String username, @RequestParam("password") String password){
-			Account account = new Account(username, password, ERole.C, user);
-			userService.saveUser(user);
-			accountService.saveAccount(account);
-			String mail = user.getEmail();
-			String name = user.getFullName();
-			sendMailService.sendRegisterSuccess(mail, name, username, password);
-			return "dangnhap";
-		}
+		return "dangnhap";
+	}
 
-		@GetMapping("/showFormRegister")
-		public String showFormRegister(Model model) {
-			User user = new User();
-			model.addAttribute("user", user);
-			return "Register";
-		}
-	
-	
+//	@PostMapping("/register")
+//	public String register(@ModelAttribute("user") User user, @RequestParam("username") String username,
+//			@RequestParam("password") String password) {
+//		Account account = new Account(username, password, ERole.C, user);
+//		userService.saveUser(user);
+//		accountService.saveAccount(account);
+//		String mail = user.getEmail();
+//		String name = user.getFullName();
+//		sendMailService.sendRegisterSuccess(mail, name, username, password);
+//		return "dangnhap";
+//	}
+
+	@GetMapping("/showFormRegister")
+	public String showFormRegister(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "Register";
+	}
+
 }
