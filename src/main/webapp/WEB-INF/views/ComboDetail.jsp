@@ -121,12 +121,23 @@
 						<c:url var="bookingLink" value="/Combo/booking">
 							<c:param name="comboId" value="${combo.travelPackageId}"></c:param>
 						</c:url>
-						<a href="${bookingLink}" style="text-decoration: none;">
-							<div class="btn_DatNgay">
-								<span>Đặt Ngay</span> <img
-									src="/resources/library/icon/shopping-cart-add1.svg" alt="">
-							</div>
-						</a>
+						
+						<c:if test="${not empty sessionScope.USERID}">
+							<a href="${bookingLink}" style="text-decoration: none;">
+								<div class="btn_DatNgay">
+									<span>Đặt Ngay</span> <img
+										src="/resources/library/icon/shopping-cart-add1.svg" alt="">
+								</div>
+							</a>
+						</c:if>
+						<c:if test="${empty sessionScope.USERID}">
+							<a href="http://localhost:8080/user/showFormRegister" style="text-decoration: none;">
+								<div class="btn_DatNgay">
+									<span>Đặt Ngay</span> <img
+										src="/resources/library/icon/shopping-cart-add1.svg" alt="">
+								</div>
+							</a>
+						</c:if>
 						<div class="btn_Call">
 							<input type="button" value="Liên hệ tư vấn">
 						</div>
