@@ -11,18 +11,27 @@
 <title>Admin Travel.co</title>
 </head>
 <body>
-	<div>
-		<input type="button" value="Quản lý Người Dùng"
-			onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
-			class="button_manager" /> <input type="button" value="Quản lý Tour"
-			onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
-			class="button_manager" style="background-color: #3B0EEE; color: #fff" />
-		<input type="button" value="Quản lý Combo Tour"
-			onclick="window.location.href='http://localhost:8080/Combo/showListCombos'; return false;"
-			class="button_manager" /> <input type="button"
-			value="Quản lý Booking"
-			onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
-			class="button_manager" /> <br> <br>
+	<div style="display: flex;justify-content: space-between;">
+		<div>
+			<input type="button" value="Quản lý Người Dùng"
+				onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
+				class="button_manager"
+				 /> <input
+				type="button" value="Quản lý Tour"
+				onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
+				class="button_manager" style="background-color: #3B0EEE; color: #fff" /> <input type="button"
+				value="Quản lý Combo Tour"
+				onclick="window.location.href='http://localhost:8080/Combo/showListCombos'; return false;"
+				class="button_manager" /> <input type="button"
+				value="Quản lý Booking"
+				onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
+				class="button_manager" /> <br> <br>
+		</div>
+		<div>
+			<input type="button" value="Quay lại trang chủ"
+				onclick="window.location.href='http://localhost:8080/'; return false;"
+				class="button_manager" style="background-color: red; color: #fff" />
+		</div>
 	</div>
 	<div class="body_manager">
 		<h1 class="title">QUẢN LÝ TOUR</h1>
@@ -30,6 +39,15 @@
 		<input type="button" value="Thêm tour mới"
 			onclick="window.location.href='addTour'; return false;"
 			class="add-button" /> <br> <br>
+
+		<div>
+			<form action="searchTour" modelAttribute="tour" method="GET">
+				<input type="submit" value="Tìm kiếm" class="add-button" /> <input
+					type="text" placeholder="Tìm kiếm tour" class="search row_2"
+					name="tourId" />
+			</form>
+		</div>
+		<br> <br>
 
 		<div class="table">
 

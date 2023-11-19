@@ -128,7 +128,8 @@ public class TourController {
 		bookingService.saveBooking(booking); 
 		session.setAttribute("acc", user);
 		String emailUser = user.getEmail();
-		mailService.sendBookingConfirmationEmail(emailUser);
+		String nameUser = user.getFullName();
+		mailService.sendBookingConfirmationEmail(emailUser,nameUser);
 		return "PaySuccess";
 	}
 
@@ -165,6 +166,19 @@ public class TourController {
 		model.addAttribute("LISTDEP", departures);
 		model.addAttribute("LISTDES", destinations);
 		return "TourForm";
+	}
+	
+	@GetMapping("/searchTour")
+	public String searchTour(@RequestParam("tourId") int tourId, Model model) {
+		try {
+			Tour tour = packageService.getTourById(tourId);
+			List<Tour> tours = new ArrayList<Tour>();
+			tours.add(tour);
+			model.addAttribute("LISTTOURS", tours);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "ListTours";
 	}
 
 	@GetMapping("/addTourToCart")
