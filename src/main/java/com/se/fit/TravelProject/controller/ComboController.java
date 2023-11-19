@@ -127,7 +127,8 @@ public class ComboController {
 		bookingService.saveBooking(booking);
 		session.setAttribute("acc", user);
 		String emailUser = user.getEmail();
-		mailService.sendBookingConfirmationEmail(emailUser);
+		String nameUser = user.getFullName();
+		mailService.sendBookingConfirmationEmail(emailUser,nameUser);
 		return "PaySuccess";
 	}
 
@@ -165,6 +166,19 @@ public class ComboController {
 		model.addAttribute("departures", departures);
 		model.addAttribute("destinations", destinations);
 		return "ComboForm";
+	}
+	
+	@GetMapping("/searchCombo")
+	public String searchCombo(@RequestParam("comboId") int comboId, Model model) {
+		try {
+			Combo combo = travelPackageService.getComboById(comboId);
+			List<Combo> combos = new ArrayList<Combo>();
+			combos.add(combo);
+			model.addAttribute("combo", combos);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "ListCombos";
 	}
 
 	@GetMapping("/deleteCombo")

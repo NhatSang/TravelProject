@@ -44,8 +44,6 @@ public class BookingController {
 		return "BookingForm";
 	}
 
-
-
 	@GetMapping("/searchBooking")
 	public String searchBooking(@RequestParam("bookingId") int bookingId, Model model) {
 		

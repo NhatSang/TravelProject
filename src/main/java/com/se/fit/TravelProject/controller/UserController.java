@@ -85,11 +85,25 @@ public class UserController {
 	
 	}
 	@GetMapping("/updateUsers")
-	public String showFormForUpdate(@RequestParam("userId") int id, Model theModel) {
+	public String showFormForUpdateAdmin(@RequestParam("userId") int id, Model theModel) {
 		User user = userService.getUserById(id);
 		System.out.println(user);
 		theModel.addAttribute("user", user);
 		return "AddUserForm";
+	}
+	@PostMapping("/saveUserNotAdmin")
+	public String saveUserNotAdmin(@ModelAttribute("user") User user, @RequestParam("username") String username, @RequestParam("password") String password){
+		Account account = new Account(username, password, ERole.C, user);
+		userService.saveUser(user);
+		accountService.saveAccount(account);
+		return "redirect:/";
+	}
+	@GetMapping("/updateUsersNotAdmin")
+	public String showFormForUpdateUser(@RequestParam("userId") int id, Model theModel) {
+		User user = userService.getUserById(id);
+		System.out.println(user);
+		theModel.addAttribute("user", user);
+		return "UpdateUserNotAdmin";
 	}
 	
 	@GetMapping("/showUsers")
@@ -131,7 +145,7 @@ public class UserController {
 		}
 	}
 
-		@PostMapping("/logout")
+		@GetMapping("/logout")
 		public String logout(HttpServletRequest request) {
 			HttpSession session = request.getSession(false);
 			if (session != null) {

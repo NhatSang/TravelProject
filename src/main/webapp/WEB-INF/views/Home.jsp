@@ -88,13 +88,29 @@
 							<input type="button" value="Đăng nhập"
 								onclick="window.location.href='login';return false;">
 						</c:if>
-						<%-- <c:if test="${not empty sessionScope.USERID}">
-							<input type="button" value="Đăng xuất"
-								onclick="window.location.href='logout';return false;">
-						</c:if> --%>
+						<c:if test="${not empty sessionScope.USERID}">
+							<li class="menu_item nav-item dropdown"><a class="nav-link"
+								href="#" role="button" id="dropdownMenuLink"
+								data-bs-toggle="dropdown" aria-expanded="false"> <img
+									alt="account" src="/resources/library/icon/account.svg">
+							</a>
+								<ul style="position: absolute;"
+									class="dropdown-menu dropdown-menu-end"
+									aria-labelledby="dropdownMenuLink">
+									<li><a class="dropdown-item"
+										href="http://localhost:8080/user/updateUsersNotAdmin?userId=${sessionScope.USERID}">Thông
+											tin tài khoản</a></li>
+									<li><a class="dropdown-item"
+										href="http://localhost:8080/user/logout">Đăng xuất</a></li>
+								</ul></li>
+						</c:if>
 						<a href="http://localhost:8080/Cart/showCart"> <img
 							src="/resources/library/icon/Cart.svg" alt="cart">
 						</a>
+						<c:if test="${not empty sessionScope.userCart }">
+							<img style="position: absolute; width: 12px; height: 12px"
+								alt="red" src="/resources/library/icon/red.svg">
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -208,7 +224,7 @@
 											<p style="padding: 0 5px 0px 5px;"></p>
 											<p>VND</p>
 										</div>
-										<a style="text-decoration: none;width: 300px"
+										<a style="text-decoration: none; width: 300px"
 											href="http://localhost:8080/Tour/addTourToCart?tourId=${tours.travelPackageId}">
 											<div class="card_btnAddCart">
 												<span>Thêm vào giỏ hàng</span> <img

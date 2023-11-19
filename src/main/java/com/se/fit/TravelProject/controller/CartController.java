@@ -130,9 +130,9 @@ public class CartController {
 
 		session.setAttribute("acc", user);
 		String emailUser = user.getEmail();
-		mailService.sendBookingConfirmationEmail(emailUser);
-
-		model.addAttribute("mess", "Bạn đã đặt thành công tất cả các tour trong giỏ hàng");
+		
+		String nameUser = user.getFullName();
+		mailService.sendBookingConfirmationEmail(emailUser,nameUser);
 		return "PaySuccess";
 	}
 }
