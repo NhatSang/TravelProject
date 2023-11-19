@@ -166,8 +166,16 @@
 						Tổng: <span id="total" class="total"></span>
 					</h2>
 
-					<button onclick="window.location.href ='http://localhost:8080/Cart/bookAll';return false;"
-					 type="submit" class="submit-button">Thanh toán</button>
+					<c:if test="${not empty sessionScope.USERID}">
+						<button
+							onclick="window.location.href ='http://localhost:8080/Cart/bookAll';return false;"
+							type="submit" class="submit-button">Thanh toán</button>
+					</c:if>
+					<c:if test="${ empty sessionScope.USERID}">
+						<button
+							onclick="window.location.href ='http://localhost:8080/user/showFormRegister';return false;"
+							type="submit" class="submit-button">Thanh toán</button>
+					</c:if>
 				</div>
 			</div>
 		</form:form>

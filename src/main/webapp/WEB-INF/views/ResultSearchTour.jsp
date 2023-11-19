@@ -222,13 +222,24 @@
 									</div>
 									<div class="card-btn row row-cols-2">
 										<div style="padding: 0 5px 0 5px;">
-											<a href="${bookinglLink}">
-												<div class="a-btn"
-													style="background-color: #3B0EEE; color: #fff;">
-													<span><img src="/resources/library/icon/add.svg"
-														alt=""> Đặt ngay</span>
-												</div>
-											</a>
+											<c:if test="${not empty sessionScope.USERID}">
+												<a href="${bookinglLink}">
+													<div class="a-btn"
+														style="background-color: #3B0EEE; color: #fff;">
+														<span><img src="/resources/library/icon/add.svg"
+															alt=""> Đặt ngay</span>
+													</div>
+												</a>
+											</c:if>
+											<c:if test="${ empty sessionScope.USERID}">
+												<a href="http://localhost:8080/user/showFormRegister">
+													<div class="a-btn"
+														style="background-color: #3B0EEE; color: #fff;">
+														<span><img src="/resources/library/icon/add.svg"
+															alt=""> Đặt ngay</span>
+													</div>
+												</a>
+											</c:if>
 										</div>
 										<div style="padding: 0 5px 0 5px;">
 											<a href="${detailLink}">

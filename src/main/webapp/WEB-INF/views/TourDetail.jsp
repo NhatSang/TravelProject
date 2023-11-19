@@ -122,12 +122,22 @@
 						<p>/ khách</p>
 					</div>
 					<div class="btn_content">
-						<a href="${bookingLink}" style="text-decoration: none;">
-							<div class="btn_DatNgay">
-								<span>Đặt Ngay</span> <img
-									src="/resources/library/icon/shopping-cart-add1.svg" alt="">
-							</div>
-						</a>
+						<c:if test="${not empty sessionScope.USERID}">
+							<a href="${bookingLink}" style="text-decoration: none;">
+								<div class="btn_DatNgay">
+									<span>Đặt Ngay</span> <img
+										src="/resources/library/icon/shopping-cart-add1.svg" alt="">
+								</div>
+							</a>
+						</c:if>
+						<c:if test="${ empty sessionScope.USERID}">
+							<a href="http://localhost:8080/user/showFormRegister" style="text-decoration: none;">
+								<div class="btn_DatNgay">
+									<span>Đặt Ngay</span> <img
+										src="/resources/library/icon/shopping-cart-add1.svg" alt="">
+								</div>
+							</a>
+						</c:if>
 						<div class="btn_Call">
 							<input type="button" value="Liên hệ tư vấn">
 						</div>

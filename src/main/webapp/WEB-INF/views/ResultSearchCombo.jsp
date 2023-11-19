@@ -229,13 +229,24 @@
 										</div>
 										<div class="card-footer-combo">
 											<div class="btn-addcart">
-												<a href="${bookinglLink}" style="text-decoration: none;">
-													<div class="a-btn"
-														style="background-color: #3B0EEE; color: #fff;">
-														<span><img src="/resources/library/icon/add.svg"
-															alt=""> Đặt ngay</span>
-													</div>
-												</a>
+												<c:if test="${not empty sessionScope.USERID}">
+													<a href="${bookinglLink}" style="text-decoration: none;">
+														<div class="a-btn"
+															style="background-color: #3B0EEE; color: #fff;">
+															<span><img src="/resources/library/icon/add.svg"
+																alt=""> Đặt ngay</span>
+														</div>
+													</a>
+												</c:if>
+												<c:if test="${empty sessionScope.USERID}">
+													<a href="http://localhost:8080/user/showFormRegister" style="text-decoration: none;">
+														<div class="a-btn"
+															style="background-color: #3B0EEE; color: #fff;">
+															<span><img src="/resources/library/icon/add.svg"
+																alt=""> Đặt ngay</span>
+														</div>
+													</a>
+												</c:if>
 											</div>
 											<div class="btn-addcart">
 												<a href="${detailLink}" style="text-decoration: none;">

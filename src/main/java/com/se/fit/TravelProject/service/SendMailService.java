@@ -1,5 +1,7 @@
 package com.se.fit.TravelProject.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -42,6 +44,29 @@ public class SendMailService {
 				+ "\r\n" + "Cảm ơn bạn đã chọn chúng tôi để trải nghiệm hành trình đặc biệt này!\r\n" + "\r\n"
 				+ "Trân trọng,\r\n" + "TRAVEL.LO";
 
+		sendEmail(toEmail, subject, message);
+	}
+	public void sendRegisterSuccess(String toEmail, String name, String user, String pass) {
+		String subject = "Xác Nhận Đăng Ký Tài Khoản Thành Công";
+		String message = "Chào "+name+",\r\n"
+				+ "\r\n"
+				+ "Chúc mừng! Chúng tôi rất vui mừng thông báo rằng bạn đã đăng ký thành công tài khoản trên Travel.Lo.\r\n"
+				+ "\r\n"
+				+ "Dưới đây là một số thông tin về tài khoản của bạn:\r\n"
+				+ "\r\n"
+				+ "Tài khoản: " + user + " \r\n"
+				+ "Mật khẩu: " + pass + " \r\n"
+				+ "Ngày Đăng Ký:  " + LocalDate.now() + "\r\n"
+				+ "\r\n"
+				+ "Hãy giữ lại thông tin này cho mọi công việc liên quan đến tài khoản của bạn.\r\n"
+				+ "\r\n"
+				+ "Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ, đừng ngần ngại liên hệ với chúng tôi tại Travel@support.vn.lo hoặc số điện thoại 0999 999 999.\r\n"
+				+ "\r\n"
+				+ "Cảm ơn bạn đã tham gia cùng chúng tôi! Chúc bạn có những trải nghiệm tuyệt vời trên Travel.lo .\r\n"
+				+ "\r\n"
+				+ "Trân trọng,\r\n"
+				+ "TRAVEL.LO";
+		
 		sendEmail(toEmail, subject, message);
 	}
 }

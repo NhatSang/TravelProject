@@ -21,6 +21,7 @@ import com.se.fit.TravelProject.entities.ERole;
 import com.se.fit.TravelProject.entities.Tour;
 import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.service.AccountService;
+import com.se.fit.TravelProject.service.SendMailService;
 import com.se.fit.TravelProject.service.TravelPackageService;
 import com.se.fit.TravelProject.service.UserService;
 
@@ -36,13 +37,15 @@ public class UserController {
 	private UserService userService;
 	private AccountService accountService;
 	private TravelPackageService packageService;
+	private SendMailService sendMailService;
 
 	@Autowired
-	public UserController(UserService userService, AccountService accountService, TravelPackageService packageService) {
+	public UserController(UserService userService, AccountService accountService, TravelPackageService packageService, SendMailService sendMailService) {
 		super();
 		this.userService = userService;
 		this.accountService = accountService;
 		this.packageService = packageService;
+		this.sendMailService = sendMailService;
 	}
 	
 	@PostMapping("/saveUser")
@@ -149,12 +152,31 @@ public class UserController {
 		public String logout(HttpServletRequest request) {
 			HttpSession session = request.getSession(false);
 			if (session != null) {
+				session.removeAttribute("USERID");
+				session.removeAttribute("ROLEUSER");
+				session.removeAttribute("User");
 				session.invalidate();
 			}
 			return "dangnhap";
 		}
+		
+		@PostMapping("/register")
+		public String register(@ModelAttribute("user") User user, @RequestParam("username") String username, @RequestParam("password") String password){
+			Account account = new Account(username, password, ERole.C, user);
+			userService.saveUser(user);
+			accountService.saveAccount(account);
+			String mail = user.getEmail();
+			String name = user.getFullName();
+			sendMailService.sendRegisterSuccess(mail, name, username, password);
+			return "dangnhap";
+		}
 
-	
+		@GetMapping("/showFormRegister")
+		public String showFormRegister(Model model) {
+			User user = new User();
+			model.addAttribute("user", user);
+			return "Register";
+		}
 	
 	
 }

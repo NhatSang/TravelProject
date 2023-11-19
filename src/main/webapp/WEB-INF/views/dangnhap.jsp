@@ -74,6 +74,7 @@
 					style="background-color: rgb(59, 14, 238); font-family: Inter; font-weight: bold; margin-top: 40px; margin-left: 95px; height: 45px; width: 135px; font-size: 20px;">Đăng
 					nhập</button>
 				<button type="button" class="btn btn-secondary ml-2"
+				onclick="window.location.href='http://localhost:8080/user/showFormRegister'; return false;"
 					style="background-color: rgb(255, 255, 255); border: 2px solid rgb(59, 14, 238); width: 118px; margin-top: 40px; margin-left: 30px; font-family: Inter; font-weight: 700; height: 45px; width: 135px; font-size: 20px;">
 					<span style="color: rgb(59, 14, 238);">Đăng ký</span>
 				</button>
@@ -81,10 +82,10 @@
 
 				<div class="Or" style="margin-top: 35px; margin-left: 95px;">
 					<a style="margin-right: 20px; font-family: Inter;">Hoặc đăng
-						nhập bằng <img src="../../library/icon/Gmail1.svg" alt=""
+						nhập bằng <img src="/resources/library/icon/Gmail1.svg" alt=""
 						class="icon ml-2"> <img
-						src="../../library/icon/Facebook1.svg" alt="" class="icon2 ml-3">
-						<img src="../../library/icon/GG1.svg" alt="" class="icon3 ml-3">
+						src="/resources/library/icon/Facebook1.svg" alt="" class="icon2 ml-3">
+						<img src="/resources/library/icon/GG1.svg" alt="" class="icon3 ml-3">
 					</a>
 				</div>
 			</form>
