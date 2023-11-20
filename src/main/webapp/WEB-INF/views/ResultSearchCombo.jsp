@@ -75,6 +75,9 @@
 								href="http://localhost:8080/user/updateUsersNotAdmin?userId=${sessionScope.USERID}">Thông
 									tin tài khoản</a></li>
 							<li><a class="dropdown-item"
+								href="http://localhost:8080/Account/showFormAccount?USERNAME=${sessionScope.USERNAME}">Đổi
+									mật khẩu</a></li>
+							<li><a class="dropdown-item"
 								href="http://localhost:8080/user/logout">Đăng xuất</a></li>
 						</ul></li>
 				</c:if>
@@ -239,7 +242,8 @@
 													</a>
 												</c:if>
 												<c:if test="${empty sessionScope.USERID}">
-													<a href="http://localhost:8080/user/showFormRegister" style="text-decoration: none;">
+													<a href="http://localhost:8080/user/showFormRegister"
+														style="text-decoration: none;">
 														<div class="a-btn"
 															style="background-color: #3B0EEE; color: #fff;">
 															<span><img src="/resources/library/icon/add.svg"

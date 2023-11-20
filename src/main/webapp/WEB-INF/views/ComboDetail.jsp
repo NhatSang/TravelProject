@@ -73,6 +73,9 @@
 							href="http://localhost:8080/user/updateUsersNotAdmin?userId=${sessionScope.USERID}">Thông
 								tin tài khoản</a></li>
 						<li><a class="dropdown-item"
+							href="http://localhost:8080/Account/showFormAccount?USERNAME=${sessionScope.USERNAME}">Đổi
+								mật khẩu</a></li>
+						<li><a class="dropdown-item"
 							href="http://localhost:8080/user/logout">Đăng xuất</a></li>
 					</ul></li>
 			</c:if>
@@ -121,7 +124,7 @@
 						<c:url var="bookingLink" value="/Combo/booking">
 							<c:param name="comboId" value="${combo.travelPackageId}"></c:param>
 						</c:url>
-						
+
 						<c:if test="${not empty sessionScope.USERID}">
 							<a href="${bookingLink}" style="text-decoration: none;">
 								<div class="btn_DatNgay">
@@ -131,7 +134,8 @@
 							</a>
 						</c:if>
 						<c:if test="${empty sessionScope.USERID}">
-							<a href="http://localhost:8080/user/showFormRegister" style="text-decoration: none;">
+							<a href="http://localhost:8080/user/showFormRegister"
+								style="text-decoration: none;">
 								<div class="btn_DatNgay">
 									<span>Đặt Ngay</span> <img
 										src="/resources/library/icon/shopping-cart-add1.svg" alt="">

@@ -41,7 +41,7 @@
 					<!-- <div class="div-19">Số tiền thanh toán</div> -->
 				</div>
 				<div class="div-20">
-					<div class="div-21">${user.userId}</div>
+					<div class="div-21">${sessionScope.USERID}</div>
 					<div class="div-22">
 						<div class="div-23">${acc.fullName}</div>
 						<div class="div-24">${acc.email}</div>

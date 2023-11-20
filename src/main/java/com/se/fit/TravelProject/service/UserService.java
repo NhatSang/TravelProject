@@ -53,6 +53,10 @@ public class UserService {
 
 	}
 	
+	public void saveUserUpdate(User user) {
+		userRepository.save(user);
+	}
+	
 	public void deleteUser(int id) {
 		userRepository.deleteById(id);
 	}

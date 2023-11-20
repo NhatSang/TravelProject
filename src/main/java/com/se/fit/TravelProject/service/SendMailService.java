@@ -69,4 +69,19 @@ public class SendMailService {
 		
 		sendEmail(toEmail, subject, message);
 	}
+	
+	public void sendPassNew(String toEmail, String name, String pass) {
+		String subject = "Thông báo: Mật khẩu mới cho tài khoản của bạn";
+		String message = "Chào bạn "+name+",\r\n"
+				+ "\r\n"
+				+ "Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn. Dưới đây là mật khẩu mới của bạn:\r\n"
+				+ "\r\n"
+				+ "Mật khẩu mới: "+pass+"\r\n"
+				+ "\r\n"
+				+ "Vui lòng đảm bảo rằng bạn giữ mật khẩu này an toàn và không chia sẻ với người khác. Nếu bạn không thực hiện yêu cầu này, vui lòng liên hệ với chúng tôi ngay lập tức.\r\n"
+				+ "\r\n"
+				+ "Trân trọng,\r\n"
+				+ "TRAVEL.LO";
+		sendEmail(toEmail, subject, message);
+	}
 }
