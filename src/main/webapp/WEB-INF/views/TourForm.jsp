@@ -16,19 +16,21 @@
 <body>
 
 	<div class="body_manager">
-		<div class="container" style="height: 1050px">
+		<div class="container" style="height: 1150px">
 			<h2 class="title">CẬP NHẬT TOUR</h2>
 			<table>
 				<form:form action="saveTour" method="POST" modelAttribute="TOUR">
 					<form:hidden path="travelPackageId" />
 					<tr>
 						<td class="row_1">Tour:</td>
-						<td><form:input path="packageName" class="row_2" /><form:errors path="packageName" cssClass="red"/> </td>
+						<td><form:input path="packageName" class="row_2" /> <form:errors
+								path="packageName" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Ngày đi:</td>
 						<td><form:input path="departureDate" id="departureDate"
-								class="datepicker row_2" /><form:errors path="departureDate" cssClass="red"/></td>
+								class="datepicker row_2" /> <form:errors path="departureDate"
+								cssClass="red" /></td>
 						<script>
 							$(document).ready(function() {
 								$(".datepicker").datepicker({
@@ -44,7 +46,8 @@
 					<tr>
 						<td class="row_1">Ngày về:</td>
 						<td><form:input path="returnDate" id="returnDate"
-								class="datepicker row_2" /><form:errors path="returnDate" cssClass="red"/></td>
+								class="datepicker row_2" /> <form:errors path="returnDate"
+								cssClass="red" /></td>
 						<script>
 							$(document).ready(function() {
 								$(".datepicker").datepicker({
@@ -58,7 +61,8 @@
 					</tr>
 					<tr>
 						<td class="row_1">Giá:</td>
-						<td><form:input path="price" class="row_2" /><form:errors path="price" cssClass="red"/></td>
+						<td><form:input path="price" class="row_2" /> <form:errors
+								path="price" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Mô tả:</td>
@@ -66,7 +70,8 @@
 					</tr>
 					<tr>
 						<td class="row_1">Số chỗ:</td>
-						<td><form:input path="availableSeats" class="row_2" /><form:errors path="availableSeats" cssClass="red"/></td>
+						<td><form:input path="availableSeats" class="row_2" /> <form:errors
+								path="availableSeats" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Hình ảnh:</td>
@@ -85,7 +90,7 @@
 								class="row_2">
 								<form:option value="" label="-- Chọn nơi khởi hành --" />
 								<form:options items="${LISTDEP}" itemLabel="location" />
-							</form:select> <form:errors path="departure" cssClass="red"/></td>
+							</form:select> <br> <form:errors path="departure" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Điểm đến:</td>
@@ -93,11 +98,12 @@
 								class="row_2">
 								<form:option value="" label="-- chọn điểm đến --" />
 								<form:options items="${LISTDES}" itemLabel="location" />
-							</form:select><form:errors path="destination" cssClass="red"/></td>
+							</form:select> <br> <form:errors path="destination" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Số ngày:</td>
-						<td><form:input path="numberDays" class="row_2" /><form:errors path="numberDays" cssClass="red"/></td>
+						<td><form:input path="numberDays" class="row_2" /> <form:errors
+								path="numberDays" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td class="row_1">Điểm tham quan:</td>
@@ -123,14 +129,21 @@
 						<td class="row_1">Loai tour:</td>
 						<td><form:select path="internationalType" class="row_2">
 								<form:options items="${EInternationalType.values()}" />
-							</form:select><form:errors path="internationalType" cssClass="red"/></td>
+							</form:select> <form:errors path="internationalType" cssClass="red" /></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="Lưu" class="save"
-							style="width: 200px; margin-left: 50px" /></td>
+							style="width: 200px;" /></td>
 					</tr>
 				</form:form>
+
 			</table>
+			<div style="margin-left: -200px;margin-bottom: 20px">
+				<p>
+					<a href="${pageContext.request.contextPath}/Tour/showListTours"
+						class="back">Quay lại</a>
+				</p>
+			</div>
 		</div>
 	</div>
 </body>

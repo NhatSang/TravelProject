@@ -21,6 +21,10 @@ public class UserAccount {
 		this.user = user;
 		this.account = account;
 	}
+	
+	public UserAccount getUserAccount(User user, Account account) {
+		return new UserAccount(user, account);
+	}
 
 	public User getUser() {
 		return user;

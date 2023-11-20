@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,7 @@ import com.se.fit.TravelProject.service.TravelPackageService;
 import com.se.fit.TravelProject.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/Combo")
@@ -141,7 +143,10 @@ public class ComboController {
 	}
 
 	@PostMapping("/saveCombo")
-	public String saveCombo(@ModelAttribute("combo") Combo combo) {
+	public String saveCombo(@Valid @ModelAttribute("combo") Combo combo,BindingResult result) {
+		if(result.hasErrors()) {
+			return "ComboForm";
+		}
 		travelPackageService.saveCombo(combo);
 		return "redirect:/Combo/showListCombos";
 	}

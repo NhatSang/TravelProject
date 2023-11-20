@@ -11,20 +11,26 @@
 <title>Admin Travel.co</title>
 </head>
 <body>
-	<div style="display: flex;justify-content: space-between;">
+	<div style="display: flex; justify-content: space-between;">
 		<div>
 			<input type="button" value="Quản lý Người Dùng"
 				onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
-				class="button_manager"
-				 /> <input
-				type="button" value="Quản lý Tour"
+				class="button_manager" /> <input type="button"
+				value="Quản lý Tour"
 				onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
-				class="button_manager" style="background-color: #3B0EEE; color: #fff" /> <input type="button"
-				value="Quản lý Combo Tour"
+				class="button_manager"
+				style="background-color: #3B0EEE; color: #fff" /> <input
+				type="button" value="Quản lý Combo Tour"
 				onclick="window.location.href='http://localhost:8080/Combo/showListCombos'; return false;"
 				class="button_manager" /> <input type="button"
 				value="Quản lý Booking"
 				onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
+				class="button_manager" /><input type="button"
+				value="Quản lý điểm đi"
+				onclick="window.location.href='http://localhost:8080/Departure/showDeparture'; return false;"
+				class="button_manager" /><input type="button"
+				value="Quản lý điểm đến"
+				onclick="window.location.href='http://localhost:8080/Destination/showDestination'; return false;"
 				class="button_manager" /> <br> <br>
 		</div>
 		<div>

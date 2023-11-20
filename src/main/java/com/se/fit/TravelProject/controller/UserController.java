@@ -51,7 +51,8 @@ public class UserController {
 	}
 
 	@PostMapping("/saveUser")
-	public String saveUser(@Valid @ModelAttribute("userAccount") UserAccount userAccount, BindingResult result,Model model) {
+	public String saveUser(@Valid @ModelAttribute("userAccount") UserAccount userAccount, BindingResult result,
+			Model model) {
 		if (result.hasErrors()) {
 			return "AddUserForm";
 		}
@@ -59,13 +60,13 @@ public class UserController {
 			User user = userAccount.getUser();
 			Account account = userAccount.getAccount();
 			account.setUser(user);
-			userService.saveUser(user,account);
+			userService.saveUser(user, account);
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("ERROR", "Tài khoản đã tồn tại");
 			return "AddUserForm";
 		}
-		
+
 		return "redirect:/user/showUsers";
 	}
 
@@ -101,26 +102,38 @@ public class UserController {
 	@GetMapping("/updateUsers")
 	public String showFormForUpdateAdmin(@RequestParam("userId") int id, Model theModel) {
 		User user = userService.getUserById(id);
-		System.out.println(user);
-		theModel.addAttribute("user", user);
-		theModel.addAttribute("ERROR", "Tài khoản đã tồn tại");
+		Account account = new Account();
+		UserAccount userAccount = new UserAccount(user, account);
+		System.out.println(userAccount);
+		theModel.addAttribute("userAccount", userAccount);
 		return "AddUserForm";
 	}
 
-//	@PostMapping("/saveUserNotAdmin")
-//	public String saveUserNotAdmin(@ModelAttribute("user") User user, @RequestParam("username") String username,
-//			@RequestParam("password") String password) {
-//		Account account = new Account(username, password, ERole.C, user);
-//		userService.saveUser(user);
-//		accountService.saveAccount(account);
-//		return "redirect:/";
-//	}
+	@PostMapping("/saveUserNotAdmin")
+	public String saveUserNotAdmin(@Valid @ModelAttribute("userAccount") UserAccount userAccount, BindingResult result,
+			Model model, @RequestParam("account.username") String username,
+			@RequestParam("account.password") String password, @RequestParam("user.userId") int id) {
+		if (result.hasErrors()) {
+			return "UpdateUserNotAdmin";
+		}
+		try {
+			User user = userService.getUserById(id);
+			Account account = new Account(username, password, ERole.C, user);
+			userService.saveUser(user, account);
+		} catch (Exception e) {
+			model.addAttribute("ERROR", "Tài khoản đã tồn tại");
+			return "UpdateUserNotAdmin";
+		}
+		return "redirect:/";
+	}
 
 	@GetMapping("/updateUsersNotAdmin")
 	public String showFormForUpdateUser(@RequestParam("userId") int id, Model theModel) {
 		User user = userService.getUserById(id);
-		System.out.println(user);
-		theModel.addAttribute("user", user);
+		Account account = new Account();
+		UserAccount userAccount = new UserAccount(user, account);
+		System.out.println(userAccount);
+		theModel.addAttribute("userAccount", userAccount);
 		return "UpdateUserNotAdmin";
 	}
 
@@ -175,22 +188,35 @@ public class UserController {
 		return "dangnhap";
 	}
 
-//	@PostMapping("/register")
-//	public String register(@ModelAttribute("user") User user, @RequestParam("username") String username,
-//			@RequestParam("password") String password) {
-//		Account account = new Account(username, password, ERole.C, user);
-//		userService.saveUser(user);
-//		accountService.saveAccount(account);
-//		String mail = user.getEmail();
-//		String name = user.getFullName();
-//		sendMailService.sendRegisterSuccess(mail, name, username, password);
-//		return "dangnhap";
-//	}
+	@PostMapping("/register")
+	public String register(@Valid @ModelAttribute("userAccount") UserAccount userAccount, BindingResult result,
+			Model model) {
+		if (result.hasErrors()) {
+			return "Register";
+		}
+		try {
+			User user = userAccount.getUser();
+			Account account = userAccount.getAccount();
+			account.setUser(user);
+			userService.saveUser(user, account);
+			String mail = user.getEmail();
+			String name = user.getFullName();
+			String username = account.getUsername();
+			String password = account.getPassword();
+			sendMailService.sendRegisterSuccess(mail, name, username, password);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ERROR", "Tài khoản đã tồn tại");
+			return "Register";
+
+		}
+		return "dangnhap";
+	}
 
 	@GetMapping("/showFormRegister")
 	public String showFormRegister(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
+		UserAccount userAccount = new UserAccount();
+		model.addAttribute("userAccount", userAccount);
 		return "Register";
 	}
 
