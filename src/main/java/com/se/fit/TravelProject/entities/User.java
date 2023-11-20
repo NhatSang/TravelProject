@@ -22,7 +22,7 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="user_id")
 	private int userId;
-	@Column(nullable = false, columnDefinition = "nvarchar(50)",name = "full_name")
+	@Column(nullable = false, columnDefinition = "nvarchar(100)",name = "full_name")
 	@Pattern(regexp = "^[a-zA-z0-9].+$" ,message = "Tên không được để trống")
 	private String fullName;
 	@Column(nullable = false, length = 50,name = "email")

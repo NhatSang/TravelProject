@@ -14,8 +14,7 @@
 		<div>
 			<input type="button" value="Quản lý Người Dùng"
 				onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
-				class="button_manager" /> <input type="button"
-				value="Quản lý Tour"
+				class="button_manager" /> <input type="button" value="Quản lý Tour"
 				onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
 				class="button_manager" /> <input type="button"
 				value="Quản lý Combo Tour"
@@ -23,10 +22,12 @@
 				class="button_manager" /> <input type="button"
 				value="Quản lý Booking"
 				onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
-				class="button_manager"/><input type="button" value="Quản lý điểm đi"
+				class="button_manager" /><input type="button"
+				value="Quản lý điểm đi"
 				onclick="window.location.href='http://localhost:8080/Departure/showDeparture'; return false;"
 				class="button_manager"
-				style="background-color: #3B0EEE; color: #fff;padding: 10px;margin-left: 5px;border-radius: 7px;border-color: #E2E2E2;" /><input type="button" value="Quản lý điểm đến"
+				style="background-color: #3B0EEE; color: #fff; padding: 10px; margin-left: 5px; border-radius: 7px; border-color: #E2E2E2;" /><input
+				type="button" value="Quản lý điểm đến"
 				onclick="window.location.href='http://localhost:8080/Destination/showDestination'; return false;"
 				class="button_manager" /><br> <br>
 		</div>
@@ -48,11 +49,12 @@
 				style="justify-content: center; width: 1310px; font-size: 15px; padding: 10px; height: 20px" />
 		</form>
 
-		<div class="table" style="alialign-items: center;display: flex;justify-content: center">
-			<table  >
+		<div class="table"
+			style="alialign-items: center; display: flex; justify-content: center">
+			<table>
 				<tr>
 					<th class="row_head_1">Mã điểm đi</th>
-					<th class="row_head_2" >Điểm đi</th>
+					<th class="row_head_2">Điểm đi</th>
 					<th class="row_head_3">Chức năng</th>
 
 					<!-- Add more columns as needed -->
@@ -61,13 +63,19 @@
 					<c:url var="updateLink" value="/Departure/updateDeparture">
 						<c:param name="departureId" value="${tempDeparture.departureId}"></c:param>
 					</c:url>
+					<c:url var="deleteLink" value="/Departure/deleteDeparture">
+						<c:param name="departureId" value="${tempDeparture.departureId}"></c:param>
+					</c:url>
 
 					<tr>
 
 						<td class="row_head">${tempDeparture.departureId}</td>
 						<td class="row_head">${tempDeparture.location}</td>
-						<td class="row_head"><a href="${updateLink}"
-							class="manager_button">Cập nhật</a> </td>
+						<td class="row_head" style="display: flex;"><a
+							href="${updateLink}" class="manager_button">Cập nhật</a> <%-- <a
+							href="${deleteLink}"
+							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
+							class="manager_button_delete">Xóa</a> --%></td>
 
 
 					</tr>

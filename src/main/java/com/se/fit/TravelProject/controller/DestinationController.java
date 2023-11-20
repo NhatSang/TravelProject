@@ -77,6 +77,12 @@ public class DestinationController {
 		theModel.addAttribute("destination", destination);
 		return "AddDestinationForm";
 	}
+	
+//	@GetMapping("/deleteDestination")
+//	public String deleteDeparture(@RequestParam("destinationId") int id) {
+//		destinationService.deleteDestination(id);
+//		return "redirect:/Destination/showDestination";
+//	}
 
 	
 }
