@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -63,12 +65,14 @@ public abstract class TravelPackage implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private EVehicle vehicle;
 	@ManyToOne
-	@JoinColumn(name = "departure_id")
+	@JoinColumn(name = "departure_id",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonProperty("departure")
 	@NotNull(message = "      Nơi khởi hành không được để trống")
 	private Departure departure;
 	@ManyToOne
-	@JoinColumn(name = "destination_id")
+	@JoinColumn(name = "destination_id",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonProperty("destination")
 	@NotNull(message = "      Điểm đến không được để trống")
 	private Destination destination;

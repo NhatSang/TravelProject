@@ -3,6 +3,9 @@ package com.se.fit.TravelProject.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,10 +28,12 @@ public class Booking implements Serializable {
 	@Column(name = "booking_id")
 	private int bookingId;
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	@ManyToOne
-	@JoinColumn(name = "travel_package_id")
+	@JoinColumn(name = "travel_package_id",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private TravelPackage travelPackage;
 	@Column(columnDefinition = "datetime2(7)",name="creation_date")
 	private LocalDate creationDate;

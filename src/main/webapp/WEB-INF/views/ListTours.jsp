@@ -15,8 +15,7 @@
 		<div>
 			<input type="button" value="Quản lý Người Dùng"
 				onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
-				class="button_manager" /> <input type="button"
-				value="Quản lý Tour"
+				class="button_manager" /> <input type="button" value="Quản lý Tour"
 				onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
 				class="button_manager"
 				style="background-color: #3B0EEE; color: #fff" /> <input
@@ -75,6 +74,9 @@
 					<c:url var="updateLink" value="/Tour/updateTour">
 						<c:param name="tourId" value="${tempTour.travelPackageId}"></c:param>
 					</c:url>
+					<c:url var="deleteLink" value="/Tour/deleteTour">
+						<c:param name="tourId" value="${tempTour.travelPackageId}"></c:param>
+					</c:url>
 					<tr>
 						<td class="row_head">${tempTour.travelPackageId}</td>
 						<td class="row_head">${tempTour.packageName}</td>
@@ -85,7 +87,10 @@
 						<td class="row_head"><fmt:formatNumber>${tempTour.price}</fmt:formatNumber></td>
 						<td class="row_head">${tempTour.availableSeats}</td>
 						<td class="row_head"><a href="${updateLink}"
-							class="manager_button">Cập nhật</a>
+							class="manager_button">Cập nhật</a></td>
+						<td class="row_head"><a href="${deleteLink}"
+							onclick="if(!(confirm('Are you sure'))) return false;"
+							class="manager_button_delete">Xóa</a></td>
 					</tr>
 				</c:forEach>
 			</table>

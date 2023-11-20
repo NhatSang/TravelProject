@@ -1,7 +1,7 @@
 ﻿go
 use DuLich
 go
-insert into Userr values
+insert into Userr(phone,email,address,full_name) values
 ('0101010101','test@gmail.com','testata','nhat Sang'),
 ('0202020202','vananh@gmail.com','Ha Noi','Nguyen Van Anh'),
 ('0303030303','thithanh@gmail.com','HCM','Tran Thi Thanh'),
@@ -48,7 +48,7 @@ go
 select * from  Departure
 go
 /* 0: trong nuoc, 1: nuoc ngoai*/
-insert into Destination
+insert into Destination(type,location)
 values 
 (0,N'Hà Nội'),
 (0,N'Hồ Chí Minh'),
