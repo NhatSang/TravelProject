@@ -65,12 +65,12 @@ public abstract class TravelPackage implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "departure_id")
 	@JsonProperty("departure")
-	@NotNull(message = "Nơi khởi hành không được để trống")
+	@NotNull(message = "      Nơi khởi hành không được để trống")
 	private Departure departure;
 	@ManyToOne
 	@JoinColumn(name = "destination_id")
 	@JsonProperty("destination")
-	@NotNull(message = "Điểm đến không được để trống")
+	@NotNull(message = "      Điểm đến không được để trống")
 	private Destination destination;
 
 	public TravelPackage() {

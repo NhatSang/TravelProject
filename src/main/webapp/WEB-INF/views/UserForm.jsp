@@ -10,7 +10,7 @@
 	href="/resources/css/styleUserForm.css" />
 </head>
 <body>
-	<div style="display: flex;justify-content: space-between;">
+	<div style="display: flex; justify-content: space-between;">
 		<div>
 			<input type="button" value="Quản lý Người Dùng"
 				onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
@@ -24,6 +24,12 @@
 				class="button_manager" /> <input type="button"
 				value="Quản lý Booking"
 				onclick="window.location.href='http://localhost:8080/Booking/showBooking'; return false;"
+				class="button_manager" /><input type="button"
+				value="Quản lý điểm đi"
+				onclick="window.location.href='http://localhost:8080/Departure/showDeparture'; return false;"
+				class="button_manager" /><input type="button"
+				value="Quản lý điểm đến"
+				onclick="window.location.href='http://localhost:8080/Destination/showDestination'; return false;"
 				class="button_manager" /> <br> <br>
 		</div>
 		<div>
