@@ -66,7 +66,7 @@
 				<div class="Checkbox" style="margin-left: 95px;">
 					<input name="checkbox" type="checkbox" value="Nhớ mật khẩu"><span
 						class="remember ml-2" style="font-family: Inter;">Nhớ đăng
-						nhập</span> <a href="" class="Link"
+						nhập</span> <a href="http://localhost:8080/Account/showFormForgot" class="Link"
 						style="color: black; font-family: Inter; margin-left: 117px;">Quên
 						mật khẩu?</a>
 				</div class="Button">

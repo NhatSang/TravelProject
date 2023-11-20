@@ -110,30 +110,18 @@ public class UserController {
 	}
 
 	@PostMapping("/saveUserNotAdmin")
-	public String saveUserNotAdmin(@Valid @ModelAttribute("userAccount") UserAccount userAccount, BindingResult result,
-			Model model, @RequestParam("account.username") String username,
-			@RequestParam("account.password") String password, @RequestParam("user.userId") int id) {
+	public String saveUserNotAdmin(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "UpdateUserNotAdmin";
 		}
-		try {
-			User user = userService.getUserById(id);
-			Account account = new Account(username, password, ERole.C, user);
-			userService.saveUser(user, account);
-		} catch (Exception e) {
-			model.addAttribute("ERROR", "Tài khoản đã tồn tại");
-			return "UpdateUserNotAdmin";
-		}
+		userService.saveUserUpdate(user);
 		return "redirect:/";
 	}
 
 	@GetMapping("/updateUsersNotAdmin")
 	public String showFormForUpdateUser(@RequestParam("userId") int id, Model theModel) {
 		User user = userService.getUserById(id);
-		Account account = new Account();
-		UserAccount userAccount = new UserAccount(user, account);
-		System.out.println(userAccount);
-		theModel.addAttribute("userAccount", userAccount);
+		theModel.addAttribute("user", user);
 		return "UpdateUserNotAdmin";
 	}
 
@@ -153,10 +141,12 @@ public class UserController {
 			if (account.getPassword().equals(password)) {
 				User user = userService.getUserById(account.getUser().getUserId());
 				int userId = user.getUserId();
+				String userName = username;
 				String role = account.getRole().toString();
 				session.setAttribute("USERID", userId);
 				session.setAttribute("ROLEUSER", role);
 				session.setAttribute("User", user);
+				session.setAttribute("USERNAME",userName);
 				model.addAttribute("ROLE", account.getRole().toString());
 				System.out.println(role);
 				model.addAttribute("USER", user);

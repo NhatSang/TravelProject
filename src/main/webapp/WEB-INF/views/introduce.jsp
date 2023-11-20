@@ -80,6 +80,9 @@
 							href="http://localhost:8080/user/updateUsersNotAdmin?userId=${sessionScope.USERID}">Thông
 								tin tài khoản</a></li>
 						<li><a class="dropdown-item"
+							href="http://localhost:8080/Account/showFormAccount?USERNAME=${sessionScope.USERNAME}">Đổi
+								mật khẩu</a></li>
+						<li><a class="dropdown-item"
 							href="http://localhost:8080/user/logout">Đăng xuất</a></li>
 					</ul></li>
 			</c:if>
