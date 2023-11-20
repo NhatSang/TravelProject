@@ -80,7 +80,7 @@
 						<td class="row_head">${tempUser.address}</td>
 						<td class="row_head"><a href="${updateLink}"
 							class="manager_button">Cập nhật</a> <a href="${deleteLink}"
-							onclick="if(!(confirm('Are you sure'))) return false;"
+							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
 							class="manager_button_delete">Xóa</a></td>
 					</tr>
 				</c:forEach>

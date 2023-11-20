@@ -15,8 +15,7 @@
 		<div>
 			<input type="button" value="Quản lý Người Dùng"
 				onclick="window.location.href='http://localhost:8080/user/showUsers'; return false;"
-				class="button_manager" /> <input type="button"
-				value="Quản lý Tour"
+				class="button_manager" /> <input type="button" value="Quản lý Tour"
 				onclick="window.location.href='http://localhost:8080/Tour/showListTours'; return false;"
 				class="button_manager" /> <input type="button"
 				value="Quản lý Combo Tour"
@@ -88,9 +87,11 @@
 						<td class="row_head">${temp.returnDate}</td>
 						<td class="row_head"><fmt:formatNumber>${temp.price}</fmt:formatNumber></td>
 						<td class="row_head">${temp.availableSeats}</td>
-						<td class="row_head"><a href="${updateLink}"
-							class="manager_button">Cập nhật</a> <%-- <a href="${deleteLink}"
-							class="manager_button_delete">Xoá</a> --%></td>
+						<td class="row_head" style="display: flex;"><a
+							href="${updateLink}" class="manager_button">Cập nhật</a> <a
+							href="${deleteLink}"
+							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
+							class="manager_button_delete">Xóa</a></td>
 					</tr>
 				</c:forEach>
 			</table>

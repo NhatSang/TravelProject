@@ -29,12 +29,12 @@ public class BookingController {
 		this.packageService = packageService;
 	}
 
-	@PostMapping("/saveBooking")
-	public String saveBooking(@ModelAttribute("booking") Booking booking) {
-		System.out.println(booking);
-		bookingService.saveBooking(booking);
-		return "redirect:/QLbooking/Booking";
-	}
+	/*
+	 * @PostMapping("/saveBooking") public String
+	 * saveBooking(@ModelAttribute("booking") Booking booking) {
+	 * System.out.println(booking); bookingService.saveBooking(booking); return
+	 * "redirect:/QLbooking/Booking"; }
+	 */
 
 	@GetMapping("/showBooking")
 	public String showBooking(Model model) {
@@ -57,5 +57,11 @@ public class BookingController {
 		
 		return "BookingForm";
 
+	}
+	
+	@GetMapping("/deleteBooking")
+	public String deleteBooking(@RequestParam("bookingId")int bookingId) {
+		bookingService.deleteBooking(bookingId);
+		return "redirect:/Booking/showBooking";
 	}
 }

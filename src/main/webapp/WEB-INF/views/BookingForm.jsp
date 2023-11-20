@@ -42,7 +42,7 @@
 
 		<form action="searchBooking" method="GET">
 			<input type="submit" value="Tìm kiếm" class="add-button" /> <input
-				type="text" placeholder="Tìm kiếm người dùng" name="bookingId"
+				type="text" placeholder="Tìm kiếm booking" name="bookingId"
 				style="justify-content: center; width: 1310px; font-size: 15px; padding: 10px; height: 20px" />
 		</form>
 
@@ -56,15 +56,14 @@
 					<th class="row_head_2">Tên khách hàng</th>
 					<th class="row_head_2">Số điện thoại</th>
 					<th class="row_head_3">Email</th>
-
-
+					<th class="row_head_3">Chức năng</th>
 					<!-- Add more columns as needed -->
 				</tr>
 				<c:forEach var="tempBooking" items="${booking}">
-
-
+					<c:url var="deleteLink" value="/Booking/deleteBooking">
+						<c:param name="bookingId" value="${tempBooking.bookingId}"></c:param>
+					</c:url>
 					<tr>
-
 						<td class="row_head">${tempBooking.bookingId}</td>
 						<td class="row_head">${tempBooking.travelPackage.packageName}</td>
 						<td class="row_head">${tempBooking.travelPackage.travelPackageId}</td>
@@ -72,8 +71,10 @@
 						<td class="row_head">${tempBooking.user.fullName}</td>
 						<td class="row_head">${tempBooking.user.phone}</td>
 						<td class="row_head">${tempBooking.user.email}</td>
-
-
+						<td class="row_head" style="display: flex;"><a
+							href="${deleteLink}"
+							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
+							class="manager_button_delete">Xóa</a></td>
 					</tr>
 				</c:forEach>
 			</table>
