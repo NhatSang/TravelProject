@@ -2,6 +2,9 @@ package com.se.fit.TravelProject.entities;
 
 import java.io.Serializable;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +33,8 @@ public class Account implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private ERole role;
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id",nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 
 	public Account() {

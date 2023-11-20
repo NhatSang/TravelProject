@@ -185,6 +185,12 @@ public class TourController {
 		}
 		return "ListTours";
 	}
+	
+	@GetMapping("/deleteTour")
+	public String deleteTour(@RequestParam("tourId") int tourId) {
+		packageService.deleteTour(tourId);
+		return "redirect:/Tour/showListTours";
+	}
 
 	@GetMapping("/addTourToCart")
 	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session, Model model) {
