@@ -47,7 +47,8 @@ public class TourController {
 
 	@Autowired
 	public TourController(TravelPackageService packageService, DepartureService departureService,
-			DestinationService destinationService, BookingService bookingService, UserService userService, SendMailService mailService) {
+			DestinationService destinationService, BookingService bookingService, UserService userService,
+			SendMailService mailService) {
 		super();
 		this.packageService = packageService;
 		this.departureService = departureService;
@@ -122,17 +123,18 @@ public class TourController {
 	}
 
 	@GetMapping("/saveBooking")
-	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model,HttpSession session) {
+	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model,
+			HttpSession session) {
 		User user = userService.getUserById(userId);
 		Tour tour = packageService.getTourById(id);
 		tour.setAvailableSeats(tour.getAvailableSeats() - 1);
-        packageService.saveTour(tour);
+		packageService.saveTour(tour);
 		Booking booking = new Booking(user, tour, LocalDate.now());
-		bookingService.saveBooking(booking); 
+		bookingService.saveBooking(booking);
 		session.setAttribute("acc", user);
 		String emailUser = user.getEmail();
 		String nameUser = user.getFullName();
-		mailService.sendBookingConfirmationEmail(emailUser,nameUser);
+		mailService.sendBookingConfirmationEmail(emailUser, nameUser);
 		return "PaySuccess";
 	}
 
@@ -144,8 +146,8 @@ public class TourController {
 	}
 
 	@PostMapping("/saveTour")
-	public String saveTour(@Valid @ModelAttribute("TOUR") Tour tour,BindingResult result) {
-		if(result.hasErrors()) {
+	public String saveTour(@Valid @ModelAttribute("TOUR") Tour tour, BindingResult result) {
+		if (result.hasErrors()) {
 			return "TourForm";
 		}
 		packageService.saveTour(tour);
@@ -173,7 +175,7 @@ public class TourController {
 		model.addAttribute("LISTDES", destinations);
 		return "TourForm";
 	}
-	
+
 	@GetMapping("/searchTour")
 	public String searchTour(@RequestParam("tourId") int tourId, Model model) {
 		try {
@@ -186,15 +188,23 @@ public class TourController {
 		}
 		return "ListTours";
 	}
-	
+
 	@GetMapping("/deleteTour")
-	public String deleteTour(@RequestParam("tourId") int tourId) {
-		packageService.deleteTour(tourId);
-		return "redirect:/Tour/showListTours";
+	public String deleteTour(@RequestParam("tourId") int tourId, Model model) {
+		try {
+			packageService.deleteTour(tourId);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ERROR", "Không thể xóa dữ liệu này");
+		}
+		List<Tour> list = packageService.getAllTours();
+		model.addAttribute("LISTTOURS", list);
+		return "ListTours";
 	}
 
 	@GetMapping("/addTourToCart")
-	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+	public String addTourToCart(@RequestParam("tourId") int tourId, HttpSession session, Model model,
+			RedirectAttributes redirectAttributes) {
 		Tour tour = packageService.getTourById(tourId);
 		if (tour != null) {
 			// Kiểm tra xem combo có chỗ trống và số lượng không vượt quá chỗ trống

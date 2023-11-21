@@ -46,7 +46,8 @@ public class ComboController {
 
 	@Autowired
 	public ComboController(TravelPackageService travelPackageService, DepartureService departureService,
-			DestinationService destinationService, BookingService bookingService, UserService userService,SendMailService mailService) {
+			DestinationService destinationService, BookingService bookingService, UserService userService,
+			SendMailService mailService) {
 		super();
 		this.travelPackageService = travelPackageService;
 		this.departureService = departureService;
@@ -120,8 +121,10 @@ public class ComboController {
 		model.addAttribute("TRAVELPACKAGE", combo);
 		return "Booking";
 	}
+
 	@GetMapping("/saveBooking")
-	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model,HttpSession session) {
+	public String booking(@RequestParam("id") int id, @RequestParam("userId") int userId, Model model,
+			HttpSession session) {
 		User user = userService.getUserById(userId);
 		Combo combo = travelPackageService.getComboById(id);
 		combo.setAvailableSeats(combo.getAvailableSeats() - 1);
@@ -131,10 +134,9 @@ public class ComboController {
 		session.setAttribute("acc", user);
 		String emailUser = user.getEmail();
 		String nameUser = user.getFullName();
-		mailService.sendBookingConfirmationEmail(emailUser,nameUser);
+		mailService.sendBookingConfirmationEmail(emailUser, nameUser);
 		return "PaySuccess";
 	}
-
 
 	@GetMapping("/showListCombos")
 	public String showListCombos(Model model) {
@@ -144,8 +146,8 @@ public class ComboController {
 	}
 
 	@PostMapping("/saveCombo")
-	public String saveCombo(@Valid @ModelAttribute("combo") Combo combo,BindingResult result) {
-		if(result.hasErrors()) {
+	public String saveCombo(@Valid @ModelAttribute("combo") Combo combo, BindingResult result) {
+		if (result.hasErrors()) {
 			return "ComboForm";
 		}
 		travelPackageService.saveCombo(combo);
@@ -173,7 +175,7 @@ public class ComboController {
 		model.addAttribute("destinations", destinations);
 		return "ComboForm";
 	}
-	
+
 	@GetMapping("/searchCombo")
 	public String searchCombo(@RequestParam("comboId") int comboId, Model model) {
 		try {
@@ -188,13 +190,21 @@ public class ComboController {
 	}
 
 	@GetMapping("/deleteCombo")
-	public String deleteCombo(@RequestParam("comboId") int comboId) {
-		travelPackageService.deleteCombo(comboId);
-		return "redirect:/Combo/showListCombos";
+	public String deleteCombo(@RequestParam("comboId") int comboId, Model model) {
+		try {
+			travelPackageService.deleteCombo(comboId);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ERROR", "Không thể xóa dữ liệu này");
+		}
+		List<Combo> listCb = travelPackageService.getAllCombos();
+		model.addAttribute("combos", listCb);
+		return "ListCombos";
 	}
 
 	@GetMapping("/addComboToCart")
-	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session, Model model,
+			RedirectAttributes redirectAttributes) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		if (combo != null) {
 			// Kiểm tra xem combo có chỗ trống và số lượng không vượt quá chỗ trống
