@@ -86,9 +86,17 @@ public class UserController {
 	}
 
 	@GetMapping("/deleteUsers")
-	public String deleteUsers(@RequestParam("userId") int id) {
-		userService.deleteUser(id);
-		return "redirect:/user/showUsers";
+	public String deleteUsers(@RequestParam("userId") int id, Model theModel) {
+		try {
+			userService.deleteUser(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			theModel.addAttribute("ERROR", "Không thể xóa dữ liệu này");
+		}
+		List<User> user = userService.getAllUsers();
+		theModel.addAttribute("user", user);
+		return "UserForm";
+
 	}
 
 	@GetMapping("/addUsers")
