@@ -29,11 +29,9 @@ public class Booking implements Serializable {
 	private int bookingId;
 	@ManyToOne
 	@JoinColumn(name = "user_id",nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User user;
 	@ManyToOne
 	@JoinColumn(name = "travel_package_id",nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	private TravelPackage travelPackage;
 	@Column(columnDefinition = "datetime2(7)",name="creation_date")
 	private LocalDate creationDate;

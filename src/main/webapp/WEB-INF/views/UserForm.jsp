@@ -52,7 +52,7 @@
 			</form>
 		</div>
 		<br> <br>
-
+		<p style="font-size: 25px; color: red">${ERROR}</p>
 		<div class="table">
 			<table>
 				<tr>

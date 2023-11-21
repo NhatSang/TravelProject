@@ -68,13 +68,11 @@ public abstract class TravelPackage implements Serializable {
 	private EVehicle vehicle;
 	@ManyToOne
 	@JoinColumn(name = "departure_id",nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonProperty("departure")
 	@NotNull(message = "      Nơi khởi hành không được để trống")
 	private Departure departure;
 	@ManyToOne
 	@JoinColumn(name = "destination_id",nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonProperty("destination")
 	@NotNull(message = "      Điểm đến không được để trống")
 	private Destination destination;
