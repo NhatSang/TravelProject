@@ -38,9 +38,11 @@
 	<div class="containerx">
 		<div class="image-container"></div>
 		<div class="login-container">
-			<h3 style="margin-top: 90px;">
-				Travel<span style="color: rgb(59, 14, 238);">.co</span>
-			</h3>
+			<a href="http://localhost:8080/" style="text-decoration: none;">
+				<h3 style="margin-top: 90px; color: #000">
+					Travel<span style="color: rgb(59, 14, 238);">.lo</span>
+				</h3>
+			</a>
 			<h2 style="margin-top: 30px;">Đăng nhập</h2>
 			<form action="/user/login" method="post">
 				<div class="form-group "
@@ -66,7 +68,8 @@
 				<div class="Checkbox" style="margin-left: 95px;">
 					<input name="checkbox" type="checkbox" value="Nhớ mật khẩu"><span
 						class="remember ml-2" style="font-family: Inter;">Nhớ đăng
-						nhập</span> <a href="http://localhost:8080/Account/showFormForgot" class="Link"
+						nhập</span> <a href="http://localhost:8080/Account/showFormForgot"
+						class="Link"
 						style="color: black; font-family: Inter; margin-left: 117px;">Quên
 						mật khẩu?</a>
 				</div class="Button">
@@ -74,7 +77,7 @@
 					style="background-color: rgb(59, 14, 238); font-family: Inter; font-weight: bold; margin-top: 40px; margin-left: 95px; height: 45px; width: 135px; font-size: 20px;">Đăng
 					nhập</button>
 				<button type="button" class="btn btn-secondary ml-2"
-				onclick="window.location.href='http://localhost:8080/user/showFormRegister'; return false;"
+					onclick="window.location.href='http://localhost:8080/user/showFormRegister'; return false;"
 					style="background-color: rgb(255, 255, 255); border: 2px solid rgb(59, 14, 238); width: 118px; margin-top: 40px; margin-left: 30px; font-family: Inter; font-weight: 700; height: 45px; width: 135px; font-size: 20px;">
 					<span style="color: rgb(59, 14, 238);">Đăng ký</span>
 				</button>
@@ -84,8 +87,9 @@
 					<a style="margin-right: 20px; font-family: Inter;">Hoặc đăng
 						nhập bằng <img src="/resources/library/icon/Gmail1.svg" alt=""
 						class="icon ml-2"> <img
-						src="/resources/library/icon/Facebook1.svg" alt="" class="icon2 ml-3">
-						<img src="/resources/library/icon/GG1.svg" alt="" class="icon3 ml-3">
+						src="/resources/library/icon/Facebook1.svg" alt=""
+						class="icon2 ml-3"> <img
+						src="/resources/library/icon/GG1.svg" alt="" class="icon3 ml-3">
 					</a>
 				</div>
 			</form>

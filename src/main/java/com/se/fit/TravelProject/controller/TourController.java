@@ -108,7 +108,7 @@ public class TourController {
 			tours = packageService.getToursByInternationalType(EInternationalType.D, LocalDate.now());
 		}
 		model.addAttribute("TOURS", tours);
-		model.addAttribute("SUM", 0);
+		model.addAttribute("SUM", tours.size());
 		model.addAttribute("LISTDEP", departures);
 		model.addAttribute("LISTDES", destinations);
 		return "ResultSearchTour";

@@ -174,10 +174,18 @@
 							onclick="window.location.href ='http://localhost:8080/Cart/bookAll';return false;"
 							type="submit" class="submit-button">Thanh toán</button>
 					</c:if>
-					<c:if test="${ empty sessionScope.USERID}">
-						<button
-							onclick="window.location.href ='http://localhost:8080/user/showFormRegister';return false;"
-							type="submit" class="submit-button">Thanh toán</button>
+					<c:if test="${empty sessionScope.USERID}">
+						<button class="submit-button" onclick="checkLogin()">Thanh
+							toán</button>
+
+						<script>
+        function checkLogin() {
+        	var confirmation = confirm("Bạn cần đăng nhập để thanh toán. Nếu chưa có tài khoản, vui lòng đăng ký.");
+            if (confirmation) {
+                window.location.href = 'http://localhost:8080/login';return false;
+            }
+        }
+    </script>
 					</c:if>
 				</div>
 			</div>

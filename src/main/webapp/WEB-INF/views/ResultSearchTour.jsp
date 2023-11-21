@@ -60,7 +60,7 @@
 		<div class="btnLogin_Cart col-sm-2">
 			<c:if test="${ empty sessionScope.USERID}">
 				<input type="button" value="Đăng nhập"
-					onclick="window.location.href='login';return false;">
+					onclick="window.location.href='http://localhost:8080/login';return false;">
 			</c:if>
 			<c:if test="${not empty sessionScope.USERID}">
 				<li class="menu_item nav-item dropdown"><a class="nav-link"

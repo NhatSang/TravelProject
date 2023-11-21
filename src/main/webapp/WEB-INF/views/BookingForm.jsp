@@ -55,8 +55,8 @@
 					<th class="row_head_2">Giá</th>
 					<th class="row_head_2">Tên khách hàng</th>
 					<th class="row_head_2">Số điện thoại</th>
-					<th class="row_head_2">Email</th>
-					<th class="row_head_3">Chức năng</th>
+					<th class="row_head_3">Email</th>
+					<!-- <th class="row_head_3">Chức năng</th> -->
 					<!-- Add more columns as needed -->
 				</tr>
 				<c:forEach var="tempBooking" items="${booking}">
@@ -71,10 +71,10 @@
 						<td class="row_head">${tempBooking.user.fullName}</td>
 						<td class="row_head">${tempBooking.user.phone}</td>
 						<td class="row_head">${tempBooking.user.email}</td>
-						<td class="row_head""><a
+						<%-- <td class="row_head""><a
 							href="${deleteLink}"
 							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
-							class="manager_button_delete">Xóa</a></td>
+							class="manager_button_delete">Xóa</a></td> --%>
 					</tr>
 				</c:forEach>
 			</table>
