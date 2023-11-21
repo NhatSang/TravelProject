@@ -74,10 +74,17 @@ public class DepartureController {
 		return "AddDepartureForm";
 	}
 	
-//	@GetMapping("/deleteDeparture")
-//	public String deleteDeparture(@RequestParam("departureId") int id) {
-//		departureService.deleteDeparture(id);
-//		return "redirect:/Departure/showDeparture";
-//	}
+	@GetMapping("/deleteDeparture")
+	public String deleteDeparture(@RequestParam("departureId") int id, Model model) {
+		try {
+			departureService.deleteDeparture(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ERROR", "Không thể xóa dữ liệu này");
+		}
+		List<Departure> departures = departureService.getAllDepartures();
+		model.addAttribute("departure", departures);
+		return "DepartureList";
+	}
 
 }

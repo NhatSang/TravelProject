@@ -49,7 +49,7 @@
 				type="text" placeholder="Tìm kiếm điểm đến" name="destinationId"
 				style="justify-content: center; width: 1310px; font-size: 15px; padding: 10px; height: 20px" />
 		</form>
-
+		<p style="font-size: 25px; color: red">${ERROR}</p>
 		<div class="table"
 			style="alialign-items: center; display: flex; justify-content: center">
 			<table>
@@ -76,10 +76,10 @@
 						<td class="row_head">${tempDestination.location}</td>
 						<td class="row_head">${tempDestination.type}</td>
 						<td class="row_head" style="display: flex;"><a
-							href="${updateLink}" class="manager_button">Cập nhật</a> <%-- <a
+							href="${updateLink}" class="manager_button">Cập nhật</a> <a
 							href="${deleteLink}"
 							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
-							class="manager_button_delete">Xóa</a> --%></td>
+							class="manager_button_delete">Xóa</a></td>
 
 
 					</tr>

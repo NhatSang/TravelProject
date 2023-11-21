@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.se.fit.TravelProject.entities.Destination;
 import com.se.fit.TravelProject.repository.DestinationRepository;
@@ -38,6 +39,7 @@ public class DestinationService {
 		destinationRepository.save(destination);
 	}
 	
+	@Transactional
 	public void deleteDestination(int id) {
 		destinationRepository.deleteById(id);
 	}

@@ -78,11 +78,20 @@ public class DestinationController {
 		return "AddDestinationForm";
 	}
 	
-//	@GetMapping("/deleteDestination")
-//	public String deleteDeparture(@RequestParam("destinationId") int id) {
-//		destinationService.deleteDestination(id);
-//		return "redirect:/Destination/showDestination";
-//	}
+	@GetMapping("/deleteDestination")
+	public String deleteDeparture(@RequestParam("destinationId") int id, Model model) {
+		try {
+			destinationService.deleteDestination(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("ERROR", "Không thể xóa dữ liệu này");
+		}
+
+		List<Destination> destinations = destinationService.getAllDestinations();
+		model.addAttribute("destination", destinations);
+		
+		return "DestinationList";
+	}
 
 	
 }
