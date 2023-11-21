@@ -242,7 +242,7 @@
 													</a>
 												</c:if>
 												<c:if test="${empty sessionScope.USERID}">
-													<a href="http://localhost:8080/user/showFormRegister"
+													<a href="http://localhost:8080/login"
 														style="text-decoration: none;">
 														<div class="a-btn"
 															style="background-color: #3B0EEE; color: #fff;">
