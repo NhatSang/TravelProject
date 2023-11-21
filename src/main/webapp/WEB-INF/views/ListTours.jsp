@@ -66,7 +66,8 @@
 					<th class="row_head_2">Ngày về</th>
 					<th class="row_head_2">Giá tour</th>
 					<th class="row_head_2">Số chỗ còn</th>
-					<th class="row_head_3">Chức năng</th>
+					<th class="row_head_2">Update</th>
+					<th class="row_head_3">Delete</th>
 					<!-- Add more columns as needed -->
 				</tr>
 
@@ -86,9 +87,9 @@
 						<td class="row_head">${tempTour.returnDate}</td>
 						<td class="row_head"><fmt:formatNumber>${tempTour.price}</fmt:formatNumber></td>
 						<td class="row_head">${tempTour.availableSeats}</td>
-						<td class="row_head" style="display: flex;"><a
-							href="${updateLink}" class="manager_button">Cập nhật</a> <a
-							href="${deleteLink}"
+						<td class="row_head"><a href="${updateLink}"
+							class="manager_button">Cập nhật</a></td>
+						<td class="row_head"><a href="${deleteLink}"
 							onclick="if(!(confirm('Việc xóa dữ liệu này có thể làm mất các dữ liệu có liên quan bạn vẫn muốn tiếp tục?'))) return false;"
 							class="manager_button_delete">Xóa</a></td>
 					</tr>
