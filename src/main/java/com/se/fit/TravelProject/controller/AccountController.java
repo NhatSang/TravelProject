@@ -86,7 +86,7 @@ public class AccountController {
 	}
 
 	@GetMapping("/sendPass")
-	public String sendPass(@RequestParam("emailUser") String emailUser, @RequestParam("userName") String userName) {
+	public String sendPass(@RequestParam("userName") String userName) {
 		Account account = accountService.getAccountById(userName);
 		User user = account.getUser();
 		
@@ -96,7 +96,8 @@ public class AccountController {
 		accountService.saveUser(user, account);
 		
 		String name = user.getFullName();
-		mailService.sendPassNew(emailUser, name, pass);
+		String mail = user.getEmail();
+		mailService.sendPassNew(mail, name, pass);
 		
 		return "dangnhap";
 	}

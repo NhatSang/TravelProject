@@ -176,7 +176,7 @@
 					</c:if>
 					<c:if test="${ empty sessionScope.USERID}">
 						<button
-							onclick="window.location.href ='http://localhost:8080/user/showFormRegister';return false;"
+							onclick="window.location.href ='http://localhost:8080/login';return false;"
 							type="submit" class="submit-button">Thanh toán</button>
 					</c:if>
 				</div>

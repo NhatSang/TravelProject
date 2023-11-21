@@ -60,7 +60,7 @@
 		<div class="btnLogin_Cart col-sm-2">
 			<c:if test="${ empty sessionScope.USERID}">
 				<input type="button" value="Đăng nhập"
-					onclick="window.location.href='login';return false;">
+					onclick="window.location.href='http://localhost:8080/login';return false;">
 			</c:if>
 			<c:if test="${not empty sessionScope.USERID}">
 				<li class="menu_item nav-item dropdown"><a class="nav-link"
@@ -235,7 +235,7 @@
 												</a>
 											</c:if>
 											<c:if test="${ empty sessionScope.USERID}">
-												<a href="http://localhost:8080/user/showFormRegister">
+												<a href="http://localhost:8080/login">
 													<div class="a-btn"
 														style="background-color: #3B0EEE; color: #fff;">
 														<span><img src="/resources/library/icon/add.svg"

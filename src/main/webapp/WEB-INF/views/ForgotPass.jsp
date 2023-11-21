@@ -16,13 +16,14 @@
 
 		<div class="container">
 			<h2 class="title">QUÊN MẬT KHẨU</h2>
+			<p>Chúng tôi sẽ gửi mật khẩu mới vào gmail của bạn</p>
 			<form action="sendPass" method="get">
 				<table>
 					<tbody>
-						<tr>
+						<!-- <tr>
 							<td class="row_1"><label>Nhập Email</label></td>
 							<td> <input class="row_2" name="emailUser"></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td class="row_1"><label>Nhập tài khoản</label></td>
 							<td><input class="row_2" name="userName"></td>

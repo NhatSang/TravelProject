@@ -3,8 +3,8 @@ use DuLich
 go
 insert into Userr (phone,email,address,full_name)
 values
-('0359594415','phamducnhan.it@gmail.com','Gò Vấp','Pham Duc Nhan'),
-('0101010101','test@gmail.com','testata','nhat Sang'),
+('0359594415','phamducnhan.it@gmail.com','Go Vap','Pham Duc Nhan'),
+('09775787951','pdnchannel1@gmail.com','Binh Thanh','Duc Nhan'),
 ('0202020202','vananh@gmail.com','Ha Noi','Nguyen Van Anh'),
 ('0303030303','thithanh@gmail.com','HCM','Tran Thi Thanh'),
 ('0404040404','vanhung@gmail.com','Da Nang','Nguyen Van Hung'),
