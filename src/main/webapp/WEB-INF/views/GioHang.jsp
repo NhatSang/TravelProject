@@ -31,7 +31,7 @@
         if (message && message.trim() !== "") {
             alert(message);
         }
-        
+        console.log(message);
         
         function decreaseQuantity(itemId) {
             $.get('decreaseQuantity?itemId=' + itemId, function() {
@@ -46,14 +46,17 @@
 
             // Lặp qua từng sản phẩm trong giỏ hàng
             $(".cart-item").each(function () {
-                // Sử dụng Number để chuyển đổi chuỗi thành số mà không mất thông tin về phần thập phân
                 var priceText = $(this).find(".price").text();
                 var quantityText = $(this).find(".remain").text();
 
-                // Loại bỏ tất cả kí tự không phải là số hoặc dấu chấm
-                var cleanedPriceText = priceText.replace(/\./g, '').replace(',', '.');
-                var price = Number(cleanedPriceText);
+                // Loại bỏ tất cả kí tự không phải là số hoặc dấu phẩy
+                var cleanedPriceText = priceText.replace(/[^\d,]/g, ''); // Sử dụng regex để giữ lại chỉ số và dấu phẩy
+                var price = parseFloat(cleanedPriceText.replace(',', '.')); // Chuyển đổi chuỗi thành số, bao gồm cả dấu phẩy
+
                 var quantity = parseInt(quantityText);
+                console.log(cleanedPriceText);
+                console.log(price);
+                console.log(quantity);
 
                 // Kiểm tra xem giá và số lượng có là số hợp lệ hay không
                 if (!isNaN(price) && !isNaN(quantity)) {

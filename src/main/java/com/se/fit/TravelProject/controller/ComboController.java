@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.se.fit.TravelProject.entities.Booking;
 import com.se.fit.TravelProject.entities.CartItem;
@@ -193,7 +194,7 @@ public class ComboController {
 	}
 
 	@GetMapping("/addComboToCart")
-	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session, Model model) {
+	public String addComboToCart(@RequestParam("comboId") int comboId, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		Combo combo = travelPackageService.getComboById(comboId);
 		if (combo != null) {
 			// Kiểm tra xem combo có chỗ trống và số lượng không vượt quá chỗ trống
@@ -213,7 +214,7 @@ public class ComboController {
 						} else {
 							// Xử lý trường hợp vượt quá chỗ trống, có thể hiển thị thông báo hoặc thực hiện
 							// hành động khác
-							model.addAttribute("message", "Số lượng đã vượt quá chỗ trống.");
+							redirectAttributes.addFlashAttribute("message", "Số lượng đã vượt quá chỗ trống.");
 							return "redirect:/Cart/showCart";
 						}
 						comboExists = true;
@@ -229,11 +230,11 @@ public class ComboController {
 
 				session.setAttribute("userCart", userCart);
 			} else {
-				model.addAttribute("message", "Combo không còn chỗ trống.");
+				redirectAttributes.addFlashAttribute("message", "Combo không còn chỗ trống.");
 				return "redirect:/Cart/showCart";
 			}
 		} else {
-			model.addAttribute("message", "Combo không tồn tại.");
+			redirectAttributes.addFlashAttribute("message", "Combo không tồn tại.");
 			return "redirect:/Cart/showCart";
 		}
 		return "redirect:/Cart/showCart";
