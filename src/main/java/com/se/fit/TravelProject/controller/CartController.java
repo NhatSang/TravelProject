@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.se.fit.TravelProject.entities.User;
 import com.se.fit.TravelProject.entities.Booking;
@@ -84,7 +85,7 @@ public class CartController {
 	}
 
 	@GetMapping("/bookAll")
-	public String bookAll(Model model, HttpSession session) {
+	public String bookAll(Model model, HttpSession session,RedirectAttributes redirectAttributes) {
 		int userId = (int) session.getAttribute("USERID");
 
 		User user = userService.getUserById(userId);
@@ -92,6 +93,10 @@ public class CartController {
 		// Get the list of cart items from the session (userCart)
 		List<CartItem> cartItems = (List<CartItem>) session.getAttribute("userCart");
 		System.out.println(cartItems);
+		if(cartItems==null) {
+			redirectAttributes.addFlashAttribute("message", "Giỏ hàng trống");
+			return "redirect:/Cart/showCart";
+		}
 
 		// Iterate through each item in the cart
 		for (CartItem cartItem : cartItems) {
@@ -106,7 +111,7 @@ public class CartController {
 					Booking booking = new Booking(user, combo, LocalDate.now());
 					bookingService.saveBooking(booking);
 				} else {
-					model.addAttribute("messger", "Xin lỗi Tour này hết chỗ");
+					redirectAttributes.addFlashAttribute("message", "Xin lỗi Tour này hết chỗ");
 					return "redirect:/Cart/showCart";
 				}
 			} else {
@@ -119,7 +124,7 @@ public class CartController {
 					Booking booking = new Booking(user, tour, LocalDate.now());
 					bookingService.saveBooking(booking);
 				} else {
-					model.addAttribute("messger", "Xin lỗi Combo này hết chỗ");
+					redirectAttributes.addFlashAttribute("message", "Xin lỗi Tour này hết chỗ");
 					return "redirect:/Cart/showCart";
 				}
 			}

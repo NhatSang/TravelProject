@@ -194,12 +194,102 @@
 						loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 				</div>
 			</div>
+			<c:if test="${combo.comboType eq 'AH' }">
+				<div class="info_airline">
+					<h1 class="title_airline">Thông tin hãng hàng không</h1>
+					<div class="airline">
+						<div class="detail_airline">
+							<h4>VietNam Airlines</h4>
+							<img src="/resources/img/airline.png" alt="">
+							<p>${combo.vehicleInf}</p>
+						</div>
+						<div class="detail_figlht">
+							<div class="form_detail">
+								<h4>Thông tin lịch trình</h4>
+								<div class="form_full">
+									<div class="form_left">
+										<div class="day_start">
+											<p>Ngày đi:</p>
+											<p class="text-bold">${combo.departureDate}</p>
+										</div>
+										<div class="destination_start-end">
+											<div class="destination_start">
+												<p>${combo.departure.location}</p>
+												<p>(XXX)</p>
+											</div>
+											<div class="destination_end">
+												<p>${combo.destination.location}</p>
+												<p>(XXX)</p>
+											</div>
+										</div>
+										<div class="trip">
+											<img src="/resources/library/icon/Ellipse 8.svg" alt="">
+											<p>------------</p>
+											<img src="/resources/library/icon/plane1.svg" alt="">
+											<p>------------</p>
+											<img src="/resources/library/icon/Ellipse 9.svg" alt="">
+										</div>
+										<div class="trip_time-left">
+											<p class="text-bold">5:00</p>
+											<p>Bay thẳng</p>
+											<p class="text-bold">6:00</p>
+										</div>
+
+									</div>
+									<div class="form_between">
+										<div></div>
+									</div>
+									<div class="form_right">
+										<div class="day_end">
+											<p>Ngày về:</p>
+											<p class="text-bold">${combo.returnDate}</p>
+										</div>
+										<div class="destination_start-end">
+											<div class="destination_end">
+												<p>${combo.destination.location}</p>
+												<p>(XXX)</p>
+											</div>
+											<div class="destination_start">
+												<p>${combo.departure.location}</p>
+												<p>(XXX)</p>
+											</div>
+										</div>
+										<div class="trip">
+											<img src="/resources/library/icon/Ellipse 8.svg" alt="">
+											<p>------------</p>
+											<img src="/resources/library/icon/plane1.svg" alt="">
+											<p>------------</p>
+											<img src="/resources/library/icon/Ellipse 9.svg" alt="">
+										</div>
+										<div class="trip_time-right">
+											<p class="text-bold">5:00</p>
+											<p>Bay thẳng</p>
+											<p class="text-bold">6:00</p>
+										</div>
+
+									</div>
+								</div>
+								
+								<div class="code_trip">
+									<p>Mã chuyến bay</p>
+									<img class="circle_left"
+										src="/resources/library/icon/Ellipse 11.svg" alt=""> <img
+										class="circle_right"
+										src="/resources/library/icon/Ellipse 11.svg" alt="">
+									<p class="trip_code">XNXX999</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${combo.comboType eq 'CH' }">
 			<div class="info_airline">
-				<h1 class="title_airline">Thông tin hãng hàng không</h1>
+				<h1 class="title_airline">Thông tin hãng xe</h1>
 				<div class="airline">
 					<div class="detail_airline">
-						<h4>VietNam Airlines</h4>
-						<img src="/resources/img/airline.png" alt="">
+						<h4>${combo.vehicleInf}</h4>
+						<img src="/resources/img/car.png" alt="">
 						<p>${combo.vehicleInf}</p>
 					</div>
 					<div class="detail_figlht">
@@ -230,7 +320,7 @@
 									</div>
 									<div class="trip_time-left">
 										<p class="text-bold">5:00</p>
-										<p>Bay thẳng</p>
+										<p>Đi thẳng</p>
 										<p class="text-bold">6:00</p>
 									</div>
 
@@ -262,7 +352,7 @@
 									</div>
 									<div class="trip_time-right">
 										<p class="text-bold">5:00</p>
-										<p>Bay thẳng</p>
+										<p>Đi thẳng</p>
 										<p class="text-bold">6:00</p>
 									</div>
 
@@ -270,7 +360,7 @@
 							</div>
 							z
 							<div class="code_trip">
-								<p>Mã chuyến bay</p>
+								<p>Mã chuyến xe</p>
 								<img class="circle_left"
 									src="/resources/library/icon/Ellipse 11.svg" alt=""> <img
 									class="circle_right"
@@ -281,6 +371,7 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 			<div class="detail_service">
 				<div class="info_service">
 					<h1 class="info_service-title">Thông tin dịch vụ</h1>

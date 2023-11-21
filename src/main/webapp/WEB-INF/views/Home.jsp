@@ -491,7 +491,7 @@
 
 				</div>
 				<div class="reason">
-					<h1 class="title_reason">Vì sao nên chọn Travel.co</h1>
+					<h1 class="title_reason">Vì sao nên chọn Travelor.co</h1>
 					<div class="listReason row">
 						<div class="col-xl">
 							<div class="item_reason">

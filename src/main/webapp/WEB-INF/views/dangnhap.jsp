@@ -40,7 +40,7 @@
 		<div class="login-container">
 			<a href="http://localhost:8080/" style="text-decoration: none;">
 				<h3 style="margin-top: 90px; color: #000">
-					Travel<span style="color: rgb(59, 14, 238);">.lo</span>
+					Travelor<span style="color: rgb(59, 14, 238);">.co</span>
 				</h3>
 			</a>
 			<h2 style="margin-top: 30px;">Đăng nhập</h2>
